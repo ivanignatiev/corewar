@@ -5,8 +5,14 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Wed Dec  5 16:41:01 2012 arthur sfez
+** Last update Wed Dec  5 17:11:58 2012 arthur sfez
 */
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include "../include/my.h"
 
 int		main(int ac, char **av)
 {
@@ -14,12 +20,11 @@ int		main(int ac, char **av)
 
   if (ac == 2)
     {
-      if ((fd = open(s)) == -1)
+      if ((fd = open(av[1], O_RDONLY)) == -1)
 	{
 	  my_puterr("Open failed.");
 	  return (EXIT_FAILURE);
 	}
-      my_compile_asm(fd);
     }
   else
     my_putstr("Usage: ./AsmX file_name[.s]\n");

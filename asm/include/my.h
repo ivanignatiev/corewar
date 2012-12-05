@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Oct 12 12:02:14 2012 arthur sfez
-** Last update Wed Dec  5 10:57:01 2012 arthur sfez
+** Last update Wed Dec  5 17:12:16 2012 arthur sfez
 */
 
 #ifndef MY_H_
@@ -18,6 +18,7 @@ void		my_putchar(char);
 void		my_put_nbr(int);
 int		my_putnbr_base(int, char *);
 void		my_putstr(char *);
+void		my_puterr(char *);
 int		my_strlen(char *);
 int		my_getnbr(char *);
 int		my_getnbr_base(char *, char *);

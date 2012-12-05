@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Wed Dec  5 16:44:46 2012 arthur sfez
+## Last update Wed Dec  5 17:06:42 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -16,11 +16,8 @@ NAME	=	asm
 
 CFLAGS	+=	-Wall -Werror -Wextra
 CFLAGS	+=	-pedantic -ansi
-CFLAGS	+=	-I../include
 
 LIB	=	-lmy -Llib/
-
-CC	=	cc
 
 RM	=	rm -rf
 

@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:31:08 2012 arthur sfez
-## Last update Wed Dec  5 17:09:14 2012 arthur sfez
+## Last update Wed Dec  5 17:12:35 2012 arthur sfez
 ##
 
 SRC	=	my_getnbr.c \
@@ -52,3 +52,5 @@ clean:
 fclean:		clean
 		$(RM) $(NAME)
 		$(RM) ../$(NAME)
+
+re:		fclean all
