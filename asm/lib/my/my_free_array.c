@@ -5,11 +5,11 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:34:36 2012 ivan ignatiev
-** Last update Tue Dec  4 17:08:48 2012 ivan ignatiev
+** Last update Wed Dec  5 17:10:51 2012 arthur sfez
 */
 
 #include	<stdlib.h>
-#include	"cwstring.h"
+#include	"../../include/cwstring.h"
 
 int		my_free_array(char **arr)
 {

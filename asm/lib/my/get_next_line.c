@@ -5,12 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sun Dec  2 18:23:21 2012 ivan ignatiev
-** Last update Wed Dec  5 16:47:01 2012 arthur sfez
+** Last update Wed Dec  5 17:10:21 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
-#include	"cwstring.h"
+#include	"../../include/cwstring.h"
 
 int		my_strlen(char *str)
 {

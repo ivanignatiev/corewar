@@ -5,10 +5,10 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:31:08 2012 arthur sfez
-## Last update Wed Dec  5 11:01:11 2012 arthur sfez
+## Last update Wed Dec  5 17:09:14 2012 arthur sfez
 ##
 
-SRC=		my_getnbr.c \
+SRC	=	my_getnbr.c \
 		my_getnbr_base.c \
 		my_putchar.c \
 		my_put_nbr.c \
@@ -29,17 +29,15 @@ SRC=		my_getnbr.c \
 		my_free_array.c \
 		my_split_string.c \
 
-NAME=		libmy.a
+NAME	=	libmy.a
 
-OBJ=		$(SRC:.c=.o)
+OBJ	=	$(SRC:.c=.o)
 
-CP=		cp
+CP	=	cp
 
-RM=		rm -f
+RM	=	rm -f
 
-CFLAGS=		-Wall -Werror -ansi
-
-CC	+=	-I../../include
+CFLAGS	=	-Wall -Werror -ansi
 
 all:		$(NAME)
 
