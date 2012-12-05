@@ -5,10 +5,8 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Wed Dec  5 12:21:48 2012 arthur sfez
+** Last update Wed Dec  5 16:41:01 2012 arthur sfez
 */
-
-#include "my.h"
 
 int		main(int ac, char **av)
 {
