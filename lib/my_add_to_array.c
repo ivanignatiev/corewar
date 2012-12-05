@@ -5,11 +5,11 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:22:58 2012 ivan ignatiev
-** Last update Tue Dec  4 17:10:29 2012 ivan ignatiev
+** Last update Wed Dec  5 14:09:48 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
-#include	"cwstring.h"
+#include	"cwlib.h"
 
 char		**malloc_from_arr(char *str, char **arr)
 {

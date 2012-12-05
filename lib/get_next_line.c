@@ -5,12 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sun Dec  2 18:23:21 2012 ivan ignatiev
-** Last update Tue Dec  4 17:08:36 2012 ivan ignatiev
+** Last update Wed Dec  5 14:12:07 2012 ivan ignatiev
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
-#include	"cwstring.h"
+#include	"cwlib.h"
 
 int		my_strlen(char *str)
 {
@@ -24,7 +24,7 @@ int		my_strlen(char *str)
   return (i);
 }
 
-int		my_strncpy(char *dest, char *src, int n)
+int		my_strncpy_len(char *dest, char *src, int n)
 {
   int		i;
 
@@ -54,7 +54,7 @@ char		*xrealloc(char *rest, char *buf,
   len = my_strlen(rest);
   if ((tmp = (char*)malloc(sizeof(char) * (len + n + 1))) != NULL)
     {
-      i = my_strncpy(tmp, rest, len);
+      i = my_strncpy_len(tmp, rest, len);
       while ((i - len) < n)
 	{
 	  tmp[i] = buf[i - len];
@@ -80,7 +80,7 @@ char		*cut_line(char **rest, int last)
     {
       if ((line = (char*)malloc(sizeof(char) * (i + 1))) != NULL)
 	{
-	  my_strncpy(line, *rest, i);
+	  my_strncpy_len(line, *rest, i);
 	  line[i] = '\0';
 	  if ((*rest)[i] != '\0')
 	    *rest = xrealloc(((*rest) + i + 1), "", 0, *rest);

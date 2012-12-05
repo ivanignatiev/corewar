@@ -5,10 +5,10 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Oct  8 10:11:21 2012 ivan ignatiev
-** Last update Tue Dec  4 17:10:49 2012 ivan ignatiev
+** Last update Wed Dec  5 14:10:30 2012 ivan ignatiev
 */
 
-#include	"cwstring.h"
+#include	"cwlib.h"
 
 char		*my_strncpy(char *dest, char *src, int n)
 {

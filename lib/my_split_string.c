@@ -5,12 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Tue Dec  4 17:09:22 2012 ivan ignatiev
+** Last update Wed Dec  5 14:10:17 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
-#include	"cwstring.h"
+#include	"cwlib.h"
 
 int		is_it_separator(char c, char *separators)
 {

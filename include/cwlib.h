@@ -5,11 +5,11 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Tue Dec  4 17:12:21 2012 ivan ignatiev
+** Last update Wed Dec  5 14:08:47 2012 ivan ignatiev
 */
 
-#ifndef CWSTRING_H_
-# define CWSTRING_H_
+#ifndef CWLIB_H_
+# define CWLIB_H_
 
 # define BUFFER_SIZE 1024
 
@@ -20,4 +20,4 @@ char	*get_next_line(const int fd);
 char	*my_strncpy(char *dest, char *src, int n);
 char	**my_add_to_array(char *str, char **arr);
 
-#endif /* CWSTRING_H_ */
+#endif /* CWLIB_H_ */
