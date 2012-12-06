@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Wed Dec  5 14:13:27 2012 ivan ignatiev
+## Last update Thu Dec  6 18:03:47 2012 arthur sfez
 ##
 
 SRCS	=	dasm.c
@@ -14,9 +14,9 @@ CFLAGS	+=	-Wall -Werror
 CFLAGS	+=	-pedantic -Wextra
 CFLAGS	+=	-I../include
 
-LDFLAGS +=	-lcw -L../bin/lib
+LDFLAGS +=	-lcw -L../lib
 
-NAME	=	mysh
+NAME	=	dasm
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -28,8 +28,8 @@ RM	=	rm -f
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-		$(CC) -o ../bin/$(NAME) $(OBJS) $(LDFLAGS)
-
+		$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+		cp $(NAME) ../bin/$(NAME)
 clean:
 		$(RM) $(OBJS)
 

@@ -5,14 +5,14 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Wed Dec  5 17:11:58 2012 arthur sfez
+** Last update Thu Dec  6 17:59:41 2012 arthur sfez
 */
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "../include/my.h"
+#include "cwlib.h"
 
 int		main(int ac, char **av)
 {
@@ -22,11 +22,9 @@ int		main(int ac, char **av)
     {
       if ((fd = open(av[1], O_RDONLY)) == -1)
 	{
-	  my_puterr("Open failed.");
-	  return (EXIT_FAILURE);
+	  
+	  return (1);
 	}
     }
-  else
-    my_putstr("Usage: ./AsmX file_name[.s]\n");
-  return (EXIT_SUCCESS);
+  return (0);
 }

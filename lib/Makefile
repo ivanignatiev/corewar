@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Wed Dec  5 16:29:09 2012 arthur sfez
+## Last update Thu Dec  6 18:01:29 2012 arthur sfez
 ##
 
 CC	=	cc
@@ -33,8 +33,8 @@ OBJS	=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 $(NAME):	$(OBJS)
-		$(AR) ../bin/lib/$(NAME) $(OBJS)
-		$(RL) ../bin/lib/$(NAME)
+		$(AR) $(NAME) $(OBJS)
+		$(RL) $(NAME)
 clean:
 		$(RM) $(OBJS)
 fclean:		clean

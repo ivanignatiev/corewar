@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Thu Dec  6 10:52:44 2012 arthur sfez
+## Last update Thu Dec  6 18:00:58 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -16,24 +16,24 @@ NAME	=	asm
 
 CFLAGS	+=	-Wall -Werror -Wextra
 CFLAGS	+=	-pedantic -ansi
+CFLAGS	+=	-I../include/
 
-LIB	=	-lmy -Llib/
+LIB	=	-lcw -L../lib/
 
 RM	=	rm -rf
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-		(cd lib/my/ && $(MAKE))
-		$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(LIB)
+		$(CC) -o $(NAME) $(OBJS) $(LIB)
+		cp $(NAME) ../bin/
 
 clean:
-		(cd lib/my/ && $(MAKE) clean)
 		$(RM) $(OBJS)
 
 fclean:		clean
-		(cd lib/my/ && $(MAKE) fclean)
 		$(RM) $(NAME)
+		$(RM) ../bin/$(NAME)
 
 re:		fclean all
 
