@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Thu Dec  6 18:01:29 2012 arthur sfez
+## Last update Thu Dec  6 18:13:38 2012 arthur sfez
 ##
 
 CC	=	cc
@@ -26,7 +26,8 @@ SRCS	=	get_next_line.c \
 		my_add_to_array.c \
 		my_free_array.c \
 		my_split_string.c \
-		my_strncpy.c
+		my_strncpy.c \
+		strings.c
 
 
 OBJS	=	$(SRCS:.c=.o)

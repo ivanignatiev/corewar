@@ -5,26 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sun Dec  2 18:23:21 2012 ivan ignatiev
-** Last update Wed Dec  5 14:12:07 2012 ivan ignatiev
+** Last update Thu Dec  6 18:08:03 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"cwlib.h"
 
-int		my_strlen(char *str)
-{
-  int		i;
-
-  if (str == NULL)
-    return (0);
-  i = 0;
-  while (str[i] != '\0')
-    i = i + 1;
-  return (i);
-}
-
-int		my_strncpy_len(char *dest, char *src, int n)
+static int	my_strncpy_len(char *dest, char *src, int n)
 {
   int		i;
 
@@ -44,7 +32,7 @@ int		my_strncpy_len(char *dest, char *src, int n)
   return (i);
 }
 
-char		*xrealloc(char *rest, char *buf,
+static char	*xrealloc(char *rest, char *buf,
 			  int n, char *f_rest)
 {
   int		len;
@@ -66,7 +54,7 @@ char		*xrealloc(char *rest, char *buf,
   return (tmp);
 }
 
-char		*cut_line(char **rest, int last)
+static char	*cut_line(char **rest, int last)
 {
   int		i;
   char		*line;
