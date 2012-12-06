@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Thu Dec  6 17:59:41 2012 arthur sfez
+** Last update Thu Dec  6 18:49:26 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -16,15 +16,21 @@
 
 int		main(int ac, char **av)
 {
+  int		i;
   int		fd;
 
-  if (ac == 2)
+  i = 1;
+  while (i < ac)
     {
-      if ((fd = open(av[1], O_RDONLY)) == -1)
+      if ((fd = open(av[i], O_RDONLY)) == -1)
 	{
-	  
-	  return (1);
+	  my_puterr("Could not open ");
+	  my_puterr(av[i]);
+	  my_putchar('\n');
 	}
+      else
+	my_compile_file(fd);
+      i++;
     }
-  return (0);
+  return (EXIT_SUCCESS);
 }
