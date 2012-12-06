@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Wed Dec  5 17:06:42 2012 arthur sfez
+## Last update Thu Dec  6 10:52:44 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -24,12 +24,15 @@ RM	=	rm -rf
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
+		(cd lib/my/ && $(MAKE))
 		$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(LIB)
 
 clean:
+		(cd lib/my/ && $(MAKE) clean)
 		$(RM) $(OBJS)
 
 fclean:		clean
+		(cd lib/my/ && $(MAKE) fclean)
 		$(RM) $(NAME)
 
 re:		fclean all
