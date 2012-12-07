@@ -5,13 +5,14 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Thu Dec  6 18:03:47 2012 arthur sfez
+## Last update Fri Dec  7 16:22:32 2012 ivan ignatiev
 ##
 
-SRCS	=	dasm.c
+SRCS	=	dasm.c \
+		../lib/op.c
 
-CFLAGS	+=	-Wall -Werror
-CFLAGS	+=	-pedantic -Wextra
+#CFLAGS	+=	-Wall -Werror
+#CFLAGS	+=	-pedantic -Wextra
 CFLAGS	+=	-I../include
 
 LDFLAGS +=	-lcw -L../lib
@@ -29,7 +30,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 		$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
-		cp $(NAME) ../bin/$(NAME)
+		cp $(NAME) ../bin/
 clean:
 		$(RM) $(OBJS)
 
