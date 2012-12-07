@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Fri Dec  7 18:49:46 2012 arthur sfez
+   Last update Fri Dec  7 19:23:09 2012 qiuyan liu
 */
 
 #ifndef CWLIB_H_
@@ -27,6 +27,6 @@ char		*get_next_line(const int fd);
 char		*my_strncpy(char *dest, char *src, int n);
 char		**my_add_to_array(char *str, char **arr);
 int		is_big_endian(void);
-char		*conv_to_platform(char *buf, size_t sz);
+char		*my_conv_to_platform(char *buf, int sz);
 
 #endif /* CWLIB_H_ */

@@ -5,28 +5,33 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri Dec  7 16:53:25 2012 ivan ignatiev
-** Last update Fri Dec  7 17:28:06 2012 ivan ignatiev
+** Last update Fri Dec  7 19:20:55 2012 qiuyan liu
 */
 
-#include	<sys/types.h>
 #include	"cwlib.h"
 
-/*
- * Example of usign:
- * int b;
- * b = 1010000000000000000000000000000000000000000000000000000000000000b
- * b = (int)conv_to_platform(&b, sizeof(b));
- * printf("%d\n", b);
- * Output: 5
- */
+void		*my_bytes_reverse(void *buff, int size)
+{
+  char		tmp;
+  int		n;
+  char		*p;
 
-char 		*my_conv_to_platform(char *buf, size_t sz)
+  p = buff;
+  n = size / 2;
+  while (n > 0)
+    {
+      tmp = (*(char *)(p + n - 1));
+      (*(char *)(p + n - 1)) = (*(char *)(p + size - n));
+      (*(char *)(p + size - n)) = tmp;
+      n--;
+    }
+  return (buff);
+}
+
+char 		*my_conv_to_platform(char *buff, int sz)
 {
   if (is_big_endian())
-    return (buf);
+    return (buff);
   else
-    {
-      
-      return (buf);
-    }
+    return (my_bytes_reverse(buff, sz));
 }
