@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Fri Dec  7 14:08:03 2012 arthur sfez
+** Last update Fri Dec  7 15:57:00 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -16,6 +16,8 @@
 # define UNKNOWN_INS		2
 # define UNKNOWN_ARG		3
 # define UNTERMINATED_STR	4
+# define NUMBER_EXPECTED	5
+# define TRAILING_GARBAGE	6
 
 #include "op.h"
 

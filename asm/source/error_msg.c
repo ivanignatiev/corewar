@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Dec  7 09:40:48 2012 arthur sfez
-** Last update Fri Dec  7 13:37:01 2012 arthur sfez
+** Last update Fri Dec  7 15:53:25 2012 arthur sfez
 */
 
 #include <unistd.h>
@@ -19,6 +19,8 @@ err_t		g_err_tab[] =
     {"Unknown mnemonic", UNKNOWN_INS},
     {"Bad argument", UNKNOWN_ARG},
     {"Unterminated string", UNTERMINATED_STR},
+    {"Number expected", NUMBER_EXPECTED},
+    {"Trailing garbage", TRAILING_GARBAGE},
   };
 
 void		my_err_msg(char *s, int line, int err, int pos)
