@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Thu Dec  6 20:02:15 2012 arthur sfez
+## Last update Fri Dec  7 11:47:41 2012 arthur sfez
 ##
 
 CC	=	cc
@@ -28,6 +28,7 @@ SRCS	=	get_next_line.c \
 		my_split_string.c \
 		my_strncpy.c \
 		strings.c \
+		my_put_nbr.c \
 		my_strncmp.c
 
 
