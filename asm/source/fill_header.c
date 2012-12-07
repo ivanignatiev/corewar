@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Fri Dec  7 14:07:45 2012 arthur sfez
+** Last update Fri Dec  7 14:25:07 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -67,7 +67,7 @@ int		my_fill_header(header_t *header, char *s, int line)
 {
   if (my_strncmp(s, ".name", 5) == 0)
     {
-      if (!my_header_name(header->comment, s + 5))
+      if (!my_header_name(header->prog_name, s + 5))
 	my_err_msg(s, line, UNTERMINATED_STR, 8);
       return (1);
     }
