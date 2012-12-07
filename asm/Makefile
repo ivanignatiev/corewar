@@ -5,13 +5,14 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Fri Dec  7 11:44:32 2012 arthur sfez
+## Last update Fri Dec  7 19:36:48 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
 		source/compile_file.c \
 		source/fill_header.c \
 		source/error_msg.c \
+		source/my_write_bin.c \
 		../lib/op.c
 
 OBJS	=	$(SRCS:.c=.o)

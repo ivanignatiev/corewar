@@ -5,16 +5,19 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Fri Dec  7 18:46:41 2012 arthur sfez
+** Last update Fri Dec  7 20:08:33 2012 arthur sfez
 */
 
+#include	<sys/types.h>
+#include	<sys/stat.h>
+#include	<fcntl.h>
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"op.h"
 #include	"asm.h"
 #include	"cwlib.h"
 
-void		my_retrieve_data(int fd, labels_t **list, char *s)
+void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
 {
   int		i;
   char		**arr;
@@ -23,27 +26,28 @@ void		my_retrieve_data(int fd, labels_t **list, char *s)
     {
       i = 0;
       if ((arr = my_split_string(s, " ,\t")))
-	my_translate(arr, list);
+
       free(s);
       my_free_array(arr);
-      s = get_next_line(fd);
+      s = get_next_line(fdr);
     }
-  return (1);
 }
 
-void		my_compile_file(int fd)
+void		my_compile_file(int fdr)
 {
-  int		prog_size;
+  int		fdw;
   char		*s;
   header_t	*header;
   labels_t	*list;
 
-
   if ((header = malloc(sizeof(header_t))))
     {
-      s = my_init_header(fd, header);
+      s = my_init_header(fdr, header);
       my_check_header(header);
       list = NULL;
-      my_retrieve_data(fd, &list, s);
+      if ((fdw = open("my_cor.cor", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+	return ;
+      my_write_header(fdw, header);
+      my_parse_data(fdr, &list, s, fdw);
     }
 }
