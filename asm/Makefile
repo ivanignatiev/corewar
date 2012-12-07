@@ -5,17 +5,20 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Thu Dec  6 18:00:58 2012 arthur sfez
+## Last update Thu Dec  6 20:22:35 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
+		source/compile_file.c \
+		source/fill_header.c \
+		../lib/op.c
 
 OBJS	=	$(SRCS:.c=.o)
 
 NAME	=	asm
 
-CFLAGS	+=	-Wall -Werror -Wextra
-CFLAGS	+=	-pedantic -ansi
+#CFLAGS	+=	-Wall -Werror -Wextra
+#CFLAGS	+=	-pedantic -ansi
 CFLAGS	+=	-I../include/
 
 LIB	=	-lcw -L../lib/

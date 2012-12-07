@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Thu Dec  6 18:49:26 2012 arthur sfez
+** Last update Thu Dec  6 19:59:03 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -13,6 +13,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "cwlib.h"
+#include	"op.h"
+#include	"asm.h"
+
 
 int		main(int ac, char **av)
 {

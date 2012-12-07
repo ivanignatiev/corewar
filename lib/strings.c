@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:11:23 2012 arthur sfez
-** Last update Thu Dec  6 18:14:50 2012 arthur sfez
+** Last update Thu Dec  6 20:08:38 2012 arthur sfez
 */
 
 #include <unistd.h>
@@ -20,6 +20,8 @@ int		my_strlen(char *s)
   int		i;
 
   i = 0;
+  if (!s)
+    return (0);
   while (s[i])
     i++;
   return (i);

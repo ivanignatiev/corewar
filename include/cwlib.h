@@ -5,20 +5,22 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Thu Dec  6 18:48:26 2012 arthur sfez
+** Last update Thu Dec  6 20:04:25 2012 arthur sfez
 */
 
 #ifndef CWLIB_H_
 # define CWLIB_H_
 
-# define BUFFER_SIZE 1024
-# define EXIT_SUCCESS 0
-# define EXIT_FAILURE 1
+# define BUFFER_SIZE		1024
+# define EXIT_SUCCESS		0
+# define EXIT_FAILURE		1
+# define MALLOC_FAILURE		2
 
 void		my_putchar(char);
 int		my_strlen(char *);
 void		my_putstr(char *);
 void		my_puterr(char *);
+int		my_strncmp(char *, char *, int);
 char		**my_split_string(char *str, char *separator,
 			  int quotes_mode);
 int		my_free_array(char **arr);
