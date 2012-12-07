@@ -5,13 +5,18 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Fri Dec  7 14:08:39 2012 arthur sfez
+** Last update Fri Dec  7 15:32:32 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	"op.h"
 #include	"asm.h"
 #include	"cwlib.h"
+
+int		my_retrieve_data(int fd, labels_t **list)
+{
+  
+}
 
 void		my_compile_file(int fd)
 {
@@ -23,6 +28,6 @@ void		my_compile_file(int fd)
     {
       my_check_header(header);
       list = NULL;
-      //prog_size = my_retrieve_data(fd, &list);
+      prog_size = my_retrieve_data(fd, &list);
     }
 }
