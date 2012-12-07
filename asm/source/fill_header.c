@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Fri Dec  7 14:25:07 2012 arthur sfez
+** Last update Fri Dec  7 18:12:42 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -68,7 +68,7 @@ int		my_fill_header(header_t *header, char *s, int line)
   if (my_strncmp(s, ".name", 5) == 0)
     {
       if (!my_header_name(header->prog_name, s + 5))
-	my_err_msg(s, line, UNTERMINATED_STR, 8);
+	my_err_msg(s, line, UNTERMINATED_STR, 7);
       return (1);
     }
   else if (my_strncmp(s, ".comment", 8) == 0)
@@ -104,30 +104,28 @@ void		my_check_header(header_t *header)
       }
 }
 
-header_t	*my_init_header(int fd)
+char		*my_init_header(int fd, header_t *header)
 {
   int		line;
   char		*tmp;
   char		*s;
-  header_t	*header;
 
-  if ((header = malloc(sizeof(header_t))))
+  line = 1;
+  header->magic = COREWAR_EXEC_MAGIC;
+  header->prog_size = 0;
+  *(header->prog_name) = 0;
+  *(header->comment) = 0;
+  while ((s = get_next_line(fd)))
     {
-      line = 1;
-      header->magic = COREWAR_EXEC_MAGIC;
-      *(header->prog_name) = 0;
-      *(header->comment) = 0;
-      while ((s = get_next_line(fd)))
-	{
-	  tmp = s;
-	  while (*s == ' ' || *s == '\t')
-	    s++;
-	  if (*s != '.' && *s != '\n')
-	    return (header);
-	  my_fill_header(header, s, line);
-	  free(tmp);
-	  line++;
-	}
+      tmp = s;
+      while (*s == ' ' || *s == '\t')
+	s++;
+      if (*s != '.' && *s != '\0')
+	return (s);
+      if (*s == '.')
+	my_fill_header(header, s, line);
+      free(tmp);
+      line++;
     }
-  return (header);
+  return (NULL);
 }

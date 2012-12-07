@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Wed Dec  5 14:10:17 2012 ivan ignatiev
+** Last update Fri Dec  7 17:17:17 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -58,32 +58,27 @@ char		**handle_quotes(char *str, char **arr, int *i)
   return (add_word(str + start, count + 1, arr));
 }
 
-char		**my_split_string(char *str, char *separators,
-				  int quotes_mode)
+char		**my_split_string(char *str, char *separators)
 {
   int		i;
   int		count;
   int		start;
   char		**arr;
-  int		quotes;
 
   i = 0;
   arr = NULL;
   count = 0;
-  quotes = 0;
+  if (!str)
+    return (NULL);
   while (str[i] != '\0')
     {
       if (!is_it_separator(str[i], separators))
 	{
-	  if ((i == 0 || is_it_separator(str[i - 1], separators)) && !quotes)
+	  if ((i == 0 || is_it_separator(str[i - 1], separators)))
 	    start = i;
-	  if ((str[i] == '\'' || str[i] == '"') && quotes_mode)
-	    quotes = !quotes;
 	  count = count + 1;
 	}
-      else if (quotes)
-	count = count + 1;
-      else if (!quotes && count > 0 && (arr = add_word(str + start, count, arr)) != NULL)
+      else if (count > 0 && (arr = add_word(str + start, count, arr)) != NULL)
 	count = 0;
       i = i + 1;
     }
