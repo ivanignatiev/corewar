@@ -5,23 +5,24 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Thu Dec  6 20:26:53 2012 arthur sfez
+** Last update Fri Dec  7 14:08:39 2012 arthur sfez
 */
 
+#include	<unistd.h>
 #include	"op.h"
 #include	"asm.h"
 #include	"cwlib.h"
 
 void		my_compile_file(int fd)
 {
+  int		prog_size;
   header_t	*header;
+  labels_t	*list;
 
-  if (!(header = my_init_header(fd)))
+  if ((header = my_init_header(fd)))
     {
-      return ; 
-   }
-     my_putstr(header->prog_name);
-      my_putchar('\n');				
-      my_putstr(header->comment);
- 
+      my_check_header(header);
+      list = NULL;
+      //prog_size = my_retrieve_data(fd, &list);
+    }
 }
