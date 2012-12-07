@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Fri Dec  7 20:08:33 2012 arthur sfez
+** Last update Fri Dec  7 20:25:14 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -26,7 +26,7 @@ void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
     {
       i = 0;
       if ((arr = my_split_string(s, " ,\t")))
-
+	my_write_line(arr, list);
       free(s);
       my_free_array(arr);
       s = get_next_line(fdr);
@@ -45,9 +45,10 @@ void		my_compile_file(int fdr)
       s = my_init_header(fdr, header);
       my_check_header(header);
       list = NULL;
-      if ((fdw = open("my_cor.cor", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+      if ((fdw = open("my_cor.cor", O_RDWR | O_CREAT | O_TRUNC, 
+		      S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	return ;
-      my_write_header(fdw, header);
+      write(fdw, header, sizeof(*header));
       my_parse_data(fdr, &list, s, fdw);
     }
 }
