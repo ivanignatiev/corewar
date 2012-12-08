@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri Dec  7 16:53:25 2012 ivan ignatiev
-** Last update Fri Dec  7 19:20:55 2012 qiuyan liu
+** Last update Fri Dec  7 20:34:11 2012 arthur sfez
 */
 
 #include	"cwlib.h"
@@ -28,7 +28,7 @@ void		*my_bytes_reverse(void *buff, int size)
   return (buff);
 }
 
-char 		*my_conv_to_platform(char *buff, int sz)
+void 		*my_conv_to_platform(void *buff, int sz)
 {
   if (is_big_endian())
     return (buff);

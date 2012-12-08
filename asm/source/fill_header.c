@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Fri Dec  7 19:39:46 2012 arthur sfez
+** Last update Fri Dec  7 20:32:35 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -112,6 +112,7 @@ char		*my_init_header(int fd, header_t *header)
 
   line = 1;
   header->magic = COREWAR_EXEC_MAGIC;
+  my_conv_to_platform(&(header->magic), sizeof(header->magic));
   header->prog_size = 0;
   *(header->prog_name) = 0;
   *(header->comment) = 0;
