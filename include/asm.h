@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Fri Dec  7 18:05:45 2012 arthur sfez
+** Last update Sat Dec  8 18:52:40 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -42,5 +42,7 @@ void		my_compile_file(int fd);
 char		*my_init_header(int fd, header_t *header);
 void		my_check_header(header_t *header);
 void		my_err_msg(char *s, int line, int err, int pos);
+int		is_instruction(char *s);
+char		*my_malloc_separators();
 
 #endif /* ASM_H_ */

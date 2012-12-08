@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Fri Dec  7 20:34:26 2012 arthur sfez
+** Last update Sat Dec  8 16:59:10 2012 arthur sfez
 */
 
 #ifndef CWLIB_H_
@@ -22,6 +22,7 @@ void		my_putstr(char *);
 void		my_puterr(char *);
 int		my_strncmp(char *, char *, int);
 char		**my_split_string(char *str, char *separator);
+char		**my_split_string_asm(char *str, char *separator);
 int		my_free_array(char **arr);
 char		*get_next_line(const int fd);
 char		*my_strncpy(char *dest, char *src, int n);

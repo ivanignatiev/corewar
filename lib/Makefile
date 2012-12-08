@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Fri Dec  7 17:20:00 2012 ivan ignatiev
+## Last update Sat Dec  8 17:40:12 2012 arthur sfez
 ##
 
 CC	=	cc
@@ -30,6 +30,7 @@ SRCS	=	get_next_line.c \
 		strings.c \
 		my_put_nbr.c \
 		my_strncmp.c \
+		my_strcmp.c \
 		is_big_endian.c \
 		my_endian_convert.c
 
