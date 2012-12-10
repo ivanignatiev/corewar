@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Mon Dec 10 11:49:11 2012 ivan ignatiev
+** Last update Mon Dec 10 12:28:59 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -17,12 +17,17 @@
 #include	"op.h"
 #include	"dasm.h"
 
+int		cw_is_magic(header_t *hd)
+{
+  my_conv_to_platform(&(hd->magic), sizeof(hd->magic));
+  return (hd->magic == COREWAR_EXEC_MAGIC);
+}
+
 t_program	*cw_load_program(char *filename,
 				 int start_addr,
 				 int prog_num)
 {
   int		fd;
-  int		real_size;
   t_program	*prog;
 
   if ((prog = (t_program*)malloc(sizeof(t_program))) != NULL)
@@ -31,10 +36,10 @@ t_program	*cw_load_program(char *filename,
 	{
 	  if (read(fd, &(prog->header), sizeof(header_t)) > 0)
 	    {
-	      my_conv_to_platform(&(prog->header.prog_size), sizeof(int));
-	      /*TODO: MAGIC VALIDE*/
+	      my_conv_to_platform(&(prog->header.prog_size), sizeof(prog->header.prog_size));
 	      if ((prog->start_addr = cw_try_place_program(fd, start_addr,
-							   prog->header.prog_size)) < 0)
+							   prog->header.prog_size)) < 0
+		  || !cw_is_magic(&(prog->header)))
 		{
 		  free(prog);
 		  return (NULL);
