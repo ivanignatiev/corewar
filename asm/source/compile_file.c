@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-   Last update Mon Dec 10 15:27:59 2012 angela lu
+** Last update Mon Dec 10 15:32:52 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -19,23 +19,15 @@
 
 void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
 {
-  int		i;
   char		*separators;
   char		**arr;
 
   separators = my_malloc_separators();
   while (s)
     {
-      i = 0;
       if ((arr = my_split_string_asm(s, separators)))
 	{
 	  separators[1] = ' ';
-	  while (arr[i] != 0)
-	    {
-	      my_putstr(arr[i]);
-	      my_putchar('\n');
-	      i++;
-	    }
 	  my_write_ins(arr, list);
 	}
       free(s);
