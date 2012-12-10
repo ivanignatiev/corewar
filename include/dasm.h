@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Mon Dec 10 13:32:35 2012 ivan ignatiev
+** Last update Mon Dec 10 14:44:30 2012 ivan ignatiev
 */
 
 #ifndef	DASM_H_
@@ -47,6 +47,8 @@ int		cw_try_place_program(int fd,
 				     int prog_size);
 int		cw_init_memory();
 int		cw_free_memory();
+unsigned char	*args_order(op_t *instr, char *order_byte);
+void		args_skip(op_t *instr, t_program *prog);
 
 #endif /* !DASM_H_ */
 
