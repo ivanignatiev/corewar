@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Mon Dec 10 15:32:52 2012 arthur sfez
+** Last update Mon Dec 10 15:41:56 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -19,9 +19,11 @@
 
 void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
 {
+  int		i;
   char		*separators;
   char		**arr;
 
+  i = 0;
   separators = my_malloc_separators();
   while (s)
     {
@@ -30,9 +32,11 @@ void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
 	  separators[1] = ' ';
 	  my_write_ins(arr, list);
 	}
-      free(s);
+      if (i != 0)
+	free(s);
       my_free_array(arr);
       s = get_next_line(fdr);
+      i++;
     }
   free(separators);
 }
