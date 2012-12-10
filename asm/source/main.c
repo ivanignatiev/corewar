@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Thu Dec  6 19:59:03 2012 arthur sfez
+** Last update Mon Dec 10 13:51:59 2012 angela lu
 */
 
 #include <sys/types.h>
@@ -15,7 +15,6 @@
 #include "cwlib.h"
 #include	"op.h"
 #include	"asm.h"
-
 
 int		main(int ac, char **av)
 {
@@ -29,6 +28,12 @@ int		main(int ac, char **av)
 	{
 	  my_puterr("Could not open ");
 	  my_puterr(av[i]);
+	  my_putchar('\n');
+	}
+      else if (!(av[i][my_strlen(av[i]) - 1] == 's' && av[i][my_strlen(av[i]) - 2] == '.'))
+	{
+	  my_puterr(av[i]);
+	  my_puterr(" isn't the right file. ");
 	  my_putchar('\n');
 	}
       else
