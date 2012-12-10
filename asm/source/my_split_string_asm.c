@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Sat Dec  8 19:15:53 2012 arthur sfez
+** Last update Mon Dec 10 15:12:09 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -26,8 +26,7 @@ int		is_it_separator_asm(char c, char *separators)
     return (0);
 }
 
-char		**add_word_asm(char *str, int count,
-			 char **arr)
+char		**add_word_asm(char *str, int count, char **arr, char *separators)
 {
   char		*elem;
 
@@ -36,6 +35,8 @@ char		**add_word_asm(char *str, int count,
     {
       my_strncpy(elem, str, count);
       elem[count] = '\0';
+      if (separators[1] == 0)
+	elem = my_clean_string(elem, separators);
       return (my_add_to_array(elem, arr));
     }
   return (arr);
@@ -81,11 +82,11 @@ char		**my_split_string_asm(char *str, char *separators)
 	    }
 	  count = count + 1;
 	}
-      else if (count > 0 && (arr = add_word_asm(str + start, count, arr)) != NULL)
+      else if (count > 0 && (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
 	count = 0;
       i = i + 1;
     }
   if (count > 0)
-    arr = add_word_asm(str + start, count, arr);
+    arr = add_word_asm(str + start, count, arr, separators);
   return (arr);
 }

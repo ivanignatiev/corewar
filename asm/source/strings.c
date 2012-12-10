@@ -5,11 +5,12 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 18:46:52 2012 arthur sfez
-** Last update Sat Dec  8 18:52:00 2012 arthur sfez
+** Last update Mon Dec 10 15:20:07 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
+#include	"asm.h"
 
 char		*my_malloc_separators()
 {
@@ -22,5 +23,55 @@ char		*my_malloc_separators()
   s[1] = ' ';
   s[2] = '\t';
   s[3] = 0;
+  return (s);
+}
+
+char		*my_remove_separators(char *s, char *tmp, char *separators)
+{
+  int		i;
+  int		j;
+
+  i = 0;
+  j = 0;
+  while (tmp[i])
+    {
+      if (!is_it_separator_asm(tmp[i], separators))
+	{
+	  s[j] = tmp[i];
+	  j++;
+	}
+      i++;
+    }
+  free(tmp);
+  separators[1] = 0;
+  return (s);
+}
+
+char		*my_clean_string(char *s, char *separators)
+{
+  int		i;
+  int		sp;
+  char		*tmp;
+
+  i = 0;
+  sp = 0;
+  separators[1] = ' ';
+  while (s[i])
+    {
+      if (is_it_separator_asm(s[i], separators))
+	sp++;
+      i++;
+    }
+  if (sp > 0)
+    {
+      tmp = s;
+      s = malloc(sizeof(*s) * (my_strlen(tmp) - sp + 1));
+      if (s == NULL)
+	s = tmp;
+      s[my_strlen(tmp) - sp] = 0;
+      return (my_remove_separators(s, tmp, separators));
+
+    }
+  separators[1] = 0;
   return (s);
 }
