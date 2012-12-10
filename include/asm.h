@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Mon Dec 10 15:24:18 2012 arthur sfez
+   Last update Mon Dec 10 15:28:46 2012 angela lu
 */
 
 #ifndef ASM_H_
@@ -38,7 +38,7 @@ struct	labels_s
 
 typedef struct labels_s labels_t;
 
-void		my_compile_file(int fd);
+void		my_compile_file(int fd, char *str);
 char		*my_init_header(int fd, header_t *header);
 void		my_check_header(header_t *header);
 void		my_err_msg(char *s, int line, int err, int pos);

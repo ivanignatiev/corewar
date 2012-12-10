@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Sat Dec  8 19:42:29 2012 arthur sfez
+   Last update Mon Dec 10 15:27:59 2012 angela lu
 */
 
 #include	<sys/types.h>
@@ -45,7 +45,21 @@ void		my_parse_data(int fdr, labels_t **list, char *s, int fdw)
   free(separators);
 }
 
-void		my_compile_file(int fdr)
+int	open_cor(char *str)
+{
+  int	fdw;
+  char	*cor;
+
+  cor = malloc(sizeof(char) * (my_strlen(str) + 3));
+  cor = my_strncpy(cor, str, (my_strlen(str) - 1));
+  cor = my_strcat(cor, "cor");
+  fdw = open(cor, O_RDWR | O_CREAT | O_TRUNC, 
+	     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+  free(cor);
+  return (fdw);
+}
+
+void		my_compile_file(int fdr, char *str)
 {
   int		fdw;
   char		*s;
@@ -57,11 +71,11 @@ void		my_compile_file(int fdr)
       s = my_init_header(fdr, header);
       my_check_header(header);
       list = NULL;
-      if ((fdw = open("my_cor.cor", O_RDWR | O_CREAT | O_TRUNC, 
-		      S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-	return ;
-      write(fdw, header, sizeof(*header));
-      my_parse_data(fdr, &list, s, fdw);
+      if ((fdw = (open_cor(str))) != -1)
+	{
+	  write(fdw, header, sizeof(*header));
+	  my_parse_data(fdr, &list, s, fdw);
+	}
     }
   if (header != NULL)
     free(header);
