@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Mon Dec 10 19:11:31 2012 qiuyan liu
+   Last update Mon Dec 10 17:20:34 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -21,7 +21,6 @@
  * order_byte = 11110100b
  * return ( Array [0] => IND_SIZE, [1] => IND_SIZE [2] => REG_SIZE)
  */
-
 int		get_array_len(unsigned char order_byte)
 {
   char		c;
@@ -85,5 +84,4 @@ unsigned char	*args_order(op_t *instr, unsigned char order_byte)
 	return (NULL);
       n += 2;
     }
-
 }

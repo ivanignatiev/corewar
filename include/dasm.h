@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Mon Dec 10 14:44:30 2012 ivan ignatiev
+** Last update Mon Dec 10 17:19:19 2012 ivan ignatiev
 */
 
 #ifndef	DASM_H_
@@ -17,15 +17,19 @@ typedef struct	s_program
   unsigned int	start_addr;
   unsigned int	prog_num;
   unsigned int	pc;
+  unsigned int  reg[REG_NUMBER];
+  unsigned char carry;
   unsigned char	*memory_start; /* g_memory  + start_addr + pc =  memory_start[pc] */
 } t_program;
 
 typedef struct	s_prog_list
 {
-  unsigned char	active;
+  char		active;
   t_program	*prog;
   struct	s_prog_list	*next;
 } t_prog_list;
+
+typedef		int(*t_instr)(t_program *prog, op_t *instr);
 
 unsigned char	*g_memory;
 t_prog_list	*g_prog_list;
@@ -47,8 +51,8 @@ int		cw_try_place_program(int fd,
 				     int prog_size);
 int		cw_init_memory();
 int		cw_free_memory();
-unsigned char	*args_order(op_t *instr, char *order_byte);
-void		args_skip(op_t *instr, t_program *prog);
+unsigned char	*cw_args_order(op_t *instr, unsigned char order_byte);
+
 
 #endif /* !DASM_H_ */
 

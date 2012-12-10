@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Mon Dec 10 13:21:22 2012 ivan ignatiev
+** Last update Mon Dec 10 17:10:31 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -46,7 +46,6 @@ t_program	*cw_load_program(char *filename,
 		}
 	      prog->prog_num = prog_num;
 	      prog->memory_start = g_memory + prog->start_addr;
-	      prog->pc = 0;
 	      return (prog);
 	    }
 	}

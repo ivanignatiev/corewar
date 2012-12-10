@@ -5,13 +5,35 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Mon Dec 10 13:21:45 2012 ivan ignatiev
+** Last update Mon Dec 10 17:10:52 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	"op.h"
 #include	"dasm.h"
 
+/*
+** Build programm list from COR-files passed from command args
+** TODO: parse agrg -dump [cycle_number] / -n [prog_num] / -a [start_addr]
+*/
+void		cw_get_program_list(int argc, char **argv)
+{
+  int		i;
+  int		prog_num;
+
+  g_prog_list = NULL;
+  i = 1;
+  prog_num = 1;
+  while (i < argc)
+    {
+      prog_num = cw_add_prog_to_list(argv[i], -1, prog_num);
+      i = i + 1;
+    }
+}
+
+/*
+** Add programm to programm list
+*/
 int		cw_add_prog_to_list(char *filename,
 				    int start_addr,
 				    int prog_num)
@@ -25,6 +47,7 @@ int		cw_add_prog_to_list(char *filename,
 	{
 	  prog_elem->next = NULL;
 	  prog_elem->active = 1;
+	  prog_elem->prog->pc = 0;
 	  if (g_prog_list == NULL)
 	    g_prog_list = prog_elem;
 	  else
@@ -42,21 +65,31 @@ int		cw_add_prog_to_list(char *filename,
   return (prog_num);
 }
 
-void		cw_get_program_list(int argc, char **argv)
+/*
+** Remove programm from programm list
+*/
+void		cw_remove_programm(t_program *prog)
 {
-  int		i;
-  int		prog_num;
+  t_prog_list	*nav;
+  t_prog_list	*tmp;
 
-  g_prog_list = NULL;
-  i = 1;
-  prog_num = 1;
-  while (i < argc)
+  nav = g_prog_list;
+  while (nav->next != NULL)
     {
-      prog_num = cw_add_prog_to_list(argv[i], -1, prog_num);
-      i = i + 1;
+      if (nav->next->prog->prog_num == prog->prog_num)
+	{
+	  tmp = nav->next;
+	  nav->next = tmp->next;
+	  free(tmp);
+	  return ;
+	}
+      nav = nav->next;
     }
 }
 
+/*
+** Return count of programs in list
+*/
 int		cw_get_prog_count()
 {
   t_prog_list	*nav;
