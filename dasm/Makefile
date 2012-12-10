@@ -5,12 +5,13 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Mon Dec 10 12:00:29 2012 ivan ignatiev
+## Last update Mon Dec 10 12:36:31 2012 ivan ignatiev
 ##
 
 SRCS	=	dasm.c \
-		program.c \
 		list.c \
+		program/load.c \
+		program/instr.c \
 		memory/dump.c \
 		memory/managment.c \
 		memory/memory.c \

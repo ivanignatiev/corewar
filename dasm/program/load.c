@@ -1,11 +1,11 @@
 /*
-** program.c for corewar in /home/ignati_i//projects/corewar/corewar-2016ed-2015s-2017si-liu_q/dasm
+** program.c for corewar in ./dasm
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Mon Dec 10 12:28:59 2012 ivan ignatiev
+** Last update Mon Dec 10 13:21:22 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -46,21 +46,10 @@ t_program	*cw_load_program(char *filename,
 		}
 	      prog->prog_num = prog_num;
 	      prog->memory_start = g_memory + prog->start_addr;
+	      prog->pc = 0;
 	      return (prog);
 	    }
 	}
     }
   return (NULL);
-}
-
-void		cw_try_run_instr(t_program *prog)
-{
-  printf("#%d (start: %d) Prog: '%s' ('%s') , size %d\n",
-	 prog->prog_num,
-	 prog->start_addr,
-	 prog->header.prog_name,
-	 prog->header.comment,
-	 prog->header.prog_size);
-  cw_dump_memory(prog->memory_start, prog->header.prog_size);
-  printf("\n#\n\n");
 }

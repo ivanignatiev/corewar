@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Mon Dec 10 11:59:37 2012 ivan ignatiev
+** Last update Mon Dec 10 13:20:56 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -18,12 +18,21 @@ void		begin_corewar()
 {
   t_prog_list	*nav;
   int		cycles;
+  int		prog_count;
 
-  nav = g_prog_list;
-  while (nav != NULL)
+  prog_count = cw_get_prog_count();
+  while (prog_count)
     {
-      cw_try_run_instr(nav->prog);
-      nav = nav->next;
+      nav = g_prog_list;
+      while (nav != NULL)
+	{
+	  if (nav->active && !cw_try_run_instr(nav->prog))
+	    {
+	      prog_count = prog_count - 1;
+	      nav->active = 0;
+	    }
+	  nav = nav->next;
+	}
     }
 }
 

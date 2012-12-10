@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Mon Dec 10 11:59:51 2012 ivan ignatiev
+** Last update Mon Dec 10 13:21:45 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -24,6 +24,7 @@ int		cw_add_prog_to_list(char *filename,
       if ((prog_elem->prog = cw_load_program(filename, start_addr, prog_num)) != NULL)
 	{
 	  prog_elem->next = NULL;
+	  prog_elem->active = 1;
 	  if (g_prog_list == NULL)
 	    g_prog_list = prog_elem;
 	  else
@@ -54,4 +55,19 @@ void		cw_get_program_list(int argc, char **argv)
       prog_num = cw_add_prog_to_list(argv[i], -1, prog_num);
       i = i + 1;
     }
+}
+
+int		cw_get_prog_count()
+{
+  t_prog_list	*nav;
+  int		i;
+
+  i = 0;
+  nav = g_prog_list;
+  while (nav != NULL)
+    {
+      i = i + 1;
+      nav = nav->next;
+    }
+  return (i);
 }
