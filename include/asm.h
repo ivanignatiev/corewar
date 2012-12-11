@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-   Last update Tue Dec 11 15:23:10 2012 arthur sfez
+** Last update Tue Dec 11 16:32:46 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -19,6 +19,8 @@
 # define NUMBER_EXPECTED	5
 # define TRAILING_GARBAGE	6
 # define TOOMANY_ARG		7
+# define INVALID_CHAR		8
+# define MISSING_LABEL_NAME	9
 
 # define CALL			0
 # define DEF			1
@@ -63,5 +65,6 @@ void		my_write_hexa(char **arr, char *s, labels_t **labels, int fdw);
 char		*my_ins_hexa(char *s);
 int		my_strstr_int(char *str, char *to_find);
 int		my_get_line_pos(char *s, int i);
+int		is_label_def(char *str, char *s, int i);
 
 #endif /* ASM_H_ */

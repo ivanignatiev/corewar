@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Tue Dec 11 14:44:52 2012 arthur sfez
+** Last update Tue Dec 11 15:40:27 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -51,12 +51,12 @@ void		my_write_hexa(char **arr, char *s, labels_t **labels, int fdw)
   lb_def = 0;
   while (arr[i] != NULL)
     {
-      /*
       if ((lb_def == 0 && i == 0) && is_label_def(arr[i], s, i))
 	{
 	  lb_def = 1;
 	  my_add_to_list(&labels[DEF], arr[i]);
 	}
+      /*
       else if ((i == 0 && lb_def == 0) || (i == 1 && lb_def == 1));
         {
 	  if ((n_ins = my_get_ins_code(arr[i], s, i)) != -1)

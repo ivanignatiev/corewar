@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Mon Dec 10 13:50:25 2012 angela lu
+## Last update Tue Dec 11 15:38:34 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -15,7 +15,9 @@ SRCS	=	source/main.c \
 		source/fill_header.c \
 		source/error_msg.c \
 		source/write_binary.c \
+		source/is_label_def.c \
 		source/strings.c \
+		source/lists.c \
 		../lib/op.c
 
 OBJS	=	$(SRCS:.c=.o)
