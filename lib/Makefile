@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Mon Dec 10 14:36:12 2012 angela lu
+## Last update Tue Dec 11 14:54:42 2012 arthur sfez
 ##
 
 CC	=	cc
@@ -33,7 +33,8 @@ SRCS	=	get_next_line.c \
 		my_strcmp.c \
 		is_big_endian.c \
 		my_endian_convert.c \
-		my_strcat.c
+		my_strcat.c \
+		my_getnbr.c
 
 OBJS	=	$(SRCS:.c=.o)
 

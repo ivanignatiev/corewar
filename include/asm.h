@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Mon Dec 10 22:13:12 2012 angela lu
+   Last update Tue Dec 11 15:23:10 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -18,8 +18,14 @@
 # define UNTERMINATED_STR	4
 # define NUMBER_EXPECTED	5
 # define TRAILING_GARBAGE	6
+# define TOOMANY_ARG		7
+
+# define CALL			0
+# define DEF			1
 
 #include "op.h"
+
+extern	int	nb_line;
 
 struct	err_s
 {
@@ -36,16 +42,26 @@ struct	labels_s
   struct labels_s	*next;
 };
 
+struct	args_s
+{
+  int			val;
+  int			size;
+  struct args_s		*next;
+};
+
+typedef struct args_s	args_t;
 typedef struct labels_s labels_t;
 
 void		my_compile_file(int fd, char *str);
 char		*my_init_header(int fd, header_t *header);
 void		my_check_header(header_t *header);
-void		my_err_msg(char *s, int line, int err, int pos);
+void		my_err_msg(char *s, int err, int pos);
 int		is_instruction(char *s);
 char		*my_malloc_separators();
 char		*my_clean_string(char *s, char *separators);
-int		check_lab_chars(char c);
-int		is_label_def(char *str, int i);
+void		my_write_hexa(char **arr, char *s, labels_t **labels, int fdw);
+char		*my_ins_hexa(char *s);
+int		my_strstr_int(char *str, char *to_find);
+int		my_get_line_pos(char *s, int i);
 
 #endif /* ASM_H_ */

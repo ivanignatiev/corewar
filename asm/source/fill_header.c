@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Mon Dec 10 15:42:00 2012 arthur sfez
+** Last update Tue Dec 11 12:09:50 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -63,24 +63,24 @@ static int	my_header_comment(char *comment, char *line)
   return (1);
 }
 
-int		my_fill_header(header_t *header, char *s, int line)
+static int	my_fill_header(header_t *header, char *s)
 {
-  if (my_strncmp(s, ".name", 5) == 0)
+  if (my_strncmp(s, NAME_CMD_STRING, 5) == 0)
     {
       if (!my_header_name(header->prog_name, s + 5))
-	my_err_msg(s, line, UNTERMINATED_STR, 7);
+	my_err_msg(s, UNTERMINATED_STR, 7);
       return (1);
     }
-  else if (my_strncmp(s, ".comment", 8) == 0)
+  else if (my_strncmp(s, COMMENT_CMD_STRING, 8) == 0)
     {
       if (*(header->prog_name) == 0)
-	my_err_msg(s, line, SYNTAX_ERR, 1);
+	my_err_msg(s, SYNTAX_ERR, 1);
       if (!my_header_comment(header->comment, s + 8))
-	my_err_msg(s, line, UNTERMINATED_STR, 8);
+	my_err_msg(s, UNTERMINATED_STR, 9);
       return (1);
     }
   else if (my_strncmp(s, ".extend", 7) != 0)
-    my_err_msg(s, line, UNKNOWN_CMD, 1);
+    my_err_msg(s, UNKNOWN_CMD, 1);
   return (0);
 }
 
@@ -110,7 +110,6 @@ char		*my_init_header(int fd, header_t *header)
   char		*tmp;
   char		*s;
 
-  line = 1;
   header->magic = COREWAR_EXEC_MAGIC;
   my_conv_to_platform(&(header->magic), sizeof(header->magic));
   header->prog_size = 0;
@@ -124,9 +123,9 @@ char		*my_init_header(int fd, header_t *header)
       if (*s != '.' && *s != '\0')
 	return (s);
       if (*s == '.')
-	my_fill_header(header, s, line);
+	my_fill_header(header, s);
       free(tmp);
-      line++;
+      nb_line++;
     }
   return (NULL);
 }

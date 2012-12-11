@@ -5,16 +5,18 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Mon Dec 10 14:09:48 2012 angela lu
+** Last update Tue Dec 11 11:55:23 2012 arthur sfez
 */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "cwlib.h"
+#include	<sys/types.h>
+#include	<sys/stat.h>
+#include	<fcntl.h>
+#include	<unistd.h>
+#include	"cwlib.h"
 #include	"op.h"
 #include	"asm.h"
+
+int		nb_line;
 
 int		main(int ac, char **av)
 {
