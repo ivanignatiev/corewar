@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Oct  8 10:11:21 2012 ivan ignatiev
-** Last update Tue Dec 11 12:13:40 2012 ivan ignatiev
+** Last update Tue Dec 11 16:50:44 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -36,7 +36,7 @@ void		*my_memncpy(void *dest, void *src, int n)
   while (i < n)
     {
       ((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
-      i++;
+      i = i + 1;
     }
   return (dest);
 }

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Tue Dec 11 15:35:15 2012 ivan ignatiev
+** Last update Tue Dec 11 17:12:42 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -85,6 +85,23 @@ t_prog_args	*cw_args_order(op_t *instr,
   return (args);
 }
 
+void		*cw_my_memncpy(void *dest, void *src, int n, int dest_n)
+{
+  int		i;
+  int		j;
+
+  i = dest_n - 1;
+  j = n - 1;
+  while (i >= 0 )
+    {
+      if (j >= 0)
+	((unsigned char*)dest)[i] = ((unsigned char*)src)[j];
+      i = i - 1;
+      j = j - 1;
+    }
+  return (dest);
+}
+
 int		cw_get_args(t_program *prog,
 			    op_t *instr,
 			    t_prog_args *args)
@@ -100,8 +117,8 @@ int		cw_get_args(t_program *prog,
 	args[i].value = -1;
       else
 	args[i].value = 0;
-      my_memncpy(&args[i].value, (prog->memory_start + prog->pc + 1), args[i].size);
-      my_conv_to_platform(&args[i].value, args[i].size);
+      cw_my_memncpy(&args[i].value, (prog->memory_start + prog->pc + 1), args[i].size, sizeof(args[i].value));
+      my_conv_to_platform(&args[i].value, sizeof(args[i].value));
       prog->pc += args[i].size;
       i = i + 1;
     }

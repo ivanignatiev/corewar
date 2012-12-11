@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 12:34:41 2012 ivan ignatiev
-** Last update Tue Dec 11 15:31:05 2012 ivan ignatiev
+** Last update Tue Dec 11 17:13:39 2012 ivan ignatiev
 */
 
 #include	<stdio.h>
@@ -19,20 +19,20 @@ void	cw_show_args(op_t *instr, t_prog_args *args)
   int	i;
 
   if (args[0].type == T_REG)
-    printf("%s r%lld", instr->mnemonique, args[0].value);
+    printf("%s r%lli", instr->mnemonique, args[0].value);
   else if (args[0].type == T_DIR)
-    printf("%s %%%lld", instr->mnemonique, args[0].value);
+    printf("%s %%%lli", instr->mnemonique, args[0].value);
   else if (args[0].type == T_IND)
-    printf("%s %%:%lld", instr->mnemonique, args[0].value);
+    printf("%s %%:%lli", instr->mnemonique, args[0].value);
   i = 1;
   while (i < instr->nbr_args)
     {
       if (args[i].type == T_REG)
-	printf(", r%lld", args[i].value);
+	printf(", r%lli", args[i].value);
       else if (args[i].type == T_DIR)
-	printf(", %%%lld", args[i].value);
+	printf(", %%%lli", args[i].value);
       else if (args[i].type == T_IND)
-	printf(", %%:%lld", args[i].value);
+	printf(", %%:%lli", args[i].value);
       i = i + 1;
     }
 }
