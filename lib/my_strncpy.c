@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Oct  8 10:11:21 2012 ivan ignatiev
-** Last update Tue Dec 11 16:50:44 2012 ivan ignatiev
+** Last update Tue Dec 11 17:37:25 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -28,15 +28,19 @@ char		*my_strncpy(char *dest, char *src, int n)
   return (dest);
 }
 
-void		*my_memncpy(void *dest, void *src, int n)
+void		*my_memncpy(void *dest, void *src, int n, int dest_n)
 {
   int		i;
+  int		j;
 
-  i = 0;
-  while (i < n)
+  i = dest_n - 1;
+  j = n - 1;
+  while (i >= 0 )
     {
-      ((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
-      i = i + 1;
+      if (j >= 0)
+	((unsigned char*)dest)[i] = ((unsigned char*)src)[j];
+      i = i - 1;
+      j = j - 1;
     }
   return (dest);
 }
