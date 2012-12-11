@@ -1,11 +1,11 @@
 /*
-** dasm.h for corewar in /home/ignati_i//projects/corewar/corewar-2016ed-2015s-2017si-liu_q/dasm/memory
+** dasm.h for corewar in ./dasm/memory
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Mon Dec 10 17:19:19 2012 ivan ignatiev
+** Last update Tue Dec 11 13:21:22 2012 ivan ignatiev
 */
 
 #ifndef	DASM_H_
@@ -17,17 +17,24 @@ typedef struct	s_program
   unsigned int	start_addr;
   unsigned int	prog_num;
   unsigned int	pc;
-  unsigned int  reg[REG_NUMBER];
+  long long	 reg[REG_NUMBER];
   unsigned char carry;
   unsigned char	*memory_start; /* g_memory  + start_addr + pc =  memory_start[pc] */
-} t_program;
+}		t_program;
 
 typedef struct	s_prog_list
 {
   char		active;
   t_program	*prog;
   struct	s_prog_list	*next;
-} t_prog_list;
+}		t_prog_list;
+
+typedef struct	s_prog_args
+{
+  long long	value;
+  args_type_t	type;
+  long long	size;
+}		t_prog_args;
 
 typedef		int(*t_instr)(t_program *prog, op_t *instr);
 
@@ -51,7 +58,11 @@ int		cw_try_place_program(int fd,
 				     int prog_size);
 int		cw_init_memory();
 int		cw_free_memory();
-unsigned char	*cw_args_order(op_t *instr, unsigned char order_byte);
+t_prog_args	*cw_args_order(op_t *instr, unsigned char order_byte);
+int		cw_get_args(t_program *prog,
+			    op_t *instr,
+			    t_prog_args *args);
+
 
 
 #endif /* !DASM_H_ */

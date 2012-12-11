@@ -5,106 +5,139 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 12:34:41 2012 ivan ignatiev
-** Last update Mon Dec 10 17:21:12 2012 ivan ignatiev
+** Last update Tue Dec 11 13:29:05 2012 ivan ignatiev
 */
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"cwlib.h"
 #include	"op.h"
 #include	"dasm.h"
 
+void	cw_show_args(op_t *instr, long long *args)
+{
+  
+}
+
 int	cw_instr_live(t_program *prog, op_t *instr)
 {
-  printf("%s", instr->mnemonique);
+  t_prog_args	*args;
+
+  args = cw_args_order(instr, 64);
+  if (args == NULL)
+    return (0);
+  args[0].size = 4;
+  cw_get_args(prog, instr, args);
+  printf("%s %%:%lld", instr->mnemonique, args[0].value);
+  free(args);
   return (1);
 }
 
 int	cw_instr_ld(t_program *prog, op_t *instr)
 {
+  t_prog_args	*args;
+
+  /*  args = cw_args_order(instr, prog->memory_start[prog->pc + 1]);
+      free(args);*/
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 1;
   return (1);
 }
 
 int	cw_instr_st(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 1;
   return (1);
 }
 
 int	cw_instr_add(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 4;
   return (1);
 }
 
 int	cw_instr_sub(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 4;
   return (1);
 }
 
 int	cw_instr_and(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 4;
   return (1);
 }
 
 int	cw_instr_or(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 4;
   return (1);
 }
 
 int	cw_instr_xor(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 4;
   return (1);
 }
 
 int	cw_instr_zjmp(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + IND_SIZE;
   return (1);
 }
 int	cw_instr_ldi(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  
   return (1);
 }
 
 int	cw_instr_sti(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 2 + 2 * IND_SIZE;
   return (1);
 }
 
 int	cw_instr_fork(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + IND_SIZE;
   return (1);
 }
 
 int	cw_instr_lld(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 1;
   return (1);
 }
 
 int	cw_instr_lldi(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 1;
   return (1);
 }
 
 int	cw_instr_lfork(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + IND_SIZE;
   return (1);
 }
 
 int	cw_instr_aff(t_program *prog, op_t *instr)
 {
   printf("%s", instr->mnemonique);
+  prog->pc = prog->pc + 2;
   return (1);
 }
 

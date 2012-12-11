@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Fri Dec  7 16:53:25 2012 ivan ignatiev
-** Last update Fri Dec  7 20:34:11 2012 arthur sfez
+** Last update Tue Dec 11 12:13:07 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -20,9 +20,9 @@ void		*my_bytes_reverse(void *buff, int size)
   n = size / 2;
   while (n > 0)
     {
-      tmp = (*(char *)(p + n - 1));
-      (*(char *)(p + n - 1)) = (*(char *)(p + size - n));
-      (*(char *)(p + size - n)) = tmp;
+      tmp = (*(unsigned char*)(p + n - 1));
+      (*(unsigned char*)(p + n - 1)) = (*(unsigned char*)(p + size - n));
+      (*(unsigned char*)(p + size - n)) = tmp;
       n--;
     }
   return (buff);

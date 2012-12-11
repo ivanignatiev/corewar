@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Mon Oct  8 14:45:24 2012 arthur sfez
-** Last update Thu Dec  6 20:02:44 2012 arthur sfez
+** Last update Tue Dec 11 12:10:51 2012 ivan ignatiev
 */
 
 #include "cwlib.h"
