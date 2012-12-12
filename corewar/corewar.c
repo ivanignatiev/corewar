@@ -5,19 +5,18 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Wed Dec 12 15:51:45 2012 ivan ignatiev
+** Last update Wed Dec 12 16:42:17 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
 #include	"cwlib.h"
 #include	"op.h"
-#include	"dasm.h"
+#include	"corewar.h"
 
 void		begin_corewar()
 {
   t_prog_list	*nav;
-  int		cycles;
   int		prog_count;
   t_prog_instr	instrs[] = {
     {NULL, 0},

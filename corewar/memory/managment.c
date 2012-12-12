@@ -1,18 +1,18 @@
 /*
-** managment.c for corewar in /home/ignati_i//projects/corewar/corewar-2016ed-2015s-2017si-liu_q/dasm/memory
+** managment.c for corewar in ./dasm/memory
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:50:08 2012 ivan ignatiev
-** Last update Wed Dec 12 15:19:35 2012 ivan ignatiev
+** Last update Wed Dec 12 16:15:50 2012 ivan ignatiev
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"cwlib.h"
 #include	"op.h"
-#include	"dasm.h"
+#include	"corewar.h"
 
 int		cw_search_unmapped(int begin_search,
 				   int prog_size)

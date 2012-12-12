@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Tue Dec 11 13:21:22 2012 ivan ignatiev
+** Last update Wed Dec 12 16:03:22 2012 ivan ignatiev
 */
 
 #ifndef	DASM_H_
@@ -17,9 +17,11 @@ typedef struct	s_program
   unsigned int	start_addr;
   unsigned int	prog_num;
   unsigned int	pc;
-  long long	 reg[REG_NUMBER];
+  long long	reg[REG_NUMBER];
   unsigned char carry;
-  unsigned char	*memory_start; /* g_memory  + start_addr + pc =  memory_start[pc] */
+  int		cur_nbr_cycles;
+  int		nbr_cycles;
+  unsigned char	*memory_start;
 }		t_program;
 
 typedef struct	s_prog_list
@@ -36,7 +38,13 @@ typedef struct	s_prog_args
   long long	size;
 }		t_prog_args;
 
-typedef		int(*t_instr)(t_program *prog, op_t *instr);
+typedef		int(*t_instr)(t_program *prog, op_t *instr, t_prog_args *args);
+
+typedef	struct	s_prog_instr
+{
+  t_instr	func;
+  int		enc_byte;
+}		t_prog_instr;
 
 unsigned char	*g_memory;
 t_prog_list	*g_prog_list;
@@ -49,7 +57,7 @@ void		cw_get_program_list(int argc, char **argv);
 t_program	*cw_load_program(char *filename,
 				 int start_addr,
 				 int prog_num);
-int		cw_try_run_instr(t_program *prog);
+int		cw_try_run_instr(t_program *prog, t_prog_instr *instrs);
 int		cw_dump_memory(unsigned char *memory, int size);
 int		cw_search_unmapped(int begin_search,
 				   int prog_size);
@@ -62,8 +70,23 @@ t_prog_args	*cw_args_order(op_t *instr, unsigned char order_byte);
 int		cw_get_args(t_program *prog,
 			    op_t *instr,
 			    t_prog_args *args);
-
-
+void	cw_show_args(op_t *instr, t_prog_args *args, t_program *prog);
+int	cw_instr_live(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_ld(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_st(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_add(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_sub(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_and(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_or(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_xor(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_zjmp(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_ldi(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_sti(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_fork(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_lldi(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args);
+int	cw_instr_aff(t_program *prog, op_t *instr, t_prog_args *args);
 
 #endif /* !DASM_H_ */
 

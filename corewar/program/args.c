@@ -5,13 +5,13 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Wed Dec 12 15:22:24 2012 ivan ignatiev
+** Last update Wed Dec 12 16:40:29 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	"cwlib.h"
 #include	"op.h"
-#include	"dasm.h"
+#include	"corewar.h"
 
 int		cw_get_args_count(unsigned char order_byte)
 {
@@ -47,7 +47,7 @@ int		cw_args_size(t_prog_args *args, int nbr)
 	args[i].size = DIR_SIZE;
       else if (args[i].type == T_IND)
 	args[i].size = IND_SIZE;
-      if (args[i].size > sizeof(long long))
+      if (args[i].size > sizeof(t_long_type))
 	return (0);
       i = i + 1;
     }

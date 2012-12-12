@@ -5,12 +5,12 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Wed Dec 12 14:41:16 2012 ivan ignatiev
+** Last update Wed Dec 12 16:15:18 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
 #include	"op.h"
-#include	"dasm.h"
+#include	"corewar.h"
 
 /*
 ** Build programm list from COR-files passed from command args
