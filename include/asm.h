@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Tue Dec 11 16:32:46 2012 arthur sfez
+** Last update Wed Dec 12 17:05:34 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -19,8 +19,9 @@
 # define NUMBER_EXPECTED	5
 # define TRAILING_GARBAGE	6
 # define TOOMANY_ARG		7
-# define INVALID_CHAR		8
-# define MISSING_LABEL_NAME	9
+# define NOTENOUGH_ARG		8
+# define INVALID_CHAR		9
+# define MISSING_LABEL_NAME	10
 
 # define CALL			0
 # define DEF			1
@@ -35,7 +36,11 @@ struct	err_s
   int		err;
 };
 
-typedef struct err_s err_t;
+struct	line_s
+{
+  char			*s;
+  char			**arr;
+};
 
 struct	labels_s
 {
@@ -48,23 +53,54 @@ struct	args_s
 {
   int			val;
   int			size;
-  struct args_s		*next;
 };
 
+struct	data_s
+{
+  int			nb_line;
+  int			fdw;
+  int			count;
+};
+
+typedef struct data_s	data_t;
+typedef struct err_s	err_t;
+typedef struct line_s	line_t;
 typedef struct args_s	args_t;
 typedef struct labels_s labels_t;
+
+/*
+** Parsing header
+*/
 
 void		my_compile_file(int fd, char *str);
 char		*my_init_header(int fd, header_t *header);
 void		my_check_header(header_t *header);
-void		my_err_msg(char *s, int err, int pos);
+
+/*
+** Error messages
+*/
+void		my_err_msg(line_t one_line, int err, int pos);
+void		my_err_msg_header(char *s, int err, int pos);
+int		my_get_line_pos(char *s, int i);
+
+/*
+** Parsing instructions
+*/
 int		is_instruction(char *s);
 char		*my_malloc_separators();
 char		*my_clean_string(char *s, char *separators);
-void		my_write_hexa(char **arr, char *s, labels_t **labels, int fdw);
-char		*my_ins_hexa(char *s);
-int		my_strstr_int(char *str, char *to_find);
-int		my_get_line_pos(char *s, int i);
-int		is_label_def(char *str, char *s, int i);
+int		my_parse_line(line_t one_line, int fdw, labels_t **labels);
+int		is_label_def(line_t one_line, int i, int *lb_def);
+int		my_enc_exists(int n_ins);
+
+/*
+** Write binary
+*/
+void		my_init_arg_tab(args_t **args);
+args_t		**my_analyze_args(line_t one_line, int j, int fdw, int n_ins);
+args_t		*my_check_add_r(char *arg_val, int i, int n_ins, int *encbyte);
+args_t		*my_check_add_d(char *arg_val, int i, int n_ins, int *encbyte);
+args_t		*my_check_add_i(char *arg_val, int i, int n_ins, int *encbyte);
+int		my_enc_exists(int c);
 
 #endif /* ASM_H_ */

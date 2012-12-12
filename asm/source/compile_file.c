@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-   Last update Tue Dec 11 15:22:32 2012 arthur sfez
+** Last update Wed Dec 12 17:07:31 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -17,28 +17,32 @@
 #include	"asm.h"
 #include	"cwlib.h"
 
+int		nb_line;
+
 static void	my_parse_data(int fdr, char *s, int fdw)
 {
   int		i;
   char		*separators;
-  char		**arr;
+  line_t	one_line;
   labels_t	*labels[2];
-
+  
   i = 0;
+  one_line.s = s;
   labels[CALL] = NULL;
   labels[DEF] = NULL;
   separators = my_malloc_separators();
-  while (s)
+  while (one_line.s)
     {
-      if ((arr = my_split_string_asm(s, separators)))
+      if ((one_line.arr = my_split_string_asm(one_line.s, separators)))
 	{
 	  separators[1] = ' ';
-	  my_write_hexa(arr, s, labels, fdw);
+	  if (one_line.arr[0][0] != COMMENT_CHAR)
+	    my_parse_line(one_line, fdw, labels);
 	}
       if (i != 0)
-	free(s);
-      my_free_array(arr);
-      s = get_next_line(fdr);
+	free(one_line.s);
+      my_free_array(one_line.arr);
+      one_line.s = get_next_line(fdr);
       i++;
       nb_line++;
     }
@@ -51,6 +55,8 @@ static int	open_cor(char *str)
   char		*cor;
 
   cor = malloc(sizeof(char) * (my_strlen(str) + 3));
+  if (cor == NULL)
+    exit(EXIT_FAILURE);
   cor = my_strncpy(cor, str, (my_strlen(str) - 1));
   cor = my_strcat(cor, "cor");
   fdw = open(cor, O_RDWR | O_CREAT | O_TRUNC, 

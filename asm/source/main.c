@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Tue Dec 11 11:55:23 2012 arthur sfez
+** Last update Wed Dec 12 16:54:42 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -15,8 +15,6 @@
 #include	"cwlib.h"
 #include	"op.h"
 #include	"asm.h"
-
-int		nb_line;
 
 int		main(int ac, char **av)
 {

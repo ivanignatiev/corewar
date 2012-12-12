@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Tue Dec 11 15:40:27 2012 arthur sfez
+** Last update Wed Dec 12 17:02:58 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -13,63 +13,79 @@
 #include	"asm.h"
 #include	"op.h"
 
-/*
-void		my_write_ins_enc(char **arr, int fdw, int count, char *s)
+void		my_write_args(int fdw, args_t **args, int *count)
 {
-  int		i;
-  int		cpt;
-  int		enc;
-
-  i = 1;
-  enc = 0;
-  cpt = 0;
-  write(fdw, my_ins_hexa(arr[0]), 1);
-  count += 2;
-  while (arr[i] != NULL)
-    {
-      if (i == 4)
-	my_err_msg(s, 0, TOOMANY_ARG, my_strstr_int(s, arr[i]));
-      if (is_valid_arg(arr[i], arr[0]))
-	my_update_enc(&enc);
-      else
-	my_err_msg(s, 0, UNKNOWN_ARG, my_strstr_int(s, arr[i]));
-      i++;
-      cpt += 2;
-    }
+  /*write(fdw, &args->val, args->size);
+    args = args->next;*/
 }
-*/
 
-void		my_write_hexa(char **arr, char *s, labels_t **labels, int fdw)
+args_t		*my_update_encbyte(char *arg, int i, int n_ins, int *encbyte)
+{
+  if (*arg == 'r')
+    return (my_check_add_r(arg, i, n_ins, encbyte));
+  else if (*arg == DIRECT_CHAR)
+    return (my_check_add_d(arg, i, n_ins, encbyte));
+  /*
+  else
+    return (my_check_add_i(one_line, i, n_ins, encbyte));
+  */
+}
+
+args_t		**my_analyze_args(line_t one_line, int i, int fdw, int n_ins)
+{
+  int		n;
+  int		encbyte;
+  args_t	**args;
+
+  encbyte = 0;
+  n = 0;
+  my_init_arg_tab(args);
+  write(fdw, &n_ins, 1);
+  while (one_line.arr[i] != NULL)
+    {
+      if (n + 1 >= op_tab[n_ins - 1].nbr_args && one_line.arr[i + 1] != NULL)
+	my_err_msg(one_line, TOOMANY_ARG, i - 1);
+      args[n] = my_update_encbyte(one_line.arr[i], n, n_ins, &encbyte);
+      n++;
+      i++;
+    }
+  if (n != op_tab[n_ins - 1].nbr_args)
+    my_err_msg(one_line, NOTENOUGH_ARG, i - n - 1);
+  if (op_tab[n_ins - 1].nbr_args != 1 || op_tab[n_ins - 1].code == 16)
+    write(fdw, &encbyte, 1);
+  return (args);
+}
+
+static void	my_init_variables(int *lb_def, labels_t **labels, int *i, args_t **args)
+{
+  args = NULL;
+  *lb_def = 0;
+  *i = 0;
+}
+
+int		my_parse_line(line_t one_line, int fdw, labels_t **labels)
 {
   int		i;
-  int		n_ins;
   int		lb_def;
-  args_t	*args; /* <- STOCKAGE DES ARGS */
+  int		n_ins;
+  args_t	**args;
   static int	count = sizeof(header_t);
 
-  i = 0;
-  lb_def = 0;
-  while (arr[i] != NULL)
+  my_init_variables(&lb_def, labels, &i, args);
+  while (one_line.arr[i] != NULL)
     {
-      if ((lb_def == 0 && i == 0) && is_label_def(arr[i], s, i))
+      if ((lb_def == 0 && i == 0) && is_label_def(one_line, i, &lb_def))
+	my_lab_to_list(&labels[DEF], one_line.arr[i], count);
+      else if ((i == 0 && lb_def == 0) || (i == 1 && lb_def == 1))
 	{
-	  lb_def = 1;
-	  my_add_to_list(&labels[DEF], arr[i]);
-	}
-      /*
-      else if ((i == 0 && lb_def == 0) || (i == 1 && lb_def == 1));
-        {
-	  if ((n_ins = my_get_ins_code(arr[i], s, i)) != -1)
-	    args = my_write_ins_enc(arr + i + 1, s, i, n_ins);
-	  else
-	    RETURN ERROR;
+	  if (my_enc_exists((n_ins = my_get_ins_code(one_line, i))))
+	    count++;
+	  count++;
+	  args = my_analyze_args(one_line, i + 1, fdw, n_ins);
 	}
       else
-        {
-	  write(fdw, args->val, args->size);
-	  args = args->next;
-	}
-      */
+	my_write_args(fdw, args, &count);
       i++;
     }
+  return (count);
 }

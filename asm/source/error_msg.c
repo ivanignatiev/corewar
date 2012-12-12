@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Dec  7 09:40:48 2012 arthur sfez
-** Last update Tue Dec 11 16:30:16 2012 arthur sfez
+** Last update Wed Dec 12 13:50:17 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -22,6 +22,7 @@ err_t		g_err_tab[] =
     {"Number expected", NUMBER_EXPECTED},
     {"Trailing garbage", TRAILING_GARBAGE},
     {"Too many arguments", TOOMANY_ARG},
+    {"Not enough arguments", NOTENOUGH_ARG},
     {"Invalid characters on label", INVALID_CHAR},
     {"Missing label name", MISSING_LABEL_NAME},
   };
@@ -65,7 +66,7 @@ void		my_get_err_msg(char *s, int i, int lb_def)
   /*ARGS*/
 }
 
-void		my_err_msg(char *s, int err, int pos)
+void		my_err_msg_header(char *s, int err, int pos)
 {
   int		i;
 
@@ -76,6 +77,29 @@ void		my_err_msg(char *s, int err, int pos)
   my_putstr(g_err_tab[err].s);
   my_putchar('\n');
   my_putstr(s);
+  my_putchar('\n');
+  while (i < pos)
+    {
+      my_putchar('-');
+      i++;
+    }
+  my_putstr("^\n");
+  exit(err);
+}
+
+
+void		my_err_msg(line_t one_line, int err, int pos)
+{
+  int		i;
+
+  i = 0;
+  pos = my_get_line_pos(one_line.s, pos);
+  my_putstr("Error at line #");
+  my_put_nbr(nb_line);
+  my_putstr(" : ");
+  my_putstr(g_err_tab[err].s);
+  my_putchar('\n');
+  my_putstr(one_line.s);
   my_putchar('\n');
   while (i < pos)
     {
