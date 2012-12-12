@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:50:08 2012 ivan ignatiev
-** Last update Wed Dec 12 16:15:50 2012 ivan ignatiev
+** Last update Wed Dec 12 18:03:09 2012 ivan ignatiev
 */
 
 #include	<unistd.h>
@@ -53,3 +53,25 @@ int		cw_try_place_program(int fd,
     }
   return (-1);
 }
+
+int		cw_copy_memprogram(t_program *prog)
+{
+  int		found_addr;
+  int		i;
+  char		*memory_start;
+
+  if ((prog->start_addr = cw_search_unmapped(0, prog->header.prog_size)) >= 0)
+    {
+      memory_start = g_memory + prog->start_addr;
+      i = 0;
+      while (i < prog->header.prog_size)
+	{
+	  memory_start[i] =  prog->memory_start[i];
+	  ++i;
+	}
+      prog->memory_start = memory_start;
+      return (1);
+    }
+  return (0);
+}
+

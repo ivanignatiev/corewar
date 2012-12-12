@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Wed Dec 12 16:57:09 2012 ivan ignatiev
+** Last update Wed Dec 12 17:38:17 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -32,6 +32,7 @@ t_program	*cw_init_program(t_program *prog)
   prog->pc = 0;
   prog->nbr_cycles = 0;
   prog->carry = 0;
+  prog->fork = 0;
   while (i < REG_NUMBER)
     {
       prog->reg[i] = 0;
