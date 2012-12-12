@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Wed Dec 12 16:16:42 2012 ivan ignatiev
+** Last update Wed Dec 12 16:57:09 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -25,9 +25,19 @@ static int	cw_is_magic(header_t *hd)
 
 t_program	*cw_init_program(t_program *prog)
 {
+  int		i;
+
+  i = 0;
   prog->cur_nbr_cycles = -1;
   prog->pc = 0;
   prog->nbr_cycles = 0;
+  prog->carry = 0;
+  while (i < REG_NUMBER)
+    {
+      prog->reg[i] = 0;
+      i = i + 1;
+    }
+  prog->reg[0] = prog->prog_num;
   return (prog);
 }
 
