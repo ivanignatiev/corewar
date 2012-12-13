@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec  5 10:48:23 2012 arthur sfez
-** Last update Wed Dec 12 16:54:42 2012 arthur sfez
+** Last update Thu Dec 13 10:16:10 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -15,6 +15,8 @@
 #include	"cwlib.h"
 #include	"op.h"
 #include	"asm.h"
+
+data_t		g_data;
 
 int		main(int ac, char **av)
 {

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Mon Dec 10 15:12:09 2012 arthur sfez
+** Last update Thu Dec 13 16:17:30 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -73,18 +73,23 @@ char		**my_split_string_asm(char *str, char *separators)
   count = 0;
   while (str[i] != '\0')
     {
-      if (!is_it_separator_asm(str[i], separators))
+      if (str[i] == ';' || str[i] == '#')
+	str[i] = 0;
+      else
 	{
-	  if ((i == 0 || is_it_separator_asm(str[i - 1], separators)))
+	  if (!is_it_separator_asm(str[i], separators))
 	    {
-	      my_update_separators_asm(arr, separators);
-	      start = i;
+	      if ((i == 0 || is_it_separator_asm(str[i - 1], separators)))
+		{
+		  my_update_separators_asm(arr, separators);
+		  start = i;
+		}
+	      count = count + 1;
 	    }
-	  count = count + 1;
+	  else if (count > 0 && (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
+	    count = 0;
+	  i = i + 1;
 	}
-      else if (count > 0 && (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
-	count = 0;
-      i = i + 1;
     }
   if (count > 0)
     arr = add_word_asm(str + start, count, arr, separators);

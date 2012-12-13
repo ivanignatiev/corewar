@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Wed Dec 12 17:02:58 2012 arthur sfez
+** Last update Thu Dec 13 18:05:22 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -13,79 +13,96 @@
 #include	"asm.h"
 #include	"op.h"
 
-void		my_write_args(int fdw, args_t **args, int *count)
-{
-  /*write(fdw, &args->val, args->size);
-    args = args->next;*/
-}
 
-args_t		*my_update_encbyte(char *arg, int i, int n_ins, int *encbyte)
+args_t		*my_update_encbyte(char *arg, int n_ins, int *encbyte, labels_t **labels)
 {
   if (*arg == 'r')
-    return (my_check_add_r(arg, i, n_ins, encbyte));
+    return (my_check_add_r(arg, n_ins, encbyte));
   else if (*arg == DIRECT_CHAR)
-    return (my_check_add_d(arg, i, n_ins, encbyte));
-  /*
+    return (my_check_add_d(arg, n_ins, encbyte, labels));
   else
-    return (my_check_add_i(one_line, i, n_ins, encbyte));
-  */
+    return (my_check_add_i(arg, n_ins, encbyte));
 }
 
-args_t		**my_analyze_args(line_t one_line, int i, int fdw, int n_ins)
+int		my_analyze_args(line_t one_line, int n_ins, labels_t **labels, args_t **args)
 {
-  int		n;
   int		encbyte;
-  args_t	**args;
 
   encbyte = 0;
-  n = 0;
-  my_init_arg_tab(args);
-  write(fdw, &n_ins, 1);
-  while (one_line.arr[i] != NULL)
+  g_data.n[ARG] = 0;
+  write(g_data.fdw, &n_ins, 1);
+  while (one_line.arr[g_data.n[IND]] != NULL)
     {
-      if (n + 1 >= op_tab[n_ins - 1].nbr_args && one_line.arr[i + 1] != NULL)
-	my_err_msg(one_line, TOOMANY_ARG, i - 1);
-      args[n] = my_update_encbyte(one_line.arr[i], n, n_ins, &encbyte);
-      n++;
-      i++;
-    }
-  if (n != op_tab[n_ins - 1].nbr_args)
-    my_err_msg(one_line, NOTENOUGH_ARG, i - n - 1);
-  if (op_tab[n_ins - 1].nbr_args != 1 || op_tab[n_ins - 1].code == 16)
-    write(fdw, &encbyte, 1);
-  return (args);
-}
-
-static void	my_init_variables(int *lb_def, labels_t **labels, int *i, args_t **args)
-{
-  args = NULL;
-  *lb_def = 0;
-  *i = 0;
-}
-
-int		my_parse_line(line_t one_line, int fdw, labels_t **labels)
-{
-  int		i;
-  int		lb_def;
-  int		n_ins;
-  args_t	**args;
-  static int	count = sizeof(header_t);
-
-  my_init_variables(&lb_def, labels, &i, args);
-  while (one_line.arr[i] != NULL)
-    {
-      if ((lb_def == 0 && i == 0) && is_label_def(one_line, i, &lb_def))
-	my_lab_to_list(&labels[DEF], one_line.arr[i], count);
-      else if ((i == 0 && lb_def == 0) || (i == 1 && lb_def == 1))
+      if (g_data.n[ARG] + 1 >= op_tab[n_ins - 1].nbr_args && one_line.arr[g_data.n[IND] + 1] != NULL)
 	{
-	  if (my_enc_exists((n_ins = my_get_ins_code(one_line, i))))
-	    count++;
-	  count++;
-	  args = my_analyze_args(one_line, i + 1, fdw, n_ins);
+	  my_err_msg(one_line.s, TOOMANY_ARG, g_data.n[IND] - 1);
+	  return (-1);
 	}
-      else
-	my_write_args(fdw, args, &count);
-      i++;
+      if ((args[g_data.n[ARG]] = my_update_encbyte(one_line.arr[g_data.n[IND]], n_ins, &encbyte, labels)) == NULL)
+	return (-1);
+      g_data.n[ARG]++;
+      g_data.n[IND]++;
     }
-  return (count);
+  if (g_data.n[ARG] != op_tab[n_ins - 1].nbr_args)
+    {
+      my_err_msg(one_line.s, NOTENOUGH_ARG, g_data.n[IND] - g_data.n[ARG] - 1);
+      return (-1);
+    }
+  if (op_tab[n_ins - 1].nbr_args != 1 || op_tab[n_ins - 1].code == 16)
+    {
+      g_data.count++;
+      write(g_data.fdw, &encbyte, 1);
+    }
+  return (1);
+}
+
+int		my_check_snd(line_t one_line, labels_t **labels, args_t **args)
+{
+  int		int_v;
+  int		cpt;
+  int		n_ins;
+
+  cpt = 0;
+  if ((n_ins = my_get_ins_code(one_line, g_data.n[IND])) == -1)
+    return (-1);
+  n_ins = my_get_ins_code(one_line, g_data.n[IND]);
+  g_data.n[IND]++;
+  if (my_analyze_args(one_line, n_ins, &labels[CALL], args) == -1)
+    return (-1);
+  g_data.count++;
+  while (cpt < op_tab[n_ins - 1].nbr_args)
+    {
+      my_conv_to_platform(&args[cpt]->val, args[cpt]->size);
+      g_data.count += args[cpt]->size;
+      write(g_data.fdw, &args[cpt]->val, args[cpt]->size);
+      cpt++;
+    }
+}
+
+int		my_parse_line(line_t one_line, labels_t **labels)
+{
+  int		ret;
+  int		lb_def;
+  args_t	*args[MAX_ARGS_NUMBER];
+
+  lb_def = 0;
+  g_data.n[IND] = 0;
+  while (one_line.arr[g_data.n[IND]] != NULL)
+    {
+      if (lb_def == 0 && g_data.n[IND] == 0)
+	{
+	  if ((ret = is_label_def(one_line, g_data.n[IND], &lb_def)) == 1)
+	    my_lab_to_list(&labels[DEF], one_line.arr[g_data.n[IND]]);
+	  else if (ret == -1)
+	    return (-1);
+	}
+      if ((g_data.n[IND] == 0 && lb_def == 0) || (g_data.n[IND] == 1 && lb_def == 1))
+	{
+	  if (my_check_snd(one_line, &labels[CALL], args) == -1)
+	    return (-1);
+	  g_data.n[IND]--;
+	}
+      g_data.n[IND]++;
+    }
+  return (1);
 }

@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Dec  7 09:40:48 2012 arthur sfez
-** Last update Wed Dec 12 13:50:17 2012 arthur sfez
+** Last update Thu Dec 13 16:10:24 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -25,6 +25,8 @@ err_t		g_err_tab[] =
     {"Not enough arguments", NOTENOUGH_ARG},
     {"Invalid characters on label", INVALID_CHAR},
     {"Missing label name", MISSING_LABEL_NAME},
+    {"Expecting another argument type", BAD_ARGUMENT},
+    {"Invalid register value", REG_VALUE}
   };
 
 int		my_get_line_pos(char *s, int i)
@@ -56,56 +58,76 @@ int		my_get_line_pos(char *s, int i)
   return (1);
 }
 
-void		my_get_err_msg(char *s, int i, int lb_def)
+void		special_puterr(char *s)
 {
-  if (i == 0 && lb_def == 0);
-    /*LABEL | INS */
-  else if (i == 1 && lb_def == 1);
-  /*INS*/
-  else if ((i > 0 && lb_def == 0) || (i > 1 && lb_def == 1));
-  /*ARGS*/
+  while (*s)
+    {
+      if (*s == '\t')
+	write(2, "     ", 5);
+      else
+	write(2, s, 1);
+      s++;
+    }
 }
 
-void		my_err_msg_header(char *s, int err, int pos)
+int		my_err_msg_header(char *s, int err, int pos)
 {
   int		i;
 
   i = 0;
   my_putstr("Error at line #");
-  my_put_nbr(nb_line);
+  my_put_nbr(g_data.nb_line);
   my_putstr(" : ");
   my_putstr(g_err_tab[err].s);
   my_putchar('\n');
+  special_puterr(s);
+  my_putchar('\n');
+  while (i < pos)
+    {
+      my_putchar('-');
+      i++;
+    }
+  my_putstr("^\n");
+  return (-1);
+}
+
+int		my_err_msg(char *s, int err, int pos)
+{
+  int		i;
+
+  i = 0;
+  pos = my_get_line_pos(s, pos);
+  my_puterr("Error at line #");
+  my_put_nbr(g_data.nb_line);
+  my_puterr(" : ");
+  my_puterr(g_err_tab[err].s);
+  my_puterr("\n");
+  special_puterr(s);
+  my_puterr("\n");
+  while (i < pos)
+    {
+      my_puterr("-");
+      i++;
+    }
+  my_puterr("^\n");
+  return (-1);
+}
+
+int		my_err_msg_file(char *s)
+{
+  my_puterr("Failed to open ");
+  my_puterr(s);
+  my_puterr("\n");
+  return (-1);
+}
+
+void		my_success_msg_file(header_t *header, char *s)
+{
+  my_putstr("Assembling ");
   my_putstr(s);
+  my_putstr(":\n\t");
+  my_putstr(header->prog_name);
+  my_putstr("\n\t");
+  my_putstr(header->comment);
   my_putchar('\n');
-  while (i < pos)
-    {
-      my_putchar('-');
-      i++;
-    }
-  my_putstr("^\n");
-  exit(err);
-}
-
-
-void		my_err_msg(line_t one_line, int err, int pos)
-{
-  int		i;
-
-  i = 0;
-  pos = my_get_line_pos(one_line.s, pos);
-  my_putstr("Error at line #");
-  my_put_nbr(nb_line);
-  my_putstr(" : ");
-  my_putstr(g_err_tab[err].s);
-  my_putchar('\n');
-  my_putstr(one_line.s);
-  my_putchar('\n');
-  while (i < pos)
-    {
-      my_putchar('-');
-      i++;
-    }
-  my_putstr("^\n");
-  exit(err);
 }

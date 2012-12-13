@@ -1,36 +1,62 @@
 /*
-** check_register.c for corewar in /home/sfez_a//Local/projets_svn/corewar-2016ed-2015s-2017si-liu_q/asm/source
+** check_args.c for corewar in /home/sfez_a//Local/projets_svn/corewar-2016ed-2015s-2017si-liu_q/asm/source
 ** 
 ** Made by arthur sfez
 ** Login   <sfez_a@epitech.net>
 ** 
-** Started on  Wed Dec 12 16:13:10 2012 arthur sfez
-** Last update Wed Dec 12 16:13:45 2012 arthur sfez
+** Started on  Tue Dec 11 18:54:07 2012 arthur sfez
+** Last update Thu Dec 13 16:58:10 2012 arthur sfez
 */
 
-#include	"op.h"
+#include	<unistd.h>
+#include	<stdlib.h>
+#include	"asm.h"
 
-int		my_check_val(char *s)
+int		my_check_register(char *s)
 {
-  while (*s)
+  int		res;
+  char		*val;
+
+  val = malloc(sizeof(*val) * (my_strlen(s)));
+  if (val == NULL)
     {
-      if (*s <= '0' || *s >= '9')
-	return (0);
-      s++;
+      my_puterr("Malloc failed\n");
+      return (-1);
     }
-  return (1);
+  val[my_strlen(s) - 1] = 0;
+  my_strcpy(val, s + 1);
+  if (!my_check_val(val))
+    return (my_err_msg(g_data.s, REG_VALUE, g_data.n[IND]));
+  res = my_getnbr(val);
+  free(val);
+  if (res < 1 || res > REG_NUMBER)
+    return (my_err_msg(g_data.s, REG_VALUE, g_data.n[IND]));
+  return (res);
 }
 
-int		my_retrieve_size(int n_ins, int n, int t)
+args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte)
 {
-  if (n_ins == 1)
-    return (4);
-  if (n_ins == 9 || n_ins == 13 || n_ins == 15)
-    return (IND_SIZE);
-  if (n_ins == 10 && (n == 0 || n == 1))
-    return (IND_SIZE);
-  if (n_ins == 11 && (n == 1 || n == 2))
-    return (IND_SIZE);
+  args_t	*arg;
+  int		r_val;
+
+  arg = malloc(sizeof(*arg));
+  if (arg == NULL)
+    {
+      my_puterr("Malloc failed\n");
+      return (NULL);
+    }
+  if ((r_val = my_check_register(arg_val)) == -1)
+    return (NULL);
+  if (op_tab[n_ins - 1].type[g_data.n[ARG]] & T_REG)
+    {
+      *encbyte |= (01 << (6 - (g_data.n[ARG] * 2)));
+      arg->val = r_val;
+      arg->size = my_retrieve_size(n_ins, g_data.n[ARG], 1);
+    }
   else
-    return (t);
+    {
+      my_err_msg(g_data.s, BAD_ARGUMENT, g_data.n[IND]);
+      return (NULL);
+    }
+  return (arg);
 }

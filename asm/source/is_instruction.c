@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 17:32:21 2012 arthur sfez
-** Last update Wed Dec 12 12:07:30 2012 arthur sfez
+** Last update Thu Dec 13 15:51:49 2012 arthur sfez
 */
 
 #include	"op.h"
@@ -36,8 +36,7 @@ int		my_get_ins_code(line_t one_line, int i)
 	return (op_tab[n].code);
       n++;
     }
-  my_err_msg(one_line, UNKNOWN_INS, i);
-  return (-1);
+  return (my_err_msg(one_line.s, UNKNOWN_INS, i));
 }
 
 int		my_enc_exists(int c)
