@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:46:25 2012 ivan ignatiev
-** Last update Wed Dec 12 16:42:55 2012 ivan ignatiev
+** Last update Thu Dec 13 14:46:50 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -23,4 +23,5 @@ int		cw_init_memory()
 int		cw_free_memory()
 {
   free(g_memory);
+  return (1);
 }

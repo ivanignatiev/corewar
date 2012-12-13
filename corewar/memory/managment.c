@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:50:08 2012 ivan ignatiev
-** Last update Wed Dec 12 18:03:09 2012 ivan ignatiev
+** Last update Thu Dec 13 13:27:35 2012 ivan ignatiev
 */
 
 #include	<unistd.h>
@@ -14,64 +14,53 @@
 #include	"op.h"
 #include	"corewar.h"
 
-int		cw_search_unmapped(int begin_search,
-				   int prog_size)
+int		cw_put_program_to(int start_addr, t_program *prog)
 {
   t_prog_list	*nav;
-  int		last_addr;
+  char		test_eof;
+  int		real_size;
 
-  if ((nav = g_prog_list) == NULL
-      && (MEM_SIZE - begin_search) >= prog_size)
-    return (begin_search);
-  last_addr = begin_search;
+  nav = g_prog_list;
   while (nav != NULL)
     {
-      if ((nav->prog->start_addr - last_addr) >= prog_size)
-	return (last_addr);
-      last_addr = nav->prog->start_addr + nav->prog->header.prog_size;
+      if (start_addr >= nav->prog->start_addr
+	  && start_addr <= (nav->prog->header.prog_size
+			 + nav->prog->start_addr)
+	  && prog->prog_num != nav->prog->prog_num
+	  && nav->prog->start_addr >= 0)
+	return (0);
       nav = nav->next;
     }
-  if ((MEM_SIZE - last_addr) >= prog_size)
-    return (last_addr + 1);
-  return (-1);
+  real_size = read(prog->fd, g_memory + start_addr, prog->header.prog_size);
+  if (real_size != prog->header.prog_size
+      && read(prog->fd, &test_eof, 1) != 0)
+    return (0);
+  prog->start_addr = start_addr;
+  return (1);
 }
 
-int		cw_try_place_program(int fd,
-				     int start_addr,
-				     int prog_size)
+int		cw_try_place_programs()
 {
-  int		real_size;
-  int		found_addr;
-  char		test_eof;
-
-  if ((start_addr < 0 && (found_addr = cw_search_unmapped(0, prog_size)) >= 0)
-      || (start_addr >= 0 && (found_addr = cw_search_unmapped(start_addr, prog_size)) == start_addr))
-    {
-      real_size = read(fd, g_memory + found_addr, prog_size);
-      if (real_size == prog_size && read(fd, &test_eof, 1) == 0)
-	return (found_addr);
-    }
-  return (-1);
-}
-
-int		cw_copy_memprogram(t_program *prog)
-{
-  int		found_addr;
+  t_prog_list	*nav;
   int		i;
-  char		*memory_start;
+  int		prog_count;
+  int		start_addr;
 
-  if ((prog->start_addr = cw_search_unmapped(0, prog->header.prog_size)) >= 0)
+  prog_count = cw_get_prog_count();
+  nav = g_prog_list;
+  i = 0;
+  while (nav != NULL)
     {
-      memory_start = g_memory + prog->start_addr;
-      i = 0;
-      while (i < prog->header.prog_size)
-	{
-	  memory_start[i] =  prog->memory_start[i];
-	  ++i;
-	}
-      prog->memory_start = memory_start;
-      return (1);
+      if (nav->prog->header.prog_size > (MEM_SIZE / prog_count))
+	return (0);
+      if (nav->prog->start_addr < 0)
+	start_addr = (i * (MEM_SIZE / prog_count)) % MEM_SIZE;
+      else
+	start_addr = (nav->prog->start_addr % MEM_SIZE);
+      if (!cw_put_program_to(start_addr, nav->prog))
+	return (0);
+      nav = nav->next;
+      ++i;
     }
-  return (0);
+  return (1);
 }
-

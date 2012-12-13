@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Wed Dec 12 16:40:29 2012 ivan ignatiev
+** Last update Thu Dec 13 16:58:48 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -106,15 +106,16 @@ int		cw_get_args(t_program *prog,
   size = 0;
   while (i < instr->nbr_args)
     {
-      if (*(prog->memory_start + prog->pc + 1) >> 7)
+      if (g_memory[(prog->pc + 1) % MEM_SIZE] >> 7)
 	args[i].value = -1;
       else
 	args[i].value = 0;
-      my_memncpy(&args[i].value, (prog->memory_start + prog->pc + 1), args[i].size, sizeof(args[i].value));
+      my_memncpy(&args[i].value, (g_memory + (prog->pc + 1) % MEM_SIZE),
+		 args[i].size, sizeof(args[i].value));
       my_conv_to_platform(&args[i].value, sizeof(args[i].value));
-      if (args[i].type == T_REG && args[i].value > REG_NUMBER)
+      if (args[i].type == T_REG && args[i].value > REG_NUMBER && args[i].value < 1)
 	return (0);
-      prog->pc += args[i].size;
+      prog->pc = (prog->pc + args[i].size) % MEM_SIZE;
       i = i + 1;
     }
   return (1);

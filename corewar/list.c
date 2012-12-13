@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Wed Dec 12 16:15:18 2012 ivan ignatiev
+** Last update Thu Dec 13 16:10:45 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -19,14 +19,12 @@
 void		cw_get_program_list(int argc, char **argv)
 {
   int		i;
-  int		prog_num;
 
   g_prog_list = NULL;
   i = 1;
-  prog_num = 1;
   while (i < argc)
     {
-      prog_num = cw_add_prog_to_list(argv[i], -1, prog_num);
+      cw_add_prog_to_list(argv[i], -1, cw_get_prog_number());
       i = i + 1;
     }
 }
@@ -46,7 +44,6 @@ int		cw_add_prog_to_list(char *filename,
       if ((prog_elem->prog = cw_load_program(filename, start_addr, prog_num)) != NULL)
 	{
 	  prog_elem->next = NULL;
-	  prog_elem->active = 1;
 	  if (g_prog_list == NULL)
 	    g_prog_list = prog_elem;
 	  else
@@ -65,25 +62,33 @@ int		cw_add_prog_to_list(char *filename,
 }
 
 /*
-** Remove programm from programm list
+** Remove programm from program list
 */
-void		cw_remove_programm(t_program *prog)
+void		cw_remove_program(t_program *prog)
 {
   t_prog_list	*nav;
   t_prog_list	*tmp;
 
   nav = g_prog_list;
-  while (nav->next != NULL)
+  if (g_prog_list->prog == prog)
     {
-      if (nav->next->prog->prog_num == prog->prog_num)
-	{
-	  tmp = nav->next;
-	  nav->next = tmp->next;
-	  free(tmp);
-	  return ;
-	}
-      nav = nav->next;
+      tmp = g_prog_list;
+      g_prog_list = tmp->next;
+      free(tmp->prog);
+      free(tmp);
     }
+  else
+    while (nav->next != NULL)
+      {
+	if (nav->next->prog == prog)
+	  {
+	    tmp = nav->next;
+	    nav->next = tmp->next;
+	    free(tmp->prog);
+	    free(tmp);
+	  }
+	nav = nav->next;
+      }
 }
 
 /*
@@ -102,4 +107,25 @@ int		cw_get_prog_count()
       nav = nav->next;
     }
   return (i);
+}
+
+/*
+** Return count of programs in list
+*/
+t_long_type	cw_get_prog_number()
+{
+  t_prog_list	*nav;
+  t_long_type	max;
+
+  max = 0;
+  nav = g_prog_list;
+  if (nav)
+    max = nav->prog->prog_num;
+  while (nav != NULL)
+    {
+      if (nav->prog->prog_num > max)
+	max = nav->prog->prog_num;
+      nav = nav->next;
+    }
+  return (max + 1);
 }

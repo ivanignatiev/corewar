@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Wed Dec 12 17:30:05 2012 ivan ignatiev
+** Last update Thu Dec 13 17:37:18 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -14,10 +14,12 @@
 #include	"op.h"
 #include	"corewar.h"
 
-void		begin_corewar()
+static void	begin_corewar()
 {
   t_prog_list	*nav;
   int		prog_count;
+  t_long_type	cycle_to_die;
+  int		die_cycle;
   t_prog_instr	instrs[] = {
     {NULL, 0},
     {cw_instr_live, 0},
@@ -39,17 +41,37 @@ void		begin_corewar()
   };
 
   prog_count = cw_get_prog_count();
-  while (prog_count)
+  g_cycles = 1;
+  die_cycle = 0;
+  cycle_to_die = CYCLE_TO_DIE;
+  g_live_calls = 0;
+  while (prog_count > 0 && cycle_to_die >= 0)
     {
+      if (g_cycles == cycle_to_die)
+	die_cycle = 1;
       nav = g_prog_list;
       while (nav != NULL)
 	{
-	  if (nav->active && !cw_try_run_instr(nav->prog, instrs))
+	  cw_try_run_instr(nav->prog, instrs);
+	  if (cycle_to_die != nav->prog->last_live_cycle && die_cycle)
 	    {
-	      prog_count = prog_count - 1;
-	      nav->active = 0;
+	      printf("Prog #%d(%s) die on %d\n", nav->prog->prog_num, nav->prog->header.prog_name, nav->prog->cur_nbr_cycles);
+	      cw_remove_program(nav->prog);
+	      prog_count = cw_get_prog_count();
+	    }
+	  if (g_live_calls == NBR_LIVE)
+	    {
+	      cw_reset_program(nav->prog);
 	    }
 	  nav = nav->next;
+	}
+      ++g_cycles;
+      die_cycle = 0;
+      if (g_live_calls == NBR_LIVE)
+	{
+	  g_cycles = 1;
+	  cycle_to_die -= CYCLE_DELTA;
+	  g_live_calls = 0;
 	}
     }
 }
@@ -60,8 +82,12 @@ int		main(int argc, char **argv)
     {
       if (cw_init_memory())
 	{
+	  g_last_live = NULL;
 	  cw_get_program_list(argc, argv);
+	  cw_try_place_programs();
 	  begin_corewar();
+	  if (g_last_live)
+	    printf("player %ld(%s) won\n", g_last_live->prog_num, g_last_live->header.prog_name);
 	  /* DEBUG# */
 	  cw_dump_memory(g_memory, MEM_SIZE);
 	  /* #DEBUG */
