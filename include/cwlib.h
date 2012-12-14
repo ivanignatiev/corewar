@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Fri Dec 14 16:14:24 2012 ivan ignatiev
+   Last update Fri Dec 14 19:01:02 2012 arthur sfez
 */
 
 #ifndef CWLIB_H_
@@ -21,6 +21,9 @@ int		my_strlen(char *);
 void		my_putstr(char *);
 void		my_puterr(char *);
 int		my_strncmp(char *, char *, int);
+int		my_strcmp(char *, char *);
+int		my_strcpy(char *, char *);
+int		my_getnbr(char *s);
 char		**my_split_string(char *str, char *separator);
 char		**my_split_string_asm(char *str, char *separator);
 int		my_free_array(char **arr);
@@ -32,6 +35,9 @@ int		is_big_endian(void);
 void		*my_bytes_reverse(void *buff, int size);
 void		*my_conv_to_platform(void *buf, int sz);
 char		*my_strcat(char *dest, char *src);
+char		*my_strdup(char *s);
+char		*my_strndup(char *s, int n);
+void		my_put_nbr(int n);
 int		my_strcmp(char *s1, char *s2);
 
 #endif /* CWLIB_H_ */

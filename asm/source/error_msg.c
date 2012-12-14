@@ -5,12 +5,13 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Dec  7 09:40:48 2012 arthur sfez
-** Last update Thu Dec 13 16:10:24 2012 arthur sfez
+** Last update Fri Dec 14 17:57:36 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"asm.h"
+#include	"cwlib.h"
 
 err_t		g_err_tab[] =
   {
@@ -29,65 +30,24 @@ err_t		g_err_tab[] =
     {"Invalid register value", REG_VALUE}
   };
 
-int		my_get_line_pos(char *s, int i)
-{
-  int		j;
-  int		cpt;
-  int		in_word;
-  int		res;
-
-  cpt = -1;
-  j = 0;
-  in_word = 0;
-  res = 0;
-  while (s[j])
-    {
-      if (is_it_separator_asm(s[j], "\t"))
-	res += 4;
-      if (!is_it_separator_asm(s[j], " ,\t") && in_word == 0)
-	{
-	  in_word = 1;
-	  cpt++;
-	  if (cpt == i)
-	    return (j + res);
-	}
-      else if (in_word == 1 && is_it_separator_asm(s[j], " ,\t"))
-	in_word = 0;
-      j++;
-    }
-  return (1);
-}
-
-void		special_puterr(char *s)
-{
-  while (*s)
-    {
-      if (*s == '\t')
-	write(2, "     ", 5);
-      else
-	write(2, s, 1);
-      s++;
-    }
-}
-
 int		my_err_msg_header(char *s, int err, int pos)
 {
   int		i;
 
   i = 0;
-  my_putstr("Error at line #");
+  my_puterr("Error at line #");
   my_put_nbr(g_data.nb_line);
-  my_putstr(" : ");
-  my_putstr(g_err_tab[err].s);
-  my_putchar('\n');
+  my_puterr(" : ");
+  my_puterr(g_err_tab[err].s);
+  my_puterr("\n");
   special_puterr(s);
-  my_putchar('\n');
+  my_puterr("\n");
   while (i < pos)
     {
-      my_putchar('-');
+      my_puterr("-");
       i++;
     }
-  my_putstr("^\n");
+  my_puterr("^\n");
   return (-1);
 }
 

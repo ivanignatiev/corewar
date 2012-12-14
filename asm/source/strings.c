@@ -5,12 +5,13 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 18:46:52 2012 arthur sfez
-** Last update Wed Dec 12 15:42:49 2012 arthur sfez
+** Last update Fri Dec 14 10:14:34 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"asm.h"
+#include	"cwlib.h"
 #include	"op.h"
 
 char		*my_malloc_separators()

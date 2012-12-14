@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Thu Dec 13 16:17:30 2012 arthur sfez
+** Last update Fri Dec 14 17:55:17 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -86,7 +86,8 @@ char		**my_split_string_asm(char *str, char *separators)
 		}
 	      count = count + 1;
 	    }
-	  else if (count > 0 && (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
+	  else if (count > 0 &&
+		   (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
 	    count = 0;
 	  i = i + 1;
 	}

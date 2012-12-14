@@ -5,11 +5,12 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 17:32:21 2012 arthur sfez
-** Last update Thu Dec 13 15:51:49 2012 arthur sfez
+** Last update Fri Dec 14 11:15:08 2012 arthur sfez
 */
 
 #include	"op.h"
 #include	"asm.h"
+#include	"cwlib.h"
 
 int		is_instruction(char *s)
 {

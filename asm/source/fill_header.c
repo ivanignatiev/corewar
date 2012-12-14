@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Thu Dec 13 12:54:32 2012 arthur sfez
+** Last update Fri Dec 14 10:07:06 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -106,7 +106,6 @@ void		my_check_header(header_t *header)
 
 char		*my_init_header(int fd, header_t *header)
 {
-  int		line;
   char		*tmp;
   char		*s;
 

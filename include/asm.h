@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Thu Dec 13 19:21:44 2012 arthur sfez
+** Last update Fri Dec 14 17:58:59 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -30,6 +30,7 @@
 
 # define IND			0
 # define ARG			1
+# define ARG_C			2
 
 #include "op.h"
 
@@ -51,6 +52,7 @@ struct	labels_s
   int			adr_a;
   int			adr;
   int			size;
+  int			line;
   struct labels_s	*next;
 };
 
@@ -66,7 +68,7 @@ struct	data_s
   int			fdw;
   int			count;
   char			*s;
-  int			n[2];
+  int			n[3];
 };
 
 typedef struct err_s	err_t;
@@ -85,12 +87,19 @@ extern	data_t	g_data;
 int		my_compile_file(int fd, char *str);
 char		*my_init_header(int fd, header_t *header);
 void		my_check_header(header_t *header);
+int		is_it_separator_asm(char c, char *s);
 
 /*
 ** Error messages
 */
+
 int		my_err_msg(char *s, int err, int pos);
 int		my_err_msg_header(char *s, int err, int pos);
+int		my_get_line_pos(char *s, int i);
+void		my_success_msg_file(header_t *header, char *s);
+int		my_err_msg_file(char *s);
+void		my_puterr(char *s);
+void		special_puterr(char *s);
 int		my_get_line_pos(char *s, int i);
 
 /*
@@ -101,7 +110,11 @@ char		*my_malloc_separators();
 char		*my_clean_string(char *s, char *separators);
 int		my_parse_line(line_t one_line, labels_t **labels);
 int		is_label_def(line_t one_line, int i, int *lb_def);
+int		is_label_call(char *s);
 int		my_enc_exists(int n_ins);
+int		my_get_ins_code(line_t one_line, int n);
+int		my_check_val(char *s);
+int		my_retrieve_size(int n_ins, int n, int i);
 
 /*
 ** Write binary
@@ -110,13 +123,14 @@ void		my_init_arg_tab(args_t **args);
 int		my_analyze_args(line_t one_line, int n_ins, labels_t **labels, args_t **args);
 args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte);
 args_t		*my_check_add_d(char *arg_val, int n_ins, int *encbyte, labels_t **labels);
-args_t		*my_check_add_i(char *arg_val, int n_ins, int *encbyte);
+args_t		*my_check_add_i(char *arg_val, int n_ins, int *encbyte, labels_t **labels);
 int		my_enc_exists(int c);
-
+int		my_seeknwrite(labels_t *calls, labels_t *defs);
 /*
 ** Lists
 */
 
 void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size);
+void		my_free_lists(labels_t **l1, labels_t **l2);
 
 #endif /* ASM_H_ */

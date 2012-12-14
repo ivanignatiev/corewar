@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Thu Dec 13 19:30:52 2012 arthur sfez
+** Last update Fri Dec 14 17:51:29 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -35,7 +35,7 @@ static int	my_parse_data(int fdr, char *s)
       if ((one_line.arr = my_split_string_asm(one_line.s, separators)))
 	{
 	  separators[1] = ' ';
-	  if (one_line.arr[0][0] != COMMENT_CHAR)
+	  if (one_line.arr[0][0] != COMMENT_CHAR && one_line.arr[0][0] != '.')
 	    if (my_parse_line(one_line, labels) == -1)
 	      stop = 1;
 	}
@@ -44,8 +44,8 @@ static int	my_parse_data(int fdr, char *s)
       one_line.s = get_next_line(fdr);
       g_data.nb_line++;
     }
-  my_putstr(labels[DEF]->s);
-  my_seeknwrite(labels[CALL], labels[DEF]);
+  if (my_seeknwrite(labels[CALL], labels[DEF]) == -1)
+    stop = 1;
   free(separators);
   my_free_lists(&labels[DEF], &labels[CALL]);
   if (stop == 1)
@@ -63,7 +63,7 @@ static int	open_cor(char *str)
     return (-1);
   cor = my_strncpy(cor, str, (my_strlen(str) - 1));
   cor = my_strcat(cor, "cor");
-  fdw = open(cor, O_RDWR | O_CREAT | O_TRUNC, 
+  fdw = open(cor, O_RDWR | O_CREAT | O_TRUNC,
 	     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   free(cor);
   return (fdw);

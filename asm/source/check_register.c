@@ -5,12 +5,14 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Tue Dec 11 18:54:07 2012 arthur sfez
-** Last update Thu Dec 13 16:58:10 2012 arthur sfez
+** Last update Fri Dec 14 18:48:58 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"asm.h"
+#include	"cwlib.h"
+#include	"op.h"
 
 int		my_check_register(char *s)
 {
@@ -51,7 +53,8 @@ args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte)
     {
       *encbyte |= (01 << (6 - (g_data.n[ARG] * 2)));
       arg->val = r_val;
-      arg->size = my_retrieve_size(n_ins, g_data.n[ARG], 1);
+      arg->size = 1;
+      g_data.n[ARG_C] += arg->size;
     }
   else
     {

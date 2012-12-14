@@ -5,12 +5,13 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Mon Dec 10 16:24:42 2012 arthur sfez
-** Last update Thu Dec 13 19:32:54 2012 arthur sfez
+** Last update Fri Dec 14 17:54:41 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"asm.h"
+#include	"cwlib.h"
 
 void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size)
 {
@@ -21,11 +22,12 @@ void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size)
   if (!elem)
     return ;
   if (s[my_strlen(s) - 1] == LABEL_CHAR)
-    elem->s = strndup(s, my_strlen(s) - 1);
+    elem->s = my_strndup(s, my_strlen(s) - 1);
   else
-    elem->s = strdup(s);
-  elem->adr_a = g_data.count + g_data.n[ARG] + 1 + my_enc_exists(n_ins);
+    elem->s = my_strdup(s);
+  elem->adr_a = g_data.count + g_data.n[ARG_C] + 1 + my_enc_exists(n_ins);
   elem->adr = g_data.count;
+  elem->line = g_data.nb_line;
   elem->size = size;
   elem->next = NULL;
   if (*list == NULL)
@@ -52,7 +54,7 @@ void		my_free_lists(labels_t **list1, labels_t **list2)
     }
   while (*list2 != NULL)
     {
-      tmp = *list2;      
+      tmp = *list2;
       *list2 = (*list2)->next;
       free(tmp);
     }
@@ -60,9 +62,6 @@ void		my_free_lists(labels_t **list1, labels_t **list2)
 
 void		my_init_arg_tab(args_t **args)
 {
-  int		i;
-
-  i = 0;
   args = malloc(sizeof(*args) * (MAX_ARGS_NUMBER));
   if (args == NULL)
     exit(EXIT_FAILURE);
