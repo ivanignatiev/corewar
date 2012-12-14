@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:17:00 2012 ivan ignatiev
-** Last update Thu Dec 13 14:41:05 2012 ivan ignatiev
+** Last update Fri Dec 14 13:47:08 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -13,7 +13,18 @@
 #include	"op.h"
 #include	"corewar.h"
 
-int		cw_save_live(t_long_type prog_num)
+static void	cw_set_last_live(t_program *prog)
+{
+  if (g_last_live)
+    free(g_last_live);
+  if ((g_last_live = (t_program*)malloc(sizeof(t_program))) != NULL)
+    {
+      my_memncpy(g_last_live, prog,
+		 sizeof(t_program), sizeof(t_program));
+    }
+}
+
+static int	cw_save_live(t_long_type prog_num)
 {
   t_prog_list	*nav;
 
@@ -22,7 +33,7 @@ int		cw_save_live(t_long_type prog_num)
     {
       if (nav->prog->prog_num == prog_num)
 	{
-	  g_last_live = nav->prog;
+	  cw_set_last_live(nav->prog);
 	  nav->prog->last_live_cycle = g_cycles;
 	  printf("player %li(%s) is alive\n", prog_num, nav->prog->header.prog_name);
 	}

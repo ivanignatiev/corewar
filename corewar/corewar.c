@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Thu Dec 13 17:37:18 2012 ivan ignatiev
+** Last update Fri Dec 14 15:13:38 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -52,17 +52,22 @@ static void	begin_corewar()
       nav = g_prog_list;
       while (nav != NULL)
 	{
-	  cw_try_run_instr(nav->prog, instrs);
-	  if (cycle_to_die != nav->prog->last_live_cycle && die_cycle)
+	  if (!nav->prog->fork)
 	    {
-	      printf("Prog #%d(%s) die on %d\n", nav->prog->prog_num, nav->prog->header.prog_name, nav->prog->cur_nbr_cycles);
-	      cw_remove_program(nav->prog);
-	      prog_count = cw_get_prog_count();
+	      cw_try_run_instr(nav->prog, instrs);
+	      if (cycle_to_die != nav->prog->last_live_cycle && die_cycle)
+		{
+		  printf("Prog #%d(%s) die on %d\n", nav->prog->prog_num, nav->prog->header.prog_name, nav->prog->cur_nbr_cycles);
+		  cw_remove_program(nav->prog);
+		  prog_count = cw_get_prog_count();
+		}
+	      if (g_live_calls == NBR_LIVE)
+		{
+		  cw_reset_program(nav->prog);
+		}
 	    }
-	  if (g_live_calls == NBR_LIVE)
-	    {
-	      cw_reset_program(nav->prog);
-	    }
+	  else
+	    nav->prog->fork = 0;
 	  nav = nav->next;
 	}
       ++g_cycles;
@@ -87,7 +92,10 @@ int		main(int argc, char **argv)
 	  cw_try_place_programs();
 	  begin_corewar();
 	  if (g_last_live)
-	    printf("player %ld(%s) won\n", g_last_live->prog_num, g_last_live->header.prog_name);
+	    {
+	      printf("player %ld(%s) won\n", g_last_live->prog_num, g_last_live->header.prog_name);
+	      free(g_last_live);
+	    }
 	  /* DEBUG# */
 	  cw_dump_memory(g_memory, MEM_SIZE);
 	  /* #DEBUG */

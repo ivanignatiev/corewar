@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 12:34:41 2012 ivan ignatiev
-** Last update Thu Dec 13 18:08:08 2012 ivan ignatiev
+** Last update Fri Dec 14 15:04:56 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -17,7 +17,7 @@ void	cw_show_args(op_t *instr, t_prog_args *args, t_program *prog)
 {
   int	i;
 
-  printf("Prog #%2i {%6li} [%4li]: ", prog->prog_num, (g_cycles + 1), prog->pc);
+  printf("Prog #%2i {%6li} [%4li]: ", prog->prog_num, g_cycles, prog->pc);
   if (args[0].type == T_REG)
     printf("%s r%li", instr->mnemonique, args[0].value);
   else if (args[0].type == T_DIR)
@@ -37,11 +37,12 @@ void	cw_show_args(op_t *instr, t_prog_args *args, t_program *prog)
     }
   i = 0;
   printf(" # {");
-  while (i < REG_NUMBER)
-    {
-      printf("[r%i = %li]", i + 1,  prog->reg[i]);
-      ++i;
-    }
+  if (args[0].type == T_REG)
+    printf(" [r%li = %li] ", args[0].value, prog->reg[args[0].value - 1]);
+  if (args[1].type == T_REG)
+    printf(" [r%li = %li] ", args[1].value, prog->reg[args[1].value - 1]);
+  if (args[2].type == T_REG)
+    printf(" [r%li = %li] ", args[2].value, prog->reg[args[2].value - 1]);
   printf(" , carry = %i}", prog->carry);
   printf("\n");
 }
@@ -75,15 +76,18 @@ int		cw_try_run_instr(t_program *prog, t_prog_instr *instrs)
   if (n <= 16 && instrs[op_tab[n].code].func != NULL)
     {
       if (prog->cur_nbr_cycles < 0)
-	prog->cur_nbr_cycles = (op_tab[n].nbr_cycles - 1);
+	{
+	  printf("Prog #%2i {%6li} [%4li]: Begin exec '%s'\n", prog->prog_num, g_cycles, prog->pc, op_tab[n].mnemonique);
+	  prog->cur_nbr_cycles = op_tab[n].nbr_cycles - 1;
+	}
       else if (prog->cur_nbr_cycles == 0)
 	{
 	  cw_call_instraction(prog, &op_tab[n], instrs);
 	  prog->pc = (prog->pc + 1) % MEM_SIZE;
 	}
-      --prog->cur_nbr_cycles;
     }
   else
-    ++prog->pc;
+    prog->pc = (prog->pc + 1) % MEM_SIZE;
+  --prog->cur_nbr_cycles;
   return (1);
 }

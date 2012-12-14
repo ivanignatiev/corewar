@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:34:08 2012 ivan ignatiev
-** Last update Thu Dec 13 17:28:12 2012 ivan ignatiev
+** Last update Fri Dec 14 15:03:40 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -44,6 +44,7 @@ static t_program	*cw_copy_program(t_program *prog)
     {
       my_memncpy(new_prog, prog, sizeof(t_program), sizeof(t_program));
       new_prog->fork = 1;
+      new_prog->cur_nbr_cycles = -1;
       new_prog->prog_num = cw_get_prog_number();
     }
   return (new_prog);

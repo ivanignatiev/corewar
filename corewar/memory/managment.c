@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:50:08 2012 ivan ignatiev
-** Last update Thu Dec 13 13:27:35 2012 ivan ignatiev
+** Last update Fri Dec 14 14:56:26 2012 ivan ignatiev
 */
 
 #include	<unistd.h>
@@ -36,6 +36,7 @@ int		cw_put_program_to(int start_addr, t_program *prog)
       && read(prog->fd, &test_eof, 1) != 0)
     return (0);
   prog->start_addr = start_addr;
+  prog->pc = start_addr;
   return (1);
 }
 

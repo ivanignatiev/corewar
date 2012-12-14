@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Thu Dec 13 16:10:45 2012 ivan ignatiev
+** Last update Fri Dec 14 14:48:13 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -117,7 +117,7 @@ t_long_type	cw_get_prog_number()
   t_prog_list	*nav;
   t_long_type	max;
 
-  max = 0;
+  max = -1;
   nav = g_prog_list;
   if (nav)
     max = nav->prog->prog_num;
