@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Fri Dec 14 14:56:07 2012 ivan ignatiev
+** Last update Fri Dec 14 16:25:47 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -70,7 +70,7 @@ t_program	*cw_load_program(char *filename,
 	      my_conv_to_platform(&(prog->header.magic), sizeof(prog->header.magic));
 	      if (prog->header.magic != COREWAR_EXEC_MAGIC)
 		{
-		  printf("corewar: %s is wrong COR file.\n", filename);
+		  printf("%s is not a corewar executable\n", filename);
 		  free(prog);
 		  return (NULL);
 		}

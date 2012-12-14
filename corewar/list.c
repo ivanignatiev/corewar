@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Fri Dec 14 14:48:13 2012 ivan ignatiev
+** Last update Fri Dec 14 16:24:23 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -13,20 +13,60 @@
 #include	"corewar.h"
 
 /*
-** Build programm list from COR-files passed from command args
-** TODO: parse agrg -dump [cycle_number] / -n [prog_num] / -a [start_addr]
+** Return count of programs in list
 */
-void		cw_get_program_list(int argc, char **argv)
+int		cw_is_prog_exist(t_long_type prog_num)
+{
+  t_prog_list	*nav;
+
+  nav = g_prog_list;
+  while (nav != NULL)
+    {
+      if (nav->prog->prog_num == prog_num)
+	return (1);
+      nav = nav->next;
+    }
+  return (0);
+}
+
+/*
+** Build programm list from COR-files passed from command args
+*/
+int		cw_get_program_list(int argc, char **argv)
 {
   int		i;
+  t_long_type	prog_num;
+  t_long_type	start_addr;
 
+  g_cycle_to_dump = -1;
   g_prog_list = NULL;
   i = 1;
+  prog_num = -1;
+  start_addr = -1;
   while (i < argc)
     {
-      cw_add_prog_to_list(argv[i], -1, cw_get_prog_number());
-      i = i + 1;
+      if (my_strcmp(argv[i], "-dump") == 0 && (i + 1) < argc)
+	g_cycle_to_dump = my_getnbr(argv[i + 1]);
+      else if (my_strcmp(argv[i], "-n") == 0 && (i + 1) < argc)
+	prog_num = my_getnbr(argv[i + 1]);
+      else if (my_strcmp(argv[i], "-a") == 0 && (i + 1) < argc)
+	start_addr = my_getnbr(argv[i + 1]);
+      else
+	{
+	  if (prog_num < 0)
+	    prog_num = cw_get_prog_number();
+	  else if (cw_is_prog_exist(prog_num))
+	    {
+	      printf("prog number %li already used\n", prog_num);
+	      return (0);
+	    }
+	  cw_add_prog_to_list(argv[i], start_addr, prog_num);
+	  prog_num = -1;
+	  i = i - 1;
+	}
+      i = i + 2;
     }
+  return (1);
 }
 
 /*
@@ -53,12 +93,12 @@ int		cw_add_prog_to_list(char *filename,
 		nav = nav->next;
 	      nav->next = prog_elem;
 	    }
-	  return (prog_num + 1);
+	  return (1);
 	}
       else
 	free(prog_elem);
     }
-  return (prog_num);
+  return (0);
 }
 
 /*
@@ -129,3 +169,4 @@ t_long_type	cw_get_prog_number()
     }
   return (max + 1);
 }
+

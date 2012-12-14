@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Fri Dec 14 15:13:38 2012 ivan ignatiev
+** Last update Fri Dec 14 16:20:54 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -70,6 +70,8 @@ static void	begin_corewar()
 	    nav->prog->fork = 0;
 	  nav = nav->next;
 	}
+      if (g_cycle_to_dump == g_cycles)
+	cw_dump_memory(g_memory, MEM_SIZE);
       ++g_cycles;
       die_cycle = 0;
       if (g_live_calls == NBR_LIVE)
@@ -88,19 +90,20 @@ int		main(int argc, char **argv)
       if (cw_init_memory())
 	{
 	  g_last_live = NULL;
-	  cw_get_program_list(argc, argv);
-	  cw_try_place_programs();
-	  begin_corewar();
-	  if (g_last_live)
+	  if (cw_get_program_list(argc, argv))
 	    {
-	      printf("player %ld(%s) won\n", g_last_live->prog_num, g_last_live->header.prog_name);
-	      free(g_last_live);
+	      if (cw_try_place_programs())
+		{
+		  begin_corewar();
+		  if (g_last_live)
+		    {
+		      printf("player %ld(%s) won\n", g_last_live->prog_num, g_last_live->header.prog_name);
+		      free(g_last_live);
+		    }
+		  return (EXIT_SUCCESS);
+		}
 	    }
-	  /* DEBUG# */
-	  cw_dump_memory(g_memory, MEM_SIZE);
-	  /* #DEBUG */
 	  cw_free_memory();
-	  return (EXIT_SUCCESS);
 	}
     }
   else
