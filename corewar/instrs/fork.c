@@ -6,7 +6,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:31:17 2012 ivan ignatiev
-** Last update Fri Dec 14 15:03:25 2012 ivan ignatiev
+** Last update Fri Dec 14 17:47:48 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -47,6 +47,7 @@ static t_program	*cw_copy_program(t_program *prog)
       new_prog->fork = 1;
       new_prog->cur_nbr_cycles = -1;
       new_prog->prog_num = cw_get_prog_number();
+      new_prog->reg[0] = new_prog->prog_num;
     }
   return (new_prog);
 }
@@ -62,7 +63,8 @@ int			cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args)
     {
       if (cw_add_fork_to_list(new_prog))
 	{
-	  new_prog->pc = (new_prog->previos_pc + (args[0].value % IDX_MOD)) % MEM_SIZE;
+	  new_prog->pc = (new_prog->previos_pc +
+			  (args[0].value % IDX_MOD)) % MEM_SIZE;
 	  return (1);
 	}
       free(new_prog);

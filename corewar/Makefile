@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Wed Dec 12 16:40:54 2012 ivan ignatiev
+## Last update Fri Dec 14 17:25:50 2012 ivan ignatiev
 ##
 
 SRCS	=	corewar.c \
@@ -16,6 +16,7 @@ SRCS	=	corewar.c \
 		memory/dump.c \
 		memory/managment.c \
 		memory/memory.c \
+		memory/memcpy.c \
 		instrs/live.c \
 		instrs/ld.c \
 		instrs/st.c \

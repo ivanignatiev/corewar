@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:29:09 2012 ivan ignatiev
-** Last update Thu Dec 13 17:52:04 2012 ivan ignatiev
+** Last update Fri Dec 14 17:33:07 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -30,8 +30,9 @@ int		cw_instr_ldi(t_program *prog, op_t *instr, t_prog_args *args)
   addr = (prog->previos_pc +
     ((prog->previos_pc + (args[0].value % IDX_MOD)) + args[1].value)
 	  % IDX_MOD) % MEM_SIZE;
-  my_memncpy(&prog->reg[(args[2].value - 1)], g_memory + addr,
-	     REG_SIZE, sizeof(prog->reg[(args[2].value - 1)]));
+  cw_frommemcpy(&prog->reg[(args[2].value - 1)],
+		REG_SIZE, sizeof(prog->reg[(args[2].value - 1)]),
+		addr);
   my_conv_to_platform(&prog->reg[(args[2].value - 1)],
 		      sizeof(prog->reg[(args[2].value - 1)]));
   return (1);

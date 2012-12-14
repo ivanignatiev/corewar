@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Fri Dec 14 16:03:09 2012 ivan ignatiev
+** Last update Fri Dec 14 17:24:53 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -93,6 +93,8 @@ int		cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lldi(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_aff(t_program *prog, op_t *instr, t_prog_args *args);
+void		*cw_tomemcpy(void *src, int n, int dest_n, t_long_type start_addr);
+void		*cw_frommemcpy(void *dest, int n, int dest_n, t_long_type start_addr);
 
 #endif /* !COREWAR_H_ */
 
