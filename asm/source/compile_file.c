@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Thu Dec 13 15:53:24 2012 arthur sfez
+** Last update Thu Dec 13 19:30:52 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -44,6 +44,8 @@ static int	my_parse_data(int fdr, char *s)
       one_line.s = get_next_line(fdr);
       g_data.nb_line++;
     }
+  my_putstr(labels[DEF]->s);
+  my_seeknwrite(labels[CALL], labels[DEF]);
   free(separators);
   my_free_lists(&labels[DEF], &labels[CALL]);
   if (stop == 1)

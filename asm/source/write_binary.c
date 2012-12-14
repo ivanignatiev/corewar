@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Thu Dec 13 18:05:22 2012 arthur sfez
+** Last update Thu Dec 13 19:21:11 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -92,7 +92,7 @@ int		my_parse_line(line_t one_line, labels_t **labels)
       if (lb_def == 0 && g_data.n[IND] == 0)
 	{
 	  if ((ret = is_label_def(one_line, g_data.n[IND], &lb_def)) == 1)
-	    my_lab_to_list(&labels[DEF], one_line.arr[g_data.n[IND]]);
+	    my_lab_to_list(&labels[DEF], one_line.arr[g_data.n[IND]], 0, 0);
 	  else if (ret == -1)
 	    return (-1);
 	}

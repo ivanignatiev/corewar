@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Thu Dec 13 15:42:27 2012 arthur sfez
+** Last update Thu Dec 13 19:21:44 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -48,7 +48,9 @@ struct	line_s
 struct	labels_s
 {
   char			*s;
+  int			adr_a;
   int			adr;
+  int			size;
   struct labels_s	*next;
 };
 
@@ -115,6 +117,6 @@ int		my_enc_exists(int c);
 ** Lists
 */
 
-void		my_lab_to_list(labels_t **list, char *s);
+void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size);
 
 #endif /* ASM_H_ */

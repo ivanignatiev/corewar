@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Thu Dec 13 11:54:28 2012 arthur sfez
+## Last update Thu Dec 13 19:03:35 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -22,6 +22,7 @@ SRCS	=	source/main.c \
 		source/check_register.c \
 		source/check_direct.c \
 		source/check_indirect.c \
+		source/seek_write.c \
 		../lib/op.c
 
 OBJS	=	$(SRCS:.c=.o)

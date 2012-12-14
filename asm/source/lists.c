@@ -5,14 +5,14 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Mon Dec 10 16:24:42 2012 arthur sfez
-** Last update Thu Dec 13 15:47:40 2012 arthur sfez
+** Last update Thu Dec 13 19:32:54 2012 arthur sfez
 */
 
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	"asm.h"
 
-void		my_lab_to_list(labels_t **list, char *s)
+void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size)
 {
   labels_t	*elem;
   labels_t	*tmp;
@@ -20,11 +20,13 @@ void		my_lab_to_list(labels_t **list, char *s)
   elem = malloc(sizeof(*elem));
   if (!elem)
     return ;
-  if (s[my_strlen(s) - 2] == LABEL_CHAR)
+  if (s[my_strlen(s) - 1] == LABEL_CHAR)
     elem->s = strndup(s, my_strlen(s) - 1);
   else
     elem->s = strdup(s);
+  elem->adr_a = g_data.count + g_data.n[ARG] + 1 + my_enc_exists(n_ins);
   elem->adr = g_data.count;
+  elem->size = size;
   elem->next = NULL;
   if (*list == NULL)
     *list = elem;

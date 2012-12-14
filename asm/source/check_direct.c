@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec 12 15:57:05 2012 arthur sfez
-** Last update Thu Dec 13 17:13:15 2012 arthur sfez
+** Last update Thu Dec 13 19:20:58 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -13,11 +13,11 @@
 #include	"op.h"
 #include	"asm.h"
 
-int		my_check_direct(char *s, labels_t **labels)
+int		my_check_direct(char *s, labels_t **labels, int n_ins, int size)
 {
   if (is_label_call(s + 1))
     {
-      my_lab_to_list(labels, s + 2);
+      my_lab_to_list(labels, s + 2, n_ins, size);
       return (0);
     }
   else
@@ -39,8 +39,8 @@ args_t		*my_check_add_d(char *arg_val, int n_ins, int *encbyte, labels_t **label
     {
       *encbyte |= (0 << (6 - (g_data.n[ARG] * 2)));
       *encbyte |= (1 << (7 - (g_data.n[ARG] * 2)));
-      arg->val = my_check_direct(arg_val, labels);
       arg->size = my_retrieve_size(n_ins, g_data.n[ARG], 4);
+      arg->val = my_check_direct(arg_val, labels, n_ins, arg->size);
     }
   else
     {
