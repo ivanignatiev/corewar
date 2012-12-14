@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-** Last update Tue Dec 11 17:38:04 2012 ivan ignatiev
+** Last update Fri Dec 14 16:14:24 2012 ivan ignatiev
 */
 
 #ifndef CWLIB_H_
@@ -32,5 +32,6 @@ int		is_big_endian(void);
 void		*my_bytes_reverse(void *buff, int size);
 void		*my_conv_to_platform(void *buf, int sz);
 char		*my_strcat(char *dest, char *src);
+int		my_strcmp(char *s1, char *s2);
 
 #endif /* CWLIB_H_ */

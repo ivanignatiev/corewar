@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Thu Dec 13 17:32:30 2012 ivan ignatiev
+** Last update Fri Dec 14 16:03:09 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -54,13 +54,14 @@ t_prog_list	*g_prog_list;
 t_program	*g_last_live;
 t_long_type	g_cycles;
 t_long_type	g_live_calls;
+t_long_type	g_cycle_to_dump;
 
 int		cw_add_prog_to_list(char *filename,
 				    int start_addr,
 				    int prog_num);
 int		cw_get_prog_count();
 t_long_type	cw_get_prog_number();
-void		cw_get_program_list(int argc, char **argv);
+int		cw_get_program_list(int argc, char **argv);
 t_program	*cw_load_program(char *filename,
 				 int start_addr,
 				 int prog_num);
