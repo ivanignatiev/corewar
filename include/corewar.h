@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Fri Dec 14 17:24:53 2012 ivan ignatiev
+** Last update Fri Dec 14 18:24:55 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
