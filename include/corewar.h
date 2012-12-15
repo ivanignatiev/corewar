@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Sat Dec 15 05:23:10 2012 ivan ignatiev
+** Last update Sat Dec 15 07:46:42 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -15,22 +15,22 @@
 # define O_DIE_MSG	2
 # define O_OLD_STYLE	4
 
-typedef long int t_long_type;
+typedef long	t_long_type;
 
 typedef struct	s_program
 {
   int		fd;
-  header_t	header;
   int		fork;
-  int		start_addr;
-  t_long_type	prog_num;
-  int		previos_pc;
-  int		pc;
-  t_long_type	reg[REG_NUMBER];
-  unsigned char carry;
   t_long_type	cur_nbr_cycles;
   t_long_type	last_live_cycle;
   t_long_type	cycle;
+  t_long_type	prog_num;
+  unsigned char carry;
+  t_long_type	start_addr;
+  t_long_type	previos_pc;
+  t_long_type	pc;
+  t_long_type	reg[REG_NUMBER];
+  header_t	header;
 }		t_program;
 
 typedef struct	s_prog_list
@@ -68,7 +68,8 @@ t_long_type	g_cycle_to_dump;
 t_long_type	g_options;
 
 void		begin_corewar(t_cycle *cycle,
-			      t_long_type prog_count);
+			      t_long_type prog_count,
+			      t_prog_instr *instrs);
 int		cw_add_prog_to_list(char *filename,
 				    int start_addr,
 				    int prog_num);

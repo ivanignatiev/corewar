@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:32:27 2012 ivan ignatiev
-** Last update Sat Dec 15 05:32:53 2012 ivan ignatiev
+** Last update Sat Dec 15 07:59:03 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -18,7 +18,7 @@ int		cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args)
 
   cw_get_args(prog, instr, args);
   addr = cw_m(prog->previos_pc + (args[0].value));
-  if (g_options & O_OLD_STYLE)
+  if (args[0].type == T_DIR)
     prog->reg[(args[1].value - 1)] = args[0].value;
   else
     {

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 02:41:04 2012 ivan ignatiev
-** Last update Sat Dec 15 05:12:39 2012 ivan ignatiev
+** Last update Sat Dec 15 07:33:08 2012 ivan ignatiev
 */
 
 #include		<stdlib.h>
@@ -17,6 +17,7 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 					t_long_type prog_count)
 {
   t_prog_list		*nav;
+  t_prog_list		*tmp;
 
   if (cycle->nbr == cycle->die)
     {
@@ -30,9 +31,12 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 		       nav->prog->prog_num,
 		       nav->prog->header.prog_name,
 		       cycle->nbr);
-	      cw_remove_program(nav->prog);
+	      tmp = nav;
+	      nav = nav->next;
+	      cw_remove_program(tmp->prog);
 	    }
-	  nav = nav->next;
+	  else
+	    nav = nav->next;
 	}
       return (cw_get_prog_count());
     }
@@ -70,13 +74,11 @@ static int		cw_dump_cycle(t_cycle *cycle)
 }
 
 void			begin_corewar(t_cycle *cycle,
-				      t_long_type prog_count)
+				      t_long_type prog_count,
+				      t_prog_instr *instrs)
 {
   t_prog_list		*nav;
-  t_prog_instr		*instrs;
 
-  if ((instrs = cw_instrs_list()) == NULL)
-    return ;
   while (prog_count > 0 && cycle->die >= 0)
     {
       nav = g_prog_list;

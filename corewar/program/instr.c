@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 12:34:41 2012 ivan ignatiev
-** Last update Sat Dec 15 05:54:54 2012 ivan ignatiev
+** Last update Sat Dec 15 06:31:45 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -70,6 +70,7 @@ int		cw_try_run_instr(t_program *prog,
     {
       cw_bad_instr(prog);
       prog->pc = cw_m(prog->pc + 1);
+      prog->previos_pc = prog->pc;
     }
   --prog->cur_nbr_cycles;
   return (1);

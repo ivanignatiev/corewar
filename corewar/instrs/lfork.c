@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:34:08 2012 ivan ignatiev
-** Last update Sat Dec 15 06:13:59 2012 ivan ignatiev
+** Last update Sat Dec 15 08:12:10 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -65,5 +65,6 @@ int			cw_instr_fork(t_program *prog, op_t *instr, t_prog_args *args)
 	}
       free(new_prog);
     }
+  prog->carry = !args[0].value;
   return (0);
 }

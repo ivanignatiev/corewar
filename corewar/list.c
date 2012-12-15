@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Sat Dec 15 06:14:52 2012 ivan ignatiev
+** Last update Sat Dec 15 07:38:30 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -61,28 +61,27 @@ void		cw_clear_list()
 void		cw_remove_program(t_program *prog)
 {
   t_prog_list	*nav;
+  t_prog_list	*prev;
   t_prog_list	*tmp;
 
   nav = g_prog_list;
-  if (g_prog_list->prog == prog)
+  prev = nav;
+  while (nav != NULL)
     {
-      tmp = g_prog_list;
-      g_prog_list = tmp->next;
-      free(tmp->prog);
-      free(tmp);
-    }
-  else
-    while (nav->next != NULL)
-      {
-	if (nav->next->prog == prog)
-	  {
-	    tmp = nav->next;
-	    nav->next = tmp->next;
-	    free(tmp->prog);
-	    free(tmp);
-	  }
+      if (nav->prog->prog_num == prog->prog_num)
+	{
+	  tmp = nav;
+	  prev->next = nav->next;
+	  nav = nav->next;
+	  if (g_prog_list == tmp)
+	    g_prog_list = nav;
+	  free(tmp->prog);
+	  free(tmp);
+	}
+      else
 	nav = nav->next;
-      }
+      prev = nav;
+    }
 }
 
 int		cw_get_prog_count()

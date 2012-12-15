@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:46:25 2012 ivan ignatiev
-** Last update Sat Dec 15 05:37:12 2012 ivan ignatiev
+** Last update Sat Dec 15 07:25:30 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -40,6 +40,7 @@ int		cw_free_memory()
     cw_clear_list();
   if (g_last_live != NULL)
     free(g_last_live);
-  free(g_memory);
+  if (g_memory != NULL)
+    free(g_memory);
   return (1);
 }

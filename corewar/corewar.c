@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Sat Dec 15 04:37:52 2012 ivan ignatiev
+** Last update Sat Dec 15 07:27:35 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -35,30 +35,37 @@ static t_cycle	*cw_init_cycle()
   return (cycle);
 }
 
-int		main(int argc, char **argv)
+static int	corewar(int argc, char **argv)
 {
   t_long_type	prog_count;
   t_cycle	*cycle;
+  t_prog_instr	*instrs;
 
-  if (argc > 1 && argv != NULL)
-    {
-      if (cw_init_memory())
-	{
-	  if ((cycle = cw_init_cycle()) != NULL)
+  if (cw_init_memory())
+    if ((cycle = cw_init_cycle()) != NULL)
+      if ((instrs = cw_instrs_list()) != NULL)
+	if (cw_get_program_list(argc, argv))
+	  if ((prog_count = cw_try_place_programs()) != 0)
 	    {
-	      if (cw_get_program_list(argc, argv))
-		if ((prog_count = cw_try_place_programs()) != 0)
-		  {
-		    begin_corewar(cycle, prog_count);
-		    cw_winner();
-		    cw_free_memory();
-		    return (EXIT_SUCCESS);
-		  }
+	      begin_corewar(cycle, prog_count, instrs);
+	      cw_winner();
+	      cw_free_memory();
+	      free(instrs);
 	      free(cycle);
+	      return (EXIT_SUCCESS);
 	    }
-	  cw_free_memory();
-	}
-    }
+  if (instrs != NULL)
+    free(instrs);
+  if (cycle != NULL)
+    free(cycle);
+  cw_free_memory();
+  return (EXIT_FAILURE);
+}
+
+int		main(int argc, char **argv)
+{
+  if (argc > 1 && argv != NULL)
+    return (corewar(argc, argv));
   else
     printf("corewar: Too few arguments\n");
   return (EXIT_FAILURE);

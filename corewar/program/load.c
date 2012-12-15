@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Sat Dec 15 03:02:00 2012 ivan ignatiev
+** Last update Sat Dec 15 07:42:37 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -60,26 +60,26 @@ t_program	*cw_load_program(char *filename,
   t_program	*prog;
 
   if ((prog = (t_program*)malloc(sizeof(t_program))) != NULL)
-    {
-      if ((prog->fd = open(filename, O_RDONLY)) > 0)
+    if ((prog->fd = open(filename, O_RDONLY)) > 0)
+      if (read(prog->fd, &(prog->header), sizeof(header_t)) > 0)
 	{
-	  if (read(prog->fd, &(prog->header), sizeof(header_t)) > 0)
+	  my_conv_to_platform(&(prog->header.prog_size),
+			      sizeof(prog->header.prog_size));
+	  my_conv_to_platform(&(prog->header.magic),
+			      sizeof(prog->header.magic));
+	  if (prog->header.magic == COREWAR_EXEC_MAGIC)
 	    {
-	      my_conv_to_platform(&(prog->header.prog_size),
-				  sizeof(prog->header.prog_size));
-	      my_conv_to_platform(&(prog->header.magic),
-				  sizeof(prog->header.magic));
-	      if (prog->header.magic != COREWAR_EXEC_MAGIC)
-		{
-		  printf("%s is not a corewar executable\n", filename);
-		  free(prog);
-		  return (NULL);
-		}
 	      prog->start_addr = start_addr;
 	      prog->prog_num = prog_num;
 	      return (cw_init_program(prog));
 	    }
 	}
+  if (prog)
+    {
+      printf("%s is not a corewar executable\n", filename);
+      free(prog);
+      if (prog->fd >= 0)
+	close(prog->fd);
     }
   return (NULL);
 }
