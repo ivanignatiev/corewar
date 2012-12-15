@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:46:25 2012 ivan ignatiev
-** Last update Sat Dec 15 03:28:58 2012 ivan ignatiev
+** Last update Sat Dec 15 05:37:12 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -27,6 +27,7 @@ int		cw_init_memory(t_cycle **cycle)
   g_last_live = NULL;
   g_cycle_to_dump = -1;
   g_prog_list = NULL;
+  g_options = 0;
   if ((g_memory = (unsigned char*)malloc(sizeof(unsigned char)
 					 * MEM_SIZE)) != NULL)
     return (1);

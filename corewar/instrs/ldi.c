@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:29:09 2012 ivan ignatiev
-** Last update Sat Dec 15 02:52:53 2012 ivan ignatiev
+** Last update Sat Dec 15 05:15:31 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -21,7 +21,6 @@ int		cw_instr_ldi(t_program *prog, op_t *instr, t_prog_args *args)
   if (args[1].type != T_REG)
     args[1].size = IND_SIZE;
   cw_get_args(prog, instr, args);
-  cw_show_args(instr, args, prog);
   if (args[0].type == T_REG)
     args[0].value = prog->reg[(args[0].value - 1)];
   if (args[1].type == T_REG)

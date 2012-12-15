@@ -1,11 +1,11 @@
 /*
-** list.c for corewar in /home/ignati_i//projects/corewar/corewar-2016ed-2015s-2017si-liu_q/dasm
+** list.c for corewar in ./corewar
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Sat Dec 15 04:36:14 2012 ivan ignatiev
+** Last update Sat Dec 15 06:14:52 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -105,7 +105,7 @@ t_long_type	cw_get_prog_number()
   t_prog_list	*nav;
   t_long_type	max;
 
-  max = -1;
+  max = 0;
   nav = g_prog_list;
   if (nav)
     max = nav->prog->prog_num;

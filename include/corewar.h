@@ -5,11 +5,15 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Sat Dec 15 04:20:51 2012 ivan ignatiev
+** Last update Sat Dec 15 05:23:10 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
 # define COREWAR_H_
+
+# define O_AFF_SHELL	1
+# define O_DIE_MSG	2
+# define O_OLD_STYLE	4
 
 typedef long int t_long_type;
 
@@ -61,6 +65,7 @@ unsigned char	*g_memory;
 t_prog_list	*g_prog_list;
 t_program	*g_last_live;
 t_long_type	g_cycle_to_dump;
+t_long_type	g_options;
 
 void		begin_corewar(t_cycle *cycle,
 			      t_long_type prog_count);
@@ -111,6 +116,8 @@ int		cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lldi(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_aff(t_program *prog, op_t *instr, t_prog_args *args);
+void		cw_show_args(op_t *instr, t_prog_args *args,
+			     t_program *prog);
 void		*cw_tomemcpy(void *src,
 			     int n,
 			     int dest_n,
