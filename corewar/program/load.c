@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Fri Dec 14 16:25:47 2012 ivan ignatiev
+** Last update Sat Dec 15 03:02:00 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -53,7 +53,6 @@ void		cw_reset_program(t_program *prog)
   prog->reg[0] = prog->prog_num;
 }
 
-
 t_program	*cw_load_program(char *filename,
 				 int start_addr,
 				 int prog_num)
@@ -66,8 +65,10 @@ t_program	*cw_load_program(char *filename,
 	{
 	  if (read(prog->fd, &(prog->header), sizeof(header_t)) > 0)
 	    {
-	      my_conv_to_platform(&(prog->header.prog_size), sizeof(prog->header.prog_size));
-	      my_conv_to_platform(&(prog->header.magic), sizeof(prog->header.magic));
+	      my_conv_to_platform(&(prog->header.prog_size),
+				  sizeof(prog->header.prog_size));
+	      my_conv_to_platform(&(prog->header.magic),
+				  sizeof(prog->header.magic));
 	      if (prog->header.magic != COREWAR_EXEC_MAGIC)
 		{
 		  printf("%s is not a corewar executable\n", filename);

@@ -1,11 +1,11 @@
 /*
-** argc.c for corewar in ./dasm/program
+** args.c for corewar in ./dasm/program
 ** 
 ** Made by ivan ignatiev
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Fri Dec 14 17:33:46 2012 ivan ignatiev
+** Last update Sat Dec 15 03:10:18 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -54,7 +54,8 @@ int		cw_args_size(t_prog_args *args, int nbr)
   return (1);
 }
 
-args_type_t	cw_args_get_type(unsigned char ctrl_pair, op_t *instr, int arg_num)
+args_type_t	cw_args_get_type(unsigned char ctrl_pair,
+				 op_t *instr, int arg_num)
 {
   if ((ctrl_pair == 1) && (instr->type[arg_num] & T_REG))
     return (T_REG);
@@ -72,9 +73,9 @@ t_prog_args	*cw_args_order(op_t *instr,
   int		n;
   t_prog_args	*args;
 
-  if (cw_get_args_count(order_byte) != instr->nbr_args)
-    return (NULL);
-  if ((args = (t_prog_args*)malloc(sizeof(t_prog_args) * instr->nbr_args)) == NULL)
+  if ((cw_get_args_count(order_byte) != instr->nbr_args)
+      || (args = (t_prog_args*)malloc(sizeof(t_prog_args)
+				   * instr->nbr_args)) == NULL)
     return (NULL);
   n = 0;
   while (n < (instr->nbr_args * 2))
@@ -100,23 +101,22 @@ int		cw_get_args(t_program *prog,
 			    t_prog_args *args)
 {
   int		i;
-  int		size;
 
   i = 0;
-  size = 0;
   while (i < instr->nbr_args)
     {
-      if (g_memory[(prog->pc + 1) % MEM_SIZE] >> 7)
+      if (g_memory[cw_m(prog->pc + 1)] >> 7)
 	args[i].value = -1;
       else
 	args[i].value = 0;
       cw_frommemcpy(&args[i].value,
 		    args[i].size, sizeof(args[i].value),
-		    (prog->pc + 1) % MEM_SIZE);
+		    cw_m(prog->pc + 1));
       my_conv_to_platform(&args[i].value, sizeof(args[i].value));
-      if (args[i].type == T_REG && args[i].value > REG_NUMBER && args[i].value < 1)
+      if (args[i].type == T_REG
+	  && args[i].value > REG_NUMBER && args[i].value < 1)
 	return (0);
-      prog->pc = (prog->pc + args[i].size) % MEM_SIZE;
+      prog->pc = cw_m(prog->pc + args[i].size);
       i = i + 1;
     }
   return (1);

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:34:08 2012 ivan ignatiev
-** Last update Fri Dec 14 17:47:58 2012 ivan ignatiev
+** Last update Sat Dec 15 03:07:43 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -62,10 +62,10 @@ int			cw_instr_fork(t_program *prog, op_t *instr, t_prog_args *args)
     {
       if (cw_add_fork_to_list(new_prog))
 	{
-	  new_prog->pc = (new_prog->previos_pc + (args[0].value)) % MEM_SIZE;
+	  new_prog->pc = cw_m(new_prog->previos_pc + (args[0].value));
 	  return (1);
 	}
       free(new_prog);
-      return (0);
     }
+  return (0);
 }

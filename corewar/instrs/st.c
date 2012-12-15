@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:20:05 2012 ivan ignatiev
-** Last update Fri Dec 14 17:30:13 2012 ivan ignatiev
+** Last update Fri Dec 14 21:21:37 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -24,12 +24,14 @@ int		cw_instr_st(t_program *prog, op_t *instr, t_prog_args *args)
     }
   else
     {
-      addr = (prog->previos_pc + (args[0].value % IDX_MOD)) % MEM_SIZE;
-      my_conv_to_platform(&prog->reg[(args[0].value - 1)], sizeof(prog->reg[(args[0].value - 1)]));
+      addr = cw_m(prog->previos_pc + (args[0].value % IDX_MOD));
+      my_conv_to_platform(&prog->reg[(args[0].value - 1)],
+			  sizeof(prog->reg[(args[0].value - 1)]));
       cw_tomemcpy(&prog->reg[(args[0].value - 1)],
 		  sizeof(prog->reg[(args[0].value - 1)]), REG_SIZE,
 		  addr);
-      my_conv_to_platform(&prog->reg[(args[0].value - 1)], sizeof(prog->reg[(args[0].value - 1)]));
+      my_conv_to_platform(&prog->reg[(args[0].value - 1)],
+			  sizeof(prog->reg[(args[0].value - 1)]));
     }
   return (1);
 }
