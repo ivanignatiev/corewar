@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Fri Dec 14 20:02:05 2012 arthur sfez
+   Last update Sun Dec 16 10:05:22 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -17,6 +17,27 @@
 #include	"asm.h"
 #include	"cwlib.h"
 
+static void	my_init_variables(int *stop, line_t *one_line,
+				  labels_t **list, char *s)
+{
+  *stop = 0;
+  one_line->s = s;
+  *(list) = NULL;
+  *(list + 1) = NULL;
+}
+
+static int	my_prepare_snw(labels_t **call, labels_t **def,
+			       int *stop, char *separators)
+{
+  if (my_seeknwrite(*call, *def) == -1)
+    *stop = 1;
+  free(separators);
+  my_free_lists(def, call);
+  if (*stop == 1)
+    return (-1);
+  return (1);
+}
+
 static int	my_parse_data(int fdr, char *s)
 {
   int		stop;
@@ -24,10 +45,7 @@ static int	my_parse_data(int fdr, char *s)
   line_t	one_line;
   labels_t	*labels[2];
 
-  stop = 0;
-  one_line.s = s;
-  labels[CALL] = NULL;
-  labels[DEF] = NULL;
+  my_init_variables(&stop, &one_line, labels, s);
   separators = my_malloc_separators();
   while (stop == 0 && one_line.s)
     {
@@ -44,13 +62,7 @@ static int	my_parse_data(int fdr, char *s)
       one_line.s = get_next_line(fdr);
       g_data.nb_line++;
     }
-  if (stop == 0 && my_seeknwrite(labels[CALL], labels[DEF]) == -1)
-    stop = 1;
-  free(separators);
-  my_free_lists(&labels[DEF], &labels[CALL]);
-  if (stop == 1)
-    return (-1);
-  return (1);
+  return (my_prepare_snw(&labels[CALL], &labels[DEF], &stop, separators));
 }
 
 static int	open_cor(char *str)

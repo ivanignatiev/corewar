@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Sun Dec 16 10:02:06 2012 arthur sfez
+   Last update Sun Dec 16 10:04:29 2012 arthur sfez
 */
 
 #include	<stdlib.h>

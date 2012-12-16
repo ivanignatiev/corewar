@@ -5,12 +5,12 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Fri Dec 14 18:01:59 2012 arthur sfez
+## Last update Fri Dec 14 19:29:23 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
 		source/my_split_string_asm.c \
-		source/is_instruction.c \
+		source/check_instruction.c \
 		source/compile_file.c \
 		source/fill_header.c \
 		source/error_msg.c \
