@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec 13 11:51:36 2012 arthur sfez
-** Last update Sun Dec 16 16:30:39 2012 arthur sfez
+** Last update Sun Dec 16 17:32:29 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -26,7 +26,7 @@ int		my_check_indirect(char *s, labels_t **labels,
 }
 
 args_t		*my_check_add_i(char *arg_val, int n_ins,
-				int *encbyte, labels_t **labels)
+				unsigned char *encbyte, labels_t **labels)
 {
   int		ret;
   args_t	*arg;

@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:50:45 2012 arthur sfez
-** Last update Sun Dec 16 16:33:08 2012 arthur sfez
+** Last update Sun Dec 16 17:14:22 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -53,7 +53,8 @@ static int	my_parse_data(int fdr, char *s)
       if ((one_line.arr = my_split_string_asm(one_line.s, separators)))
 	{
 	  separators[1] = ' ';
-	  if (one_line.arr[0][0] != COMMENT_CHAR && one_line.arr[0][0] != '.')
+	  if (one_line.arr[0][0] != COMMENT_CHAR && one_line.arr[0][0] != '.'
+	      && one_line.arr[0][0] != ';')
 	    if (my_parse_line(one_line, labels) == -1)
 	      stop = 1;
 	}

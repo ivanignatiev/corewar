@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Tue Dec 11 18:54:07 2012 arthur sfez
-** Last update Fri Dec 14 18:48:58 2012 arthur sfez
+** Last update Sun Dec 16 17:31:56 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -36,7 +36,7 @@ int		my_check_register(char *s)
   return (res);
 }
 
-args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte)
+args_t		*my_check_add_r(char *arg_val, int n_ins, unsigned char *encbyte)
 {
   args_t	*arg;
   int		r_val;

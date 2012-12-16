@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-   Last update Sun Dec 16 10:04:29 2012 arthur sfez
+** Last update Sun Dec 16 17:13:14 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -73,7 +73,7 @@ char		**my_split_string_asm(char *str, char *separators)
   i = 0;
   arr = NULL;
   count = 0;
-  while (str[i] != '\0' && str[i] != ';' && str[i] != '#')
+  while (str[i] != '\0' && str[i] != ';' && str[i] != COMMENT_CHAR)
     {
       if (!is_it_separator_asm(str[i], separators))
 	{

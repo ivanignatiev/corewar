@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Sun Dec 16 15:36:01 2012 arthur sfez
+** Last update Sun Dec 16 17:31:17 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -15,7 +15,7 @@
 #include	"op.h"
 
 args_t		*my_update_encbyte(char *arg, int n_ins,
-				   int *encbyte, labels_t **labels)
+				   unsigned char *encbyte, labels_t **labels)
 {
   if (*arg == 'r')
     return (my_check_add_r(arg, n_ins, encbyte));
@@ -28,7 +28,7 @@ args_t		*my_update_encbyte(char *arg, int n_ins,
 int		my_analyze_args(line_t one_line, int n_ins,
 				labels_t **labels, args_t **args)
 {
-  int		encbyte;
+  unsigned char	encbyte;
 
   encbyte = 0;
   g_data.n[ARG] = 0;

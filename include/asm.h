@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Sun Dec 16 15:25:41 2012 arthur sfez
+** Last update Sun Dec 16 17:33:19 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -125,9 +125,9 @@ int		my_retrieve_size(int n_ins, int n, int i);
 
 void		my_init_arg_tab(args_t **args);
 int		my_analyze_args(line_t one_line, int n_ins, labels_t **labels, args_t **args);
-args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte);
-args_t		*my_check_add_d(char *arg_val, int n_ins, int *encbyte, labels_t **labels);
-args_t		*my_check_add_i(char *arg_val, int n_ins, int *encbyte, labels_t **labels);
+args_t		*my_check_add_r(char *arg_val, int n_ins, unsigned char *encbyte);
+args_t		*my_check_add_d(char *arg_val, int n_ins, unsigned char *encbyte, labels_t **labels);
+args_t		*my_check_add_i(char *arg_val, int n_ins, unsigned char *encbyte, labels_t **labels);
 int		my_enc_exists(int c);
 int		my_seeknwrite(labels_t *calls, labels_t *defs);
 
