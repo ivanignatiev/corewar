@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 13:58:06 2012 ivan ignatiev
-** Last update Sat Dec 15 03:10:18 2012 ivan ignatiev
+** Last update Sat Dec 15 12:13:37 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -105,6 +105,8 @@ int		cw_get_args(t_program *prog,
   i = 0;
   while (i < instr->nbr_args)
     {
+      args[i].change = 0;
+      args[i].wval = 0;
       if (g_memory[cw_m(prog->pc + 1)] >> 7)
 	args[i].value = -1;
       else

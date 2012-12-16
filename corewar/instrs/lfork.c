@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:34:08 2012 ivan ignatiev
-** Last update Sat Dec 15 08:12:10 2012 ivan ignatiev
+** Last update Sat Dec 15 13:38:38 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -44,27 +44,37 @@ static t_program	*cw_copy_program(t_program *prog)
     {
       my_memncpy(new_prog, prog, sizeof(t_program), sizeof(t_program));
       new_prog->fork = 1;
-      new_prog->cur_nbr_cycles = -1;
+      new_prog->instr.nbr_cycles = -1;
+      new_prog->instr.args = NULL;
       new_prog->prog_num = cw_get_prog_number();
     }
   return (new_prog);
 }
 
-int			cw_instr_fork(t_program *prog, op_t *instr, t_prog_args *args)
+int			cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args)
 {
   t_program		*new_prog;
 
-  args[0].size = IND_SIZE;
-  cw_get_args(prog, instr, args);
+  if (prog->instr.wait)
+    {
+      args[0].size = IND_SIZE;
+      if (cw_get_args(prog, instr, args))
+	{
+	  args[0].wval = cw_m(prog->previos_pc + (args[0].value));
+	  args[0].change = 1;
+	  prog->carry = !args[0].wval;
+	  return (1);
+	}
+      return (0);
+    }
   if ((new_prog = cw_copy_program(prog)) != NULL)
     {
       if (cw_add_fork_to_list(new_prog))
 	{
-	  new_prog->pc = cw_m(new_prog->previos_pc + (args[0].value));
+	  new_prog->pc = args[0].wval;
 	  return (1);
 	}
       free(new_prog);
     }
-  prog->carry = !args[0].value;
   return (0);
 }

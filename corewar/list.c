@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:47:52 2012 ivan ignatiev
-** Last update Sat Dec 15 07:38:30 2012 ivan ignatiev
+** Last update Sat Dec 15 13:04:36 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -40,48 +40,6 @@ int		cw_add_prog_to_list(char *filename,
 	free(prog_elem);
     }
   return (0);
-}
-
-void		cw_clear_list()
-{
-  t_prog_list	*nav;
-  t_prog_list	*tmp;
-
-  nav = g_prog_list;
-  while (nav != NULL)
-    {
-      tmp = nav;
-      nav = nav->next;
-      free(tmp->prog);
-      free(tmp);
-    }
-  g_prog_list = NULL;
-}
-
-void		cw_remove_program(t_program *prog)
-{
-  t_prog_list	*nav;
-  t_prog_list	*prev;
-  t_prog_list	*tmp;
-
-  nav = g_prog_list;
-  prev = nav;
-  while (nav != NULL)
-    {
-      if (nav->prog->prog_num == prog->prog_num)
-	{
-	  tmp = nav;
-	  prev->next = nav->next;
-	  nav = nav->next;
-	  if (g_prog_list == tmp)
-	    g_prog_list = nav;
-	  free(tmp->prog);
-	  free(tmp);
-	}
-      else
-	nav = nav->next;
-      prev = nav;
-    }
 }
 
 int		cw_get_prog_count()

@@ -5,15 +5,14 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 04:56:50 2012 ivan ignatiev
-** Last update Sat Dec 15 05:54:19 2012 ivan ignatiev
+** Last update Sat Dec 15 13:09:39 2012 ivan ignatiev
 */
 
 #include	"op.h"
 #include	"cwlib.h"
 #include	"corewar.h"
 
-void		cw_show_args(op_t *instr, t_prog_args *args,
-			     t_program *prog)
+void		cw_show_args(t_program *prog, op_t *instr, t_prog_args *args)
 {
   int		i;
 
@@ -21,8 +20,9 @@ void		cw_show_args(op_t *instr, t_prog_args *args,
     return ;
 
   printf("Prog #%3i {%6li-%6li} [%4li]: ", prog->prog_num,
-	 prog->cycle - instr->nbr_cycles + 1
-	 ,prog->cycle + 1, prog->previos_pc);
+	 prog->cycle,
+	 prog->cycle + prog->instr.nbr_cycles,
+	 prog->previos_pc);
   if (args[0].type == T_REG)
     printf("%s r%li", instr->mnemonique, args[0].value);
   else if (args[0].type == T_DIR)
@@ -40,14 +40,21 @@ void		cw_show_args(op_t *instr, t_prog_args *args,
 	printf(", %%:%li", args[i].value);
       i = i + 1;
     }
+  printf(" #{");
   i = 0;
-  printf(" # {");
-  if (args[0].type == T_REG)
-    printf(" [r%li = %li] ", args[0].value, prog->reg[args[0].value - 1]);
-  if (args[1].type == T_REG)
-    printf(" [r%li = %li] ", args[1].value, prog->reg[args[1].value - 1]);
-  if (args[2].type == T_REG)
-    printf(" [r%li = %li] ", args[2].value, prog->reg[args[2].value - 1]);
-  printf(" , carry = %i}", prog->carry);
+  while (i < instr->nbr_args)
+    {
+      if (args[i].change)
+	{
+	  if (args[i].type == T_REG)
+	    printf("cng[r%li=%li->%li] ", args[i].value, prog->reg[args[i].value - 1], args[i].wval);
+	  else
+	    printf("cng[a=%li] ", args[i].wval);
+	}
+      else if (args[i].type == T_REG)
+	printf("str[r%li=%li] ",args[i].value, prog->reg[args[i].value - 1]);
+      i = i + 1;
+    }
+  printf("carry=%d}", prog->carry);
   printf("\n");
 }

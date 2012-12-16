@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Sat Dec 15 07:46:42 2012 ivan ignatiev
+** Last update Sat Dec 15 14:13:17 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -17,36 +17,48 @@
 
 typedef long	t_long_type;
 
+
+typedef struct	s_prog_args
+{
+  t_long_type	value;
+  t_long_type	wval;
+  args_type_t	type;
+  unsigned int	size;
+  int		change;
+}		t_prog_args;
+
+typedef struct	s_exe_instr
+{
+  op_t		*op;
+  t_prog_args	*args;
+  t_long_type	nbr_cycles;
+  int		wait;
+}		t_exe_instr;
+
 typedef struct	s_program
 {
   int		fd;
   int		fork;
-  t_long_type	cur_nbr_cycles;
+  int		live;
   t_long_type	last_live_cycle;
   t_long_type	cycle;
   t_long_type	prog_num;
-  unsigned char carry;
+  int		carry;
   t_long_type	start_addr;
   t_long_type	previos_pc;
   t_long_type	pc;
   t_long_type	reg[REG_NUMBER];
   header_t	header;
+  t_exe_instr	instr;
 }		t_program;
+
+typedef		int(*t_instr)(t_program *prog, op_t *instr, t_prog_args *args);
 
 typedef struct	s_prog_list
 {
   t_program	*prog;
   struct	s_prog_list	*next;
 }		t_prog_list;
-
-typedef struct	s_prog_args
-{
-  t_long_type	value;
-  args_type_t	type;
-  unsigned int	size;
-}		t_prog_args;
-
-typedef		int(*t_instr)(t_program *prog, op_t *instr, t_prog_args *args);
 
 typedef	struct	s_prog_instr
 {
@@ -85,7 +97,7 @@ int		cw_try_run_instr(t_program *prog,
 				 t_prog_instr *instrs,
 				 t_long_type cycle);
 int		cw_dump_memory(unsigned char *memory,
-			       int size);
+			       unsigned int size);
 int		cw_init_memory();
 int		cw_free_memory();
 void		cw_clear_list();
@@ -98,9 +110,6 @@ int		cw_get_args(t_program *prog,
 			    op_t *instr,
 			    t_prog_args *args);
 void		cw_remove_program(t_program *prog);
-void		cw_show_args(op_t *instr,
-			     t_prog_args *args,
-			     t_program *prog);
 int		cw_instr_live(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_ld(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_st(t_program *prog, op_t *instr, t_prog_args *args);
@@ -117,8 +126,7 @@ int		cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lldi(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_lfork(t_program *prog, op_t *instr, t_prog_args *args);
 int		cw_instr_aff(t_program *prog, op_t *instr, t_prog_args *args);
-void		cw_show_args(op_t *instr, t_prog_args *args,
-			     t_program *prog);
+void		cw_show_args(t_program *prog, op_t *instr, t_prog_args *args);
 void		*cw_tomemcpy(void *src,
 			     int n,
 			     int dest_n,

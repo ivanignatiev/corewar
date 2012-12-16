@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:46:25 2012 ivan ignatiev
-** Last update Sat Dec 15 07:25:30 2012 ivan ignatiev
+** Last update Sat Dec 15 11:14:14 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -22,7 +22,7 @@ t_long_type	cw_m(t_long_type addr)
   return (addr);
 }
 
-int		cw_init_memory(t_cycle **cycle)
+int		cw_init_memory()
 {
   g_last_live = NULL;
   g_cycle_to_dump = -1;

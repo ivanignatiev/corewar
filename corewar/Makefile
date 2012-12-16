@@ -5,11 +5,12 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Sat Dec 15 05:01:50 2012 ivan ignatiev
+## Last update Sat Dec 15 13:08:38 2012 ivan ignatiev
 ##
 
 SRCS	=	corewar.c \
 		list.c \
+		list_clear.c \
 		args.c \
 		war.c \
 		program/load.c \

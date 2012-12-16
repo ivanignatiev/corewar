@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Sat Dec 15 07:42:37 2012 ivan ignatiev
+** Last update Sat Dec 15 14:13:40 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -22,8 +22,11 @@ t_program	*cw_init_program(t_program *prog)
   int		i;
 
   i = 0;
-  prog->cur_nbr_cycles = -1;
+  prog->instr.nbr_cycles = -1;
+  prog->instr.wait = 0;
+  prog->instr.args = NULL;
   prog->pc = 0;
+  prog->live = 0;
   prog->carry = 0;
   prog->fork = 0;
   prog->last_live_cycle = -1;
@@ -41,7 +44,12 @@ void		cw_reset_program(t_program *prog)
   int		i;
 
   i = 0;
-  prog->cur_nbr_cycles = -1;
+  if (prog->instr.args != NULL)
+    free(prog->instr.args);
+  prog->instr.args = NULL;
+  prog->instr.nbr_cycles = -1;
+  prog->instr.wait = 0;
+  prog->live = 0;
   prog->pc = prog->start_addr;
   prog->carry = 0;
   prog->last_live_cycle = -1;
@@ -74,12 +82,12 @@ t_program	*cw_load_program(char *filename,
 	      return (cw_init_program(prog));
 	    }
 	}
-  if (prog)
+  if (prog != NULL)
     {
       printf("%s is not a corewar executable\n", filename);
-      free(prog);
       if (prog->fd >= 0)
 	close(prog->fd);
+      free(prog);
     }
   return (NULL);
 }

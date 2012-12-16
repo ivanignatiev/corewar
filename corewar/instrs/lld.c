@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:32:27 2012 ivan ignatiev
-** Last update Sat Dec 15 07:59:03 2012 ivan ignatiev
+** Last update Sat Dec 15 12:20:24 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -16,18 +16,26 @@ int		cw_instr_lld(t_program *prog, op_t *instr, t_prog_args *args)
 {
   t_long_type	addr;
 
-  cw_get_args(prog, instr, args);
-  addr = cw_m(prog->previos_pc + (args[0].value));
-  if (args[0].type == T_DIR)
-    prog->reg[(args[1].value - 1)] = args[0].value;
-  else
+  if (prog->instr.wait)
     {
-      cw_frommemcpy(&prog->reg[(args[1].value - 1)],
-		    REG_SIZE, sizeof(prog->reg[(args[1].value - 1)]),
-		    addr);
-      my_conv_to_platform(&prog->reg[(args[1].value - 1)],
-			  sizeof(prog->reg[(args[1].value - 1)]));
+      if (cw_get_args(prog, instr, args))
+	{
+	  if (args[0].type == T_IND)
+	    {
+	      addr = cw_m(prog->previos_pc + (args[0].value));
+	      cw_frommemcpy(&args[1].wval, REG_SIZE,
+			    sizeof(args[1].wval), addr);
+	      my_conv_to_platform(&args[1].wval,
+				  sizeof(args[1].wval));
+	    }
+	  else
+	    args[1].wval = args[0].value;
+	  args[1].change = 1;
+	  prog->carry = !args[1].wval;
+	  return (1);
+	}
+      return (0);
     }
-  prog->carry = !prog->reg[(args[1].value - 1)];
+  prog->reg[(args[1].value - 1)] = args[1].wval;
   return (1);
 }

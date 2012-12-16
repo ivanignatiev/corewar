@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 02:41:04 2012 ivan ignatiev
-** Last update Sat Dec 15 07:33:08 2012 ivan ignatiev
+** Last update Sat Dec 15 14:14:32 2012 ivan ignatiev
 */
 
 #include		<stdlib.h>
@@ -21,16 +21,16 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 
   if (cycle->nbr == cycle->die)
     {
+      if (g_options & O_DIE_MSG)
+	printf("%li cycle to die\n", cycle->nbr);
       nav = g_prog_list;
       while (nav != NULL)
 	{
 	  if (cycle->die != nav->prog->last_live_cycle)
 	    {
 	      if (g_options & O_DIE_MSG)
-		printf("%3li (%s) die on %lli cycle\n",
-		       nav->prog->prog_num,
-		       nav->prog->header.prog_name,
-		       cycle->nbr);
+		printf("%3li (%s) die on %li cycle\n", nav->prog->prog_num,
+		       nav->prog->header.prog_name, cycle->nbr);
 	      tmp = nav;
 	      nav = nav->next;
 	      cw_remove_program(tmp->prog);
@@ -39,14 +39,19 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 	    nav = nav->next;
 	}
       return (cw_get_prog_count());
-    }
+      }
   return (prog_count);
 }
 
-static int		cw_nbr_live_calls(t_cycle *cycle)
+static int		cw_nbr_live_calls(t_cycle *cycle, t_program *prog)
 {
   t_prog_list		*nav;
 
+  if (prog->live)
+    {
+      --cycle->live_calls;
+      prog->live = 0;
+    }
   if (cycle->live_calls == 0)
     {
       cycle->nbr = 1;
@@ -58,6 +63,8 @@ static int		cw_nbr_live_calls(t_cycle *cycle)
 	  cw_reset_program(nav->prog);
 	  nav = nav->next;
 	}
+      if (g_options & O_DIE_MSG)
+	printf("%li cycle reset, c_t_die=%li\n", cycle->nbr, cycle->die);
       return (1);
     }
   return (0);
@@ -88,8 +95,7 @@ void			begin_corewar(t_cycle *cycle,
 	    cw_try_run_instr(nav->prog, instrs, cycle->nbr);
 	  else
 	    nav->prog->fork = 0;
-	  if (nav->prog->last_live_cycle == cycle->nbr
-	      && cw_nbr_live_calls(cycle))
+	  if (cw_nbr_live_calls(cycle, nav->prog))
 	    nav = NULL;
 	  else
 	    nav = nav->next;

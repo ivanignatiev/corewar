@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:17:00 2012 ivan ignatiev
-** Last update Sat Dec 15 05:16:04 2012 ivan ignatiev
+** Last update Sat Dec 15 14:15:08 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -44,8 +44,12 @@ static void	cw_save_live(t_long_type prog_num)
 
 int		cw_instr_live(t_program *prog, op_t *instr, t_prog_args *args)
 {
-  args[0].size = 4;
-  cw_get_args(prog, instr, args);
+  if (prog->instr.wait)
+    {
+      args[0].size = 4;
+      return (cw_get_args(prog, instr, args));
+    }
+  prog->live = 1;
   cw_save_live(args[0].value);
   return (1);
 }

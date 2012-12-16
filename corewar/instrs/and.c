@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:23:29 2012 ivan ignatiev
-** Last update Sat Dec 15 05:59:54 2012 ivan ignatiev
+** Last update Sat Dec 15 12:14:37 2012 ivan ignatiev
 */
 
 #include	"cwlib.h"
@@ -14,17 +14,23 @@
 
 int		cw_instr_and(t_program *prog, op_t *instr, t_prog_args *args)
 {
-  t_long_type	arg1;
-  t_long_type	arg2;
-
-  cw_get_args(prog, instr, args);
-  arg1 = args[0].value;
-  arg2 = args[1].value;
-  if (args[0].type == T_REG)
-    arg1 = prog->reg[(args[0].value - 1)];
-  if (args[1].type == T_REG)
-    arg2 = prog->reg[(args[1].value - 1)];
-  prog->reg[(args[2].value - 1)] = arg1 & arg2;
-  prog->carry = !prog->reg[(args[2].value - 1)];
+  if (prog->instr.wait)
+    {
+      if (cw_get_args(prog, instr, args))
+	{
+	  args[0].wval = args[0].value;
+	  args[1].wval = args[1].value;
+	  if (args[0].type == T_REG)
+	    args[0].wval = prog->reg[(args[0].value - 1)];
+	  if (args[1].type == T_REG)
+	    args[1].wval = prog->reg[(args[1].value - 1)];
+	  args[2].change = 1;
+	  args[2].wval = args[0].wval & args[1].wval;
+	  prog->carry = !args[2].wval;
+	  return (1);
+	}
+      return (0);
+    }
+  prog->reg[(args[2].value - 1)] = args[2].wval;
   return (1);
 }

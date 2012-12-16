@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 00:34:42 2012 ivan ignatiev
-** Last update Sat Dec 15 06:54:08 2012 ivan ignatiev
+** Last update Sat Dec 15 13:13:25 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -58,10 +58,7 @@ static int	cw_try_add_cor(char *filename, t_long_type *prog_num,
       return (0);
     }
   if (!cw_add_prog_to_list(filename, *start_addr, *prog_num))
-    {
-      printf("File %s not accessible\n", filename);
-      return (0);
-    }
+    return (0);
   *prog_num = -1;
   return (1);
 }

@@ -5,29 +5,42 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:51:59 2012 ivan ignatiev
-** Last update Wed Dec 12 16:48:39 2012 ivan ignatiev
+** Last update Sat Dec 15 13:35:20 2012 ivan ignatiev
 */
 
+#include	<stdlib.h>
 #include	"cwlib.h"
 #include	"op.h"
 #include	"corewar.h"
 
-int		cw_dump_memory(unsigned char *memory, int size)
-{
-  int		i;
-  char		myhex[] = "0123456789ABCDEF";
 
-  i = 0;
-  printf("%05X : ", 0);
-  while (i < size)
+
+int		cw_dump_memory(unsigned char *memory, unsigned int size)
+{
+  unsigned int	i;
+  unsigned int	l;
+  unsigned int	h;
+  char		*myhex;
+
+  if (memory == NULL)
+    return(0);
+  if ((myhex = my_strdup("0123456789ABCDEF")) != NULL)
     {
-      printf("%c%c ", myhex[(memory[i] / 16) % 16], myhex[memory[i]  % 16]);
-      if ((i + 1) % 16 == 0 && i > 0)
+      i = 0;
+      printf("%05X : ", 0);
+      while (i < size)
 	{
-	  printf("\n%05X : ", i);
+	  h = ((unsigned int)memory[i] / 16) % 16;
+	  l = (unsigned int)memory[i] % 16;
+	  printf("%c%c ", myhex[h], myhex[l]);
+	  if (((i + 1) % 16) == 0 && (i > 0))
+	    {
+	      printf("\n%05X : ", i);
+	    }
+	  i = i + 1;
 	}
-      i = i + 1;
+      free(myhex);
+      printf("\n");
     }
-  printf("\n");
   return (1);
 }
