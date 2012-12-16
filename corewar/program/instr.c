@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 12:34:41 2012 ivan ignatiev
-** Last update Sat Dec 15 13:26:35 2012 ivan ignatiev
+** Last update Sat Dec 15 15:38:19 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -16,7 +16,7 @@
 static void	cw_bad_instr(t_program *prog)
 {
   if (g_options & O_AFF_SHELL)
-    printf("Prog #%3li {%13li} [%4li]: Bad instruction\n",
+    my_fprintf(OSTD, "Prog #%3l {%12l} [%4l]: Bad instruction\n",
 	   prog->prog_num,
 	   prog->cycle,
 	   prog->previos_pc);

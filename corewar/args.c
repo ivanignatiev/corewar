@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 00:34:42 2012 ivan ignatiev
-** Last update Sat Dec 15 13:13:25 2012 ivan ignatiev
+** Last update Sat Dec 15 15:23:39 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -54,7 +54,7 @@ static int	cw_try_add_cor(char *filename, t_long_type *prog_num,
     *prog_num = cw_get_prog_number();
   else if (cw_is_prog_exist(*prog_num))
     {
-      printf("prog number %li already used\n", *prog_num);
+      my_fprintf(OERR, "prog number %l already used\n", *prog_num);
       return (0);
     }
   if (!cw_add_prog_to_list(filename, *start_addr, *prog_num))

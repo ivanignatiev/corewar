@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:17:00 2012 ivan ignatiev
-** Last update Sat Dec 15 14:15:08 2012 ivan ignatiev
+** Last update Sat Dec 15 15:40:40 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -35,7 +35,7 @@ static void	cw_save_live(t_long_type prog_num)
 	{
 	  cw_set_last_live(nav->prog);
 	  nav->prog->last_live_cycle = nav->prog->cycle;
-	  printf("player %li(%s) is alive\n", prog_num,
+	  my_fprintf(OSTD, "player %l(%s) is alive\n", prog_num,
 		 nav->prog->header.prog_name);
 	}
       nav = nav->next;

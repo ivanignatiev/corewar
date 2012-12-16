@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:46:25 2012 ivan ignatiev
-** Last update Sat Dec 15 11:14:14 2012 ivan ignatiev
+** Last update Sat Dec 15 16:04:24 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -24,6 +24,8 @@ t_long_type	cw_m(t_long_type addr)
 
 int		cw_init_memory()
 {
+  int		i;
+
   g_last_live = NULL;
   g_cycle_to_dump = -1;
   g_prog_list = NULL;
@@ -31,6 +33,12 @@ int		cw_init_memory()
   if ((g_memory = (unsigned char*)malloc(sizeof(unsigned char)
 					 * MEM_SIZE)) != NULL)
     return (1);
+  i = 0;
+  while (i < MEM_SIZE)
+    {
+      g_memory[i] = 0;
+      ++i;
+    }
   return (0);
 }
 

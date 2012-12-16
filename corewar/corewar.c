@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Sat Dec 15 07:27:35 2012 ivan ignatiev
+** Last update Sat Dec 15 15:21:36 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -17,7 +17,7 @@ static void	cw_winner()
 {
   if (g_last_live)
     {
-      printf("player %ld(%s) won\n", g_last_live->prog_num,
+      my_fprintf(OSTD, "player %l(%s) won\n", g_last_live->prog_num,
 	     g_last_live->header.prog_name);
     }
 }
@@ -67,6 +67,6 @@ int		main(int argc, char **argv)
   if (argc > 1 && argv != NULL)
     return (corewar(argc, argv));
   else
-    printf("corewar: Too few arguments\n");
+    my_fprintf(OERR, "corewar: Too few arguments\n");
   return (EXIT_FAILURE);
 }

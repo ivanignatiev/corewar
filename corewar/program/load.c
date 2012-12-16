@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Sat Dec 15 14:13:40 2012 ivan ignatiev
+** Last update Sat Dec 15 15:20:54 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -84,7 +84,7 @@ t_program	*cw_load_program(char *filename,
 	}
   if (prog != NULL)
     {
-      printf("%s is not a corewar executable\n", filename);
+      my_fprintf(OERR, "%s is not a corewar executable\n", filename);
       if (prog->fd >= 0)
 	close(prog->fd);
       free(prog);
