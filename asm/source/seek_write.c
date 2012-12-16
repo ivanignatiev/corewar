@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec 13 18:55:42 2012 arthur sfez
-** Last update Fri Dec 14 17:59:25 2012 arthur sfez
+** Last update Sun Dec 16 14:47:55 2012 arthur sfez
 */
 
 #include	<sys/types.h>
@@ -43,7 +43,7 @@ int		my_seeknwrite(labels_t *calls, labels_t *defs)
     {
       if ((tmp = my_check_lab_exists(calls, defs)) == NULL)
 	return (-1);
-      val = tmp->adr - calls->adr;
+      val = tmp->adr - calls->adr + calls->op;
       lseek(g_data.fdw, calls->adr_a, SEEK_SET);
       my_conv_to_platform(&val, calls->size);
       write(g_data.fdw, &val, calls->size);

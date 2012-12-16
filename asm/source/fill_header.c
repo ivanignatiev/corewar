@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:52:45 2012 arthur sfez
-** Last update Fri Dec 14 10:07:06 2012 arthur sfez
+** Last update Sun Dec 16 10:26:57 2012 arthur sfez
 */
 
 #include <sys/types.h>
@@ -79,7 +79,7 @@ static int	my_fill_header(header_t *header, char *s)
 	return (my_err_msg_header(s, UNTERMINATED_STR, 9));
       return (1);
     }
-  else if (my_strncmp(s, ".extend", 7) != 0)
+  else if (my_strncmp(s, ".extend", 7) && my_strncmp(s, ".code", 5) != 0)
     return (my_err_msg_header(s, UNKNOWN_CMD, 1));
   return (0);
 }

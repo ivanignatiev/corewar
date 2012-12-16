@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Fri Dec 14 17:54:06 2012 arthur sfez
+** Last update Sun Dec 16 15:36:01 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -38,10 +38,7 @@ int		my_analyze_args(line_t one_line, int n_ins,
     {
       if (g_data.n[ARG] + 1 >= op_tab[n_ins - 1].nbr_args
 	  && one_line.arr[g_data.n[IND] + 1] != NULL)
-	{
-	  my_err_msg(one_line.s, TOOMANY_ARG, g_data.n[IND] - 1);
-	  return (-1);
-	}
+	return (my_err_msg(one_line.s, FEW, g_data.n[IND] - 1));
       if ((args[g_data.n[ARG]] = my_update_encbyte(one_line.arr[g_data.n[IND]],
 						   n_ins, &encbyte, labels)) == NULL)
 	return (-1);
@@ -49,10 +46,7 @@ int		my_analyze_args(line_t one_line, int n_ins,
       g_data.n[IND]++;
     }
   if (g_data.n[ARG] != op_tab[n_ins - 1].nbr_args)
-    {
-      my_err_msg(one_line.s, NOTENOUGH_ARG, g_data.n[IND] - g_data.n[ARG] - 1);
-      return (-1);
-    }
+    return (my_err_msg(one_line.s, FEW, g_data.n[IND] - g_data.n[ARG] - 1));
   if (op_tab[n_ins - 1].nbr_args != 1 || op_tab[n_ins - 1].code == 16)
     {
       g_data.count++;
@@ -78,6 +72,7 @@ int		my_check_snd(line_t one_line, labels_t **labels, args_t **args)
       my_conv_to_platform(&args[cpt]->val, args[cpt]->size);
       g_data.count += args[cpt]->size;
       write(g_data.fdw, &args[cpt]->val, args[cpt]->size);
+      free(args[cpt]);
       cpt++;
     }
   return (1);

@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Fri Dec 14 17:58:59 2012 arthur sfez
+** Last update Sun Dec 16 15:25:41 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -19,11 +19,12 @@
 # define NUMBER_EXPECTED	5
 # define TRAILING_GARBAGE	6
 # define TOOMANY_ARG		7
-# define NOTENOUGH_ARG		8
+# define FEW			8
 # define INVALID_CHAR		9
 # define MISSING_LABEL_NAME	10
 # define BAD_ARGUMENT		11
 # define REG_VALUE		12
+# define TOOMUCH_OPS		13
 
 # define CALL			0
 # define DEF			1
@@ -53,6 +54,7 @@ struct	labels_s
   int			adr;
   int			size;
   int			line;
+  int			op;
   struct labels_s	*next;
 };
 
@@ -105,6 +107,7 @@ int		my_get_line_pos(char *s, int i);
 /*
 ** Parsing instructions
 */
+
 int		is_instruction(char *s);
 char		*my_malloc_separators();
 char		*my_clean_string(char *s, char *separators);
@@ -119,6 +122,7 @@ int		my_retrieve_size(int n_ins, int n, int i);
 /*
 ** Write binary
 */
+
 void		my_init_arg_tab(args_t **args);
 int		my_analyze_args(line_t one_line, int n_ins, labels_t **labels, args_t **args);
 args_t		*my_check_add_r(char *arg_val, int n_ins, int *encbyte);
@@ -126,11 +130,20 @@ args_t		*my_check_add_d(char *arg_val, int n_ins, int *encbyte, labels_t **label
 args_t		*my_check_add_i(char *arg_val, int n_ins, int *encbyte, labels_t **labels);
 int		my_enc_exists(int c);
 int		my_seeknwrite(labels_t *calls, labels_t *defs);
+
 /*
 ** Lists
 */
 
 void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size);
+void		my_lab_to_list_ops(labels_t **list, char *s, int n_ins, args_t *arg);
 void		my_free_lists(labels_t **l1, labels_t **l2);
+
+/*
+** Operators
+*/
+
+int		my_check_operators(char *s);
+char		*my_init_val(char *s, int pos, args_t *arg);
 
 #endif /* ASM_H_ */

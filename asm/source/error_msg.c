@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Fri Dec  7 09:40:48 2012 arthur sfez
-** Last update Fri Dec 14 17:57:36 2012 arthur sfez
+** Last update Sun Dec 16 12:52:39 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -13,7 +13,7 @@
 #include	"asm.h"
 #include	"cwlib.h"
 
-err_t		g_err_tab[] =
+static err_t	g_err_tab[] =
   {
     {"Unknown directive", UNKNOWN_CMD},
     {"Syntax error", SYNTAX_ERR},
@@ -23,11 +23,12 @@ err_t		g_err_tab[] =
     {"Number expected", NUMBER_EXPECTED},
     {"Trailing garbage", TRAILING_GARBAGE},
     {"Too many arguments", TOOMANY_ARG},
-    {"Not enough arguments", NOTENOUGH_ARG},
+    {"Not enough arguments", FEW},
     {"Invalid characters on label", INVALID_CHAR},
     {"Missing label name", MISSING_LABEL_NAME},
     {"Expecting another argument type", BAD_ARGUMENT},
-    {"Invalid register value", REG_VALUE}
+    {"Invalid register value", REG_VALUE},
+    {"Too much operators on the same argument", TOOMUCH_OPS}
   };
 
 int		my_err_msg_header(char *s, int err, int pos)
