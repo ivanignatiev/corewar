@@ -5,6 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
+   Last update Sun Dec 16 19:00:19 2012 ivan ignatiev
 ** Last update Sun Dec 16 17:58:49 2012 arthur sfez
 */
 
@@ -55,6 +56,30 @@ int		my_analyze_args(line_t one_line, unsigned char n_ins,
   return (1);
 }
 
+void		my_write_btb(int fd, void *val, int size, int n)
+{
+  int		i;
+
+  if (is_big_endian())
+    {
+      i = size - n;
+      while (i < size)
+	{
+	  write(fd, &((unsigned char*)val)[i], 1);
+	  ++i;
+	}
+    }
+  else
+    {
+      i = n - 1;
+      while (i >= 0)
+	{
+	  write(fd, &((unsigned char*)val)[i], 1);
+	  --i;
+	}
+    }
+}
+
 int		my_check_snd(line_t one_line, labels_t **labels, args_t **args)
 {
   int		cpt;
@@ -69,9 +94,9 @@ int		my_check_snd(line_t one_line, labels_t **labels, args_t **args)
   g_data.count++;
   while (cpt < op_tab[n_ins - 1].nbr_args)
     {
-      my_conv_to_platform(&args[cpt]->val, args[cpt]->size);
       g_data.count += args[cpt]->size;
-      write(g_data.fdw, &args[cpt]->val, args[cpt]->size);
+      my_write_btb(g_data.fdw, &args[cpt]->val, sizeof(args[cpt]->val),
+		   args[cpt]->size);
       free(args[cpt]);
       cpt++;
     }

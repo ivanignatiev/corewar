@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Sun Dec 16 17:46:34 2012 arthur sfez
+** Last update Sun Dec 16 18:31:39 2012 ivan ignatiev
 */
 
 #ifndef ASM_H_
@@ -129,6 +129,7 @@ args_t		*my_check_add_r(char *arg_val, unsigned char n_ins, unsigned char *encby
 args_t		*my_check_add_d(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
 args_t		*my_check_add_i(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
 int		my_seeknwrite(labels_t *calls, labels_t *defs);
+void		my_write_btb(int fd, void *val, int size, int n);
 
 /*
 ** Lists

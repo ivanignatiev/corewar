@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec 13 18:55:42 2012 arthur sfez
-** Last update Sun Dec 16 14:47:55 2012 arthur sfez
+** Last update Sun Dec 16 18:39:12 2012 ivan ignatiev
 */
 
 #include	<sys/types.h>
@@ -45,8 +45,7 @@ int		my_seeknwrite(labels_t *calls, labels_t *defs)
 	return (-1);
       val = tmp->adr - calls->adr + calls->op;
       lseek(g_data.fdw, calls->adr_a, SEEK_SET);
-      my_conv_to_platform(&val, calls->size);
-      write(g_data.fdw, &val, calls->size);
+      my_write_btb(g_data.fdw, &val, sizeof(val), calls->size);
       calls = calls->next;
     }
   lseek(g_data.fdw, 136, SEEK_SET);
