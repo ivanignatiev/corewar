@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Sun Dec 16 18:31:39 2012 ivan ignatiev
+** Last update Sun Dec 16 19:07:07 2012 ivan ignatiev
 */
 
 #ifndef ASM_H_
@@ -81,7 +81,6 @@ typedef struct data_s	data_t;
 
 extern	data_t	g_data;
 
-
 /*
 ** Parsing header
 */
@@ -124,10 +123,14 @@ int		my_retrieve_size(unsigned char n_ins, int n, int i);
 */
 
 void		my_init_arg_tab(args_t **args);
-int		my_analyze_args(line_t one_line, unsigned char n_ins, labels_t **labels, args_t **args);
-args_t		*my_check_add_r(char *arg_val, unsigned char n_ins, unsigned char *encbyte);
-args_t		*my_check_add_d(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
-args_t		*my_check_add_i(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
+int		my_analyze_args(line_t one_line, unsigned char n_ins,
+				labels_t **labels, args_t **args);
+args_t		*my_check_add_r(char *arg_val, unsigned char n_ins,
+				unsigned char *encbyte);
+args_t		*my_check_add_d(char *arg_val, unsigned char n_ins,
+				unsigned char *encbyte, labels_t **labels);
+args_t		*my_check_add_i(char *arg_val, unsigned char n_ins,
+				unsigned char *encbyte, labels_t **labels);
 int		my_seeknwrite(labels_t *calls, labels_t *defs);
 void		my_write_btb(int fd, void *val, int size, int n);
 
@@ -135,8 +138,10 @@ void		my_write_btb(int fd, void *val, int size, int n);
 ** Lists
 */
 
-void		my_lab_to_list(labels_t **list, char *s, unsigned char n_ins, int size);
-void		my_lab_to_list_ops(labels_t **list, char *s, unsigned char n_ins, args_t *arg);
+void		my_lab_to_list(labels_t **list, char *s,
+			       unsigned char n_ins, int size);
+void		my_lab_to_list_ops(labels_t **list, char *s,
+				   unsigned char n_ins, args_t *arg);
 void		my_free_lists(labels_t **l1, labels_t **l2);
 
 /*

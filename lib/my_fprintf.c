@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 14:33:28 2012 ivan ignatiev
-** Last update Sun Dec 16 15:50:52 2012 ivan ignatiev
+** Last update Sun Dec 16 19:09:14 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -103,5 +103,3 @@ void		my_fprintf(int fd, const char *format, ...)
     }
   va_end(ap);
 }
-
-

@@ -5,14 +5,14 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Tue Dec 11 14:52:05 2012 arthur sfez
-** Last update Tue Dec 11 14:53:19 2012 arthur sfez
+** Last update Sun Dec 16 19:09:38 2012 ivan ignatiev
 */
 
 int	my_getnbr(char *str)
 {
   int	sign;
   int	res;
-  
+
   sign = 1;
   res = 0;
   while (*str == '-' || *str == '+')

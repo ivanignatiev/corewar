@@ -5,7 +5,7 @@
 ** Login   <lu_a@epitech.net>
 ** 
 ** Started on  Tue Oct  9 16:37:41 2012 angela lu
-** Last update Mon Dec 10 14:34:54 2012 angela lu
+** Last update Sun Dec 16 19:10:03 2012 ivan ignatiev
 */
 
 char	*my_strcat(char *dest, char *src)
@@ -15,7 +15,7 @@ char	*my_strcat(char *dest, char *src)
 
   i = 0;
   n = 0;
-  while(dest[i])
+  while (dest[i])
     i = i + 1;
   while (src[n])
     {
