@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Sun Dec 16 16:38:16 2012 ivan ignatiev
+## Last update Sun Dec 16 17:34:04 2012 arthur sfez
 ##
 
 SRCS	=	source/main.c \
@@ -31,7 +31,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 NAME	=	asm
 
-CFLAGS	+=	-Wall -Wextra
+CFLAGS	+=	-Wall -Wextra -Werror
 CFLAGS	+=	-pedantic -ansi
 CFLAGS	+=	-I../include/ -g3
 
