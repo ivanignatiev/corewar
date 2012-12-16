@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 02:41:04 2012 ivan ignatiev
-** Last update Sun Dec 16 16:24:08 2012 ivan ignatiev
+** Last update Sun Dec 16 21:50:36 2012 ivan ignatiev
 */
 
 #include		<stdlib.h>
@@ -27,9 +27,9 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 	  if (cycle->die != nav->prog->last_live_cycle)
 	    {
 	      if (g_options & O_DIE_MSG)
-		my_fprintf(OSTD, "%3l (%s) die on %l cycle\n",
+		my_fprintf(OSTD, "%3l (%s) die on %l (last live %l) cycle\n",
 			   nav->prog->prog_num, nav->prog->header.prog_name,
-			   cycle->nbr);
+			   cycle->nbr, nav->prog->last_live_cycle);
 	      tmp = nav;
 	      nav = nav->next;
 	      cw_remove_program(tmp->prog);
