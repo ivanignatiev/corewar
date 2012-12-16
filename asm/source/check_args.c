@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:13:10 2012 arthur sfez
-** Last update Fri Dec 14 18:50:29 2012 arthur sfez
+** Last update Sun Dec 16 17:40:24 2012 arthur sfez
 */
 
 #include	"op.h"
@@ -21,7 +21,7 @@ int		my_check_val(char *s)
   return (1);
 }
 
-int		my_retrieve_size(int n_ins, int n, int t)
+int		my_retrieve_size(unsigned char n_ins, int n, int t)
 {
   if (n_ins == 1)
     return (4);

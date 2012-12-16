@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 16:14:16 2012 arthur sfez
-** Last update Sun Dec 16 17:31:17 2012 arthur sfez
+** Last update Sun Dec 16 17:46:58 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -14,7 +14,7 @@
 #include	"cwlib.h"
 #include	"op.h"
 
-args_t		*my_update_encbyte(char *arg, int n_ins,
+args_t		*my_update_encbyte(char *arg, unsigned char n_ins,
 				   unsigned char *encbyte, labels_t **labels)
 {
   if (*arg == 'r')
@@ -25,7 +25,7 @@ args_t		*my_update_encbyte(char *arg, int n_ins,
     return (my_check_add_i(arg, n_ins, encbyte, labels));
 }
 
-int		my_analyze_args(line_t one_line, int n_ins,
+int		my_analyze_args(line_t one_line, unsigned char n_ins,
 				labels_t **labels, args_t **args)
 {
   unsigned char	encbyte;
@@ -58,10 +58,10 @@ int		my_analyze_args(line_t one_line, int n_ins,
 int		my_check_snd(line_t one_line, labels_t **labels, args_t **args)
 {
   int		cpt;
-  int		n_ins;
+  unsigned char	n_ins;
 
   cpt = 0;
-  if ((n_ins = my_get_ins_code(one_line, g_data.n[IND])) == -1)
+  if ((n_ins = my_get_ins_code(one_line, g_data.n[IND])) == 0)
     return (-1);
   g_data.n[IND]++;
   if (my_analyze_args(one_line, n_ins, &labels[CALL], args) == -1)

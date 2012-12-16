@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Mon Dec 10 16:24:42 2012 arthur sfez
-** Last update Sun Dec 16 16:29:43 2012 arthur sfez
+** Last update Sun Dec 16 17:41:54 2012 arthur sfez
 */
 
 #include	<unistd.h>
@@ -31,7 +31,7 @@ static labels_t	*my_init_list(int *size, int *val, args_t *arg)
 }
 
 void		my_lab_to_list_ops(labels_t **list, char *s,
-				   int n_ins, args_t *arg)
+				   unsigned char n_ins, args_t *arg)
 {
   int		size;
   int		val;
@@ -61,7 +61,7 @@ void		my_lab_to_list_ops(labels_t **list, char *s,
 }
 
 
-void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size)
+void		my_lab_to_list(labels_t **list, char *s, unsigned char n_ins, int size)
 {
   labels_t	*elem;
   labels_t	*tmp;

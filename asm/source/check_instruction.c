@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Sat Dec  8 17:32:21 2012 arthur sfez
-** Last update Fri Dec 14 11:15:08 2012 arthur sfez
+** Last update Sun Dec 16 17:46:16 2012 arthur sfez
 */
 
 #include	"op.h"
@@ -26,7 +26,7 @@ int		is_instruction(char *s)
   return (0);
 }
 
-int		my_get_ins_code(line_t one_line, int i)
+unsigned char	my_get_ins_code(line_t one_line, int i)
 {
   int		n;
 
@@ -37,10 +37,11 @@ int		my_get_ins_code(line_t one_line, int i)
 	return (op_tab[n].code);
       n++;
     }
-  return (my_err_msg(one_line.s, UNKNOWN_INS, i));
+  my_err_msg(one_line.s, UNKNOWN_INS, i);
+  return (0);
 }
 
-int		my_enc_exists(int c)
+int		my_enc_exists(unsigned char c)
 {
   if (c == 1 || c == 9 || c == 12 || c == 15)
     return (0);

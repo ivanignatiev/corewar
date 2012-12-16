@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 19:50:32 2012 arthur sfez
-** Last update Sun Dec 16 17:33:19 2012 arthur sfez
+** Last update Sun Dec 16 17:46:34 2012 arthur sfez
 */
 
 #ifndef ASM_H_
@@ -114,29 +114,28 @@ char		*my_clean_string(char *s, char *separators);
 int		my_parse_line(line_t one_line, labels_t **labels);
 int		is_label_def(line_t one_line, int i, int *lb_def);
 int		is_label_call(char *s);
-int		my_enc_exists(int n_ins);
-int		my_get_ins_code(line_t one_line, int n);
+int		my_enc_exists(unsigned char n_ins);
+unsigned char	my_get_ins_code(line_t one_line, int n);
 int		my_check_val(char *s);
-int		my_retrieve_size(int n_ins, int n, int i);
+int		my_retrieve_size(unsigned char n_ins, int n, int i);
 
 /*
 ** Write binary
 */
 
 void		my_init_arg_tab(args_t **args);
-int		my_analyze_args(line_t one_line, int n_ins, labels_t **labels, args_t **args);
-args_t		*my_check_add_r(char *arg_val, int n_ins, unsigned char *encbyte);
-args_t		*my_check_add_d(char *arg_val, int n_ins, unsigned char *encbyte, labels_t **labels);
-args_t		*my_check_add_i(char *arg_val, int n_ins, unsigned char *encbyte, labels_t **labels);
-int		my_enc_exists(int c);
+int		my_analyze_args(line_t one_line, unsigned char n_ins, labels_t **labels, args_t **args);
+args_t		*my_check_add_r(char *arg_val, unsigned char n_ins, unsigned char *encbyte);
+args_t		*my_check_add_d(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
+args_t		*my_check_add_i(char *arg_val, unsigned char n_ins, unsigned char *encbyte, labels_t **labels);
 int		my_seeknwrite(labels_t *calls, labels_t *defs);
 
 /*
 ** Lists
 */
 
-void		my_lab_to_list(labels_t **list, char *s, int n_ins, int size);
-void		my_lab_to_list_ops(labels_t **list, char *s, int n_ins, args_t *arg);
+void		my_lab_to_list(labels_t **list, char *s, unsigned char n_ins, int size);
+void		my_lab_to_list_ops(labels_t **list, char *s, unsigned char n_ins, args_t *arg);
 void		my_free_lists(labels_t **l1, labels_t **l2);
 
 /*
