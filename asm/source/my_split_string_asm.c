@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Nov 10 17:21:23 2012 ivan ignatiev
-** Last update Fri Dec 14 17:55:17 2012 arthur sfez
+** Last update Sun Dec 16 10:02:06 2012 arthur sfez
 */
 
 #include	<stdlib.h>
@@ -42,13 +42,15 @@ char		**add_word_asm(char *str, int count, char **arr, char *separators)
   return (arr);
 }
 
-void		my_update_separators_asm(char **arr, char *separators)
+void		my_update_separators_asm(char **arr, char *separators,
+					 int *start, int n)
 {
   int		i;
   int		j;
 
   i = 0;
   j = 0;
+  *start = n;
   if (arr == NULL)
     return ;
   if (my_strlen(separators) == 1)
@@ -71,26 +73,18 @@ char		**my_split_string_asm(char *str, char *separators)
   i = 0;
   arr = NULL;
   count = 0;
-  while (str[i] != '\0')
+  while (str[i] != '\0' && str[i] != ';' && str[i] != '#')
     {
-      if (str[i] == ';' || str[i] == '#')
-	str[i] = 0;
-      else
+      if (!is_it_separator_asm(str[i], separators))
 	{
-	  if (!is_it_separator_asm(str[i], separators))
-	    {
-	      if ((i == 0 || is_it_separator_asm(str[i - 1], separators)))
-		{
-		  my_update_separators_asm(arr, separators);
-		  start = i;
-		}
-	      count = count + 1;
-	    }
-	  else if (count > 0 &&
-		   (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
-	    count = 0;
-	  i = i + 1;
+	  if ((i == 0 || is_it_separator_asm(str[i - 1], separators)))
+	    my_update_separators_asm(arr, separators, &start, i);
+	  count = count + 1;
 	}
+      else if (count > 0 &&
+		   (arr = add_word_asm(str + start, count, arr, separators)) != NULL)
+	count = 0;
+      i = i + 1;
     }
   if (count > 0)
     arr = add_word_asm(str + start, count, arr, separators);
