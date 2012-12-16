@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Sun Dec 16 16:34:17 2012 ivan ignatiev
+## Last update Sun Dec 16 17:27:01 2012 ivan ignatiev
 ##
 
 SRCS	=	corewar.c \
@@ -69,6 +69,7 @@ clean:
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) ../bin/$(NAME)
 
 re:		fclean all
 
