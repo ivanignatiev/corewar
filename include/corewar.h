@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Sat Dec 15 14:13:17 2012 ivan ignatiev
+** Last update Sun Dec 16 16:15:42 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -15,7 +15,7 @@
 # define O_DIE_MSG	2
 # define O_OLD_STYLE	4
 
-typedef long	t_long_type;
+typedef long int t_long_type;
 
 
 typedef struct	s_prog_args
@@ -103,7 +103,6 @@ int		cw_free_memory();
 void		cw_clear_list();
 t_long_type	cw_m(t_long_type addr);
 int		cw_try_place_programs();
-void		cw_reset_program(t_program *prog);
 t_prog_args	*cw_args_order(op_t *instr,
 			       unsigned char order_byte);
 int		cw_get_args(t_program *prog,

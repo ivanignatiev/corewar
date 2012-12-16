@@ -1,11 +1,11 @@
 ##
-## Makefile for minishell1 in /home/ignati_i//test_c/minishell1
+## Makefile for corewar in ./corewar
 ## 
 ## Made by ivan ignatiev
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Sat Nov  3 01:52:16 2012 ivan ignatiev
-## Last update Sat Dec 15 13:08:38 2012 ivan ignatiev
+## Last update Sun Dec 16 16:34:17 2012 ivan ignatiev
 ##
 
 SRCS	=	corewar.c \
@@ -40,26 +40,30 @@ SRCS	=	corewar.c \
 		instrs/aff.c \
 		../lib/op.c
 
-#CFLAGS	+=	-Werror
+CFLAGS	+=	-Werror
 CFLAGS	+=	-Wall -pedantic -Wextra
 CFLAGS	+=	-I../include
 
-LDFLAGS +=	-lcw -L../lib
+LIBNAME =	../lib/libcw.a
+LIBDIR	=	../lib/
+LDFLAGS =	-lcw -L$(LIBDIR)
 
 NAME	=	corewar
 
 OBJS	=	$(SRCS:.c=.o)
 
 CC	=	cc
+MAKE	=	make -C
 
 RM	=	rm -f
 
-
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(LIBNAME) $(OBJS)
 		$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
 		cp $(NAME) ../bin/
+$(LIBNAME):
+		$(MAKE) $(LIBDIR)
 clean:
 		$(RM) $(OBJS)
 

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Tue Dec  4 17:04:55 2012 ivan ignatiev
-   Last update Fri Dec 14 19:01:02 2012 arthur sfez
+** Last update Sun Dec 16 14:47:20 2012 ivan ignatiev
 */
 
 #ifndef CWLIB_H_
@@ -15,10 +15,14 @@
 # define EXIT_SUCCESS		0
 # define EXIT_FAILURE		1
 # define MALLOC_FAILURE		2
+# define OSTD			1
+# define OERR			2
 
+int		my_fputchar(int fd, char c);
 void		my_putchar(char);
 int		my_strlen(char *);
 void		my_putstr(char *);
+void		my_fprintf(int fd, const char *format, ...);
 void		my_puterr(char *);
 int		my_strncmp(char *, char *, int);
 int		my_strcmp(char *, char *);

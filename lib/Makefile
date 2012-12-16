@@ -5,7 +5,7 @@
 ## Login   <ignati_i@epitech.net>
 ## 
 ## Started on  Mon Oct 22 09:36:48 2012 ivan ignatiev
-## Last update Fri Dec 14 09:58:32 2012 arthur sfez
+## Last update Sat Dec 15 15:10:12 2012 ivan ignatiev
 ##
 
 CC	=	cc
@@ -37,6 +37,7 @@ SRCS	=	get_next_line.c \
 		my_getnbr.c \
 		my_strcpy.c \
 		my_strdups.c \
+		my_fprintf.c
 
 OBJS	=	$(SRCS:.c=.o)
 

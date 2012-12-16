@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec 12 16:17:00 2012 ivan ignatiev
-** Last update Sat Dec 15 15:40:40 2012 ivan ignatiev
+** Last update Sun Dec 16 16:02:24 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -31,7 +31,7 @@ static void	cw_save_live(t_long_type prog_num)
   nav = g_prog_list;
   while (nav != NULL)
     {
-      if (nav->prog->prog_num == prog_num)
+      if (nav->prog->reg[0] == prog_num)
 	{
 	  cw_set_last_live(nav->prog);
 	  nav->prog->last_live_cycle = nav->prog->cycle;

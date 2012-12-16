@@ -5,7 +5,7 @@
 ** Login   <sfez_a@epitech.net>
 ** 
 ** Started on  Thu Dec  6 18:11:23 2012 arthur sfez
-** Last update Sun Dec 16 15:24:16 2012 arthur sfez
+   Last update Sun Dec 16 16:36:23 2012 ivan ignatiev
 */
 
 #include <unistd.h>
@@ -13,6 +13,13 @@
 void		my_putchar(char c)
 {
   write(1, &c, 1);
+}
+
+int		my_fputchar(int fd, char c)
+{
+  if (write(fd, &c, 1) == 1)
+    return (1);
+  return (0);
 }
 
 int		my_strlen(char *s)

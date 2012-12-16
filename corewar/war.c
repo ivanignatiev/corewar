@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 02:41:04 2012 ivan ignatiev
-** Last update Sat Dec 15 15:34:46 2012 ivan ignatiev
+** Last update Sun Dec 16 16:24:08 2012 ivan ignatiev
 */
 
 #include		<stdlib.h>
@@ -44,27 +44,19 @@ static t_long_type	cw_cycle_to_die(t_cycle *cycle,
 
 static int		cw_nbr_live_calls(t_cycle *cycle, t_program *prog)
 {
-  t_prog_list		*nav;
-
   if (prog->live)
     {
       --cycle->live_calls;
       prog->live = 0;
     }
-  if (cycle->live_calls == 0)
+  if (cycle->live_calls <= 0)
     {
       cycle->die -= CYCLE_DELTA;
       if (g_options & O_DIE_MSG)
 	my_fprintf(OSTD, "%lc. reset (NBR_LIVE=%l), new c_t_die=%l\n",
 		   cycle->nbr, NBR_LIVE, cycle->die);
-      cycle->nbr = 1;
+      cycle->nbr = 0;
       cycle->live_calls = NBR_LIVE;
-      nav = g_prog_list;
-      while (nav != NULL)
-	{
-	  cw_reset_program(nav->prog);
-	  nav = nav->next;
-	}
       return (1);
     }
   return (0);

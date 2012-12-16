@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:44:12 2012 ivan ignatiev
-** Last update Sat Dec 15 15:20:54 2012 ivan ignatiev
+** Last update Sun Dec 16 16:15:18 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -36,29 +36,9 @@ t_program	*cw_init_program(t_program *prog)
       i = i + 1;
     }
   prog->reg[0] = prog->prog_num;
+  prog->header.prog_name[PROG_NAME_LENGTH] = '\0';
+  prog->header.comment[COMMENT_LENGTH] = '\0';
   return (prog);
-}
-
-void		cw_reset_program(t_program *prog)
-{
-  int		i;
-
-  i = 0;
-  if (prog->instr.args != NULL)
-    free(prog->instr.args);
-  prog->instr.args = NULL;
-  prog->instr.nbr_cycles = -1;
-  prog->instr.wait = 0;
-  prog->live = 0;
-  prog->pc = prog->start_addr;
-  prog->carry = 0;
-  prog->last_live_cycle = -1;
-  while (i < REG_NUMBER)
-    {
-      prog->reg[i] = 0;
-      i = i + 1;
-    }
-  prog->reg[0] = prog->prog_num;
 }
 
 t_program	*cw_load_program(char *filename,

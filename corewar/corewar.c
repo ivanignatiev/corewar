@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Wed Dec  5 14:03:15 2012 ivan ignatiev
-** Last update Sat Dec 15 15:21:36 2012 ivan ignatiev
+** Last update Sun Dec 16 16:14:20 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -17,7 +17,7 @@ static void	cw_winner()
 {
   if (g_last_live)
     {
-      my_fprintf(OSTD, "player %l(%s) won\n", g_last_live->prog_num,
+      my_fprintf(OSTD, "player %l(%s) won\n", g_last_live->reg[0],
 	     g_last_live->header.prog_name);
     }
 }
