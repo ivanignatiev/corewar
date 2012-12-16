@@ -5,7 +5,7 @@
 ## Login   <sfez_a@epitech.net>
 ## 
 ## Started on  Wed Dec  5 16:32:59 2012 arthur sfez
-## Last update Sun Dec 16 12:13:10 2012 arthur sfez
+## Last update Sun Dec 16 16:38:16 2012 ivan ignatiev
 ##
 
 SRCS	=	source/main.c \
@@ -35,16 +35,20 @@ CFLAGS	+=	-Wall -Wextra
 CFLAGS	+=	-pedantic -ansi
 CFLAGS	+=	-I../include/ -g3
 
-LIB	=	-lcw -L../lib/
+LIBNAME =	../lib/libcw.a
+LIBDIR	=	../lib/
+LIB	=	-lcw -L$(LIBDIR)
 
 RM	=	rm -rf
+MAKE	=	make -C
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(LIBNAME) $(OBJS)
 		$(CC) -o $(NAME) $(OBJS) $(LIB)
 		cp $(NAME) ../bin/
-
+$(LIBNAME):
+		$(MAKE) $(LIBDIR)
 clean:
 		$(RM) $(OBJS)
 

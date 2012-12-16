@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:51:59 2012 ivan ignatiev
-** Last update Sat Dec 15 16:06:14 2012 ivan ignatiev
+** Last update Sun Dec 16 16:43:54 2012 ivan ignatiev
 */
 
 #include	<stdlib.h>
@@ -26,7 +26,7 @@ int		cw_dump_memory(unsigned char *memory, unsigned int size)
   char		*myhex;
 
   if (memory == NULL)
-    return(0);
+    return (0);
   if ((myhex = my_strdup("0123456789ABCDEF")) == NULL)
     return (0);
   i = 0;

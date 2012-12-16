@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Sat Dec 15 04:56:50 2012 ivan ignatiev
-** Last update Sat Dec 15 15:51:53 2012 ivan ignatiev
+** Last update Sun Dec 16 16:43:22 2012 ivan ignatiev
 */
 
 #include	"op.h"
@@ -68,20 +68,19 @@ static void	cw_show_details(t_program *prog,
       if (args[i].change)
 	{
 	  if (args[i].type == T_REG)
-	    my_fprintf(OSTD, "cng[r%l=%l->%l] ", args[i].value,
+	    my_fprintf(OSTD, "cng[r%l = %l->%l] ", args[i].value,
 		       prog->reg[args[i].value - 1],
 		       args[i].wval);
 	  else
 	    my_fprintf(OSTD, "cng[a=%l] ", args[i].wval);
 	}
       else if (args[i].type == T_REG)
-	my_fprintf(OSTD, "str[r%l=%l] ",args[i].value,
+	my_fprintf(OSTD, "str[r%l = %l] ", args[i].value,
 		   prog->reg[args[i].value - 1]);
       i = i + 1;
     }
   my_fprintf(OSTD, "carry=%l}", prog->carry);
 }
-
 
 void		cw_show_args(t_program *prog,
 			     op_t *instr,

@@ -5,7 +5,7 @@
 ** Login   <ignati_i@epitech.net>
 ** 
 ** Started on  Mon Dec 10 11:53:03 2012 ivan ignatiev
-** Last update Sun Dec 16 16:15:42 2012 ivan ignatiev
+** Last update Sun Dec 16 16:41:34 2012 ivan ignatiev
 */
 
 #ifndef	COREWAR_H_
@@ -15,8 +15,8 @@
 # define O_DIE_MSG	2
 # define O_OLD_STYLE	4
 
-typedef long int t_long_type;
-
+typedef long int
+	t_long_type;
 
 typedef struct	s_prog_args
 {
@@ -52,7 +52,9 @@ typedef struct	s_program
   t_exe_instr	instr;
 }		t_program;
 
-typedef		int(*t_instr)(t_program *prog, op_t *instr, t_prog_args *args);
+typedef		int(*t_instr)(t_program *prog,
+			      op_t *instr,
+			      t_prog_args *args);
 
 typedef struct	s_prog_list
 {
